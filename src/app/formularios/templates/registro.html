@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+    {% block content %}
+        <!-- Navbar Con boostrap -->
+        <!-- Formulario de registro de usuario -->
+        <div class="row align-items-center justify-content-between">
+
+            <div class="col-md-5">
+                <form action="/forms/registrar_usuario" method="post" class="form-login mt-5 mb-5 text-center fondo" data-aos="fade-right"
+                    data-aos-offset="300" data-aos-easing="ease-in-sine">
+                    <h1 class="text-center mb-2" style="color: white;">
+                        Registro
+                    </h1>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-circle"
+                                style="color:#fff;"></i></span>
+                        <input class="form-control" type="text" name="nombres" placeholder="Nombres"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-lines-fill"
+                                style="color:#fff;"></i></span>
+                        <input class="form-control" type="text" name="apellidos" placeholder="Apellidos"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                    </div>
+                    <!-- <input class="form-control" type="text" name="telefono" placeholder="Número de telefono"> -->
+                    <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-badge"
+                                style="color:#fff;"></i></span>
+                        <select name="tipo_documento" class="form-select"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                            <option value="1">CC</option>
+                            <option value="2">TI</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-badge"
+                            style="color:#fff;"></i></span>
+                    <select name="tipo_rol" class="form-select"
+                        style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                        <option value="1">Estudiante</option>
+                        <option value="2">Docente</option>
+                    </select>
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-hash"
+                                style="color:#fff;"></i></span>
+                        <input class="form-control" type="text" name="numero_identificacion"
+                            placeholder="Número de identificación"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-hash"
+                                style="color:#fff;"></i></span>
+                        <input class="form-control" type="text" name="numero_universidad"
+                            placeholder="Número de universidad"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-envelope"
+                                style="color:#fff;"></i></span>
+                        <input class="form-control" type="email" name="correoinstitucional"
+                            placeholder="Correo Institucional"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-key"
+                                style="color:#fff;"></i></span>
+                        <input class="form-control fondo" type="password" name="contraseña"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" id="password"
+                            placeholder="Contraseña">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" id="boton" class="w-50 p-1">Enviar</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-md-2">
+
+
+            </div>
+           <div class="col-md-5 text-center" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+                <img src="{{url_for('static', filename='imgs/humans_characters.png')}}" alt="" class="img-fluid" style="width: 50rem;">
+            </div>
+
+
+        </div>
+
+    </div>
+{% endblock %}

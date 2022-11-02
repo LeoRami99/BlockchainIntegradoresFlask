@@ -1,0 +1,67 @@
+{%extends 'base.html'%}
+{%block navbar%}
+<nav class="nav navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid float-end">
+        <a class="navbar-brand" href="#" style="color: white;">
+            <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+                class="d-inline-block align-text-top">
+            Login
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a style="color: white;" class="nav-link active bt-inicio" aria-current="page" href="/"><i
+                            class="bi bi-house"></i> Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> 
+{%endblock%}
+
+{% block content %}
+        <div class="row align-items-center justify-content-between">
+            
+            <div class="col-md-5 mt-5">
+                <form action="/login_sistema/" method="post" class="form-login mt-5 text-center fondo">
+                    
+                    <h1 class="text-center mb-2" style="color: white;">
+                        Inicio de Sesion
+                    </h1>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text input-fondo" id="basic-addon1"><i
+                                class="bi bi-envelope"></i></span>
+                        <input type="email" name="email_institucional" placeholder="Correo Institucional"
+                            class="form-control input-fondo"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text input-fondo" id="basic-addon1"><i class="bi bi-key"></i></span>
+                        <input class="form-control fondo" type="password"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" name="contraseña" id=""
+                            placeholder="Contraseña">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg btn-block mt-2">Iniciar Sesion</button>   
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <a href="/recuperarPass">He olvidado mi contraseña</a>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-5 text-center" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+                <img src="{{url_for('static', filename='imgs/human_character_2.png')}}" alt="" class="img-fluid" style="width: 50rem;">
+            </div>
+        </div>
+{% endblock %}

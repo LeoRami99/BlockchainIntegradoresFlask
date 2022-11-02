@@ -1,0 +1,122 @@
+{%extends 'base.html'%}
+
+{%block content%}
+        <div class="row align-items-center justify-content-between mt-5">
+            <div class="col-md-3">
+                <!--Tarjeta formulario-->
+                <div class="card text-center fondo">
+                    <div class="card-header">
+                        <form action="#" method="post" class="form-login mt-5">
+                            <a style="color: black;" class="nav-link active bt-inicio" aria-current="page" href=""><i
+                                    class="bi bi-gear-fill" class="text-center mb-2" style="color: white;"></i> Editar
+                                perfil</a>
+                            <center>
+                                <h2 class="text-center mb-2" style="color: white;">Perfil</h2>
+                                <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" width="100 px">
+                            </center>
+                            <center>
+                                <div class="form-group">
+                                    <h5 class="text-center mb-2" style="color: white;">Juan Leonardo Ramirez Velasquez
+                                    </h5>
+                                </div>
+                                <div class="form-group">
+                                    <h6 class="text-center mb-2" style="color: white;">Ingenieria de Sistemas</h6>
+                                </div>
+                                <div class="form-group">
+                                    <h6 class="text-center mb-2" style="color: white;">Universidad de Cundinamarca
+                                        Seccional Ubate</h6>
+                                </div>
+                            </center>
+                        </form>
+                    </div>
+                </div>
+                <!--Fin tarjeta formulario-->
+            </div>
+            <!--Inicio carta primer entrega-->
+            <div class="col-md-3">
+                <!--Tarjeta formulario-->
+                <div class="card text-center fondo">
+                    <div class="card-header">
+
+                        <form action="#" method="post" class="form-login mt-5">
+                            <center>
+                                <h2 class="text-center mb-2" style="color: white;">Ciclo I</h2>
+                                <img src="https://cdn-icons-png.flaticon.com/512/3979/3979423.png" width="100 px">
+                            </center>
+                            <center>
+                                <div class="form-group">
+                                    <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
+                                    <a href=""  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" >Fechas de Entrega</a>
+                                </div>
+                            </center>
+
+                        </form>
+                    </div>
+                </div>
+                <!--Fin tarjeta formulario primer entrega-->
+            </div>
+            <!--Inicio carta segunda entrega-->
+            <div class="col-md-3">
+                <!--Tarjeta formulario-->
+                <div class="card text-center fondo">
+                    <div class="card-header">
+                        <form action="#" method="post" class="form-login mt-5">
+                            <center>
+                                <h2 class="text-center mb-2" style="color: white;">Ciclo II</h2>
+                                <img src="https://cdn-icons-png.flaticon.com/512/3979/3979423.png" width="100 px">
+                            </center>
+                            <center>
+                                <div class="form-group">
+                                    <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
+                                    <a href="" class="btn btn-success">Fechas de Entrega</a>
+                                </div>
+                            </center>
+                        </form>
+                    </div>
+                </div>
+                <!--Fin tarjeta formulario segunda entrega-->
+            </div>
+            <!--Inicio carta segunda entrega-->
+            <div class="col-md-3">
+                <!--Tarjeta formulario-->
+                <div class="card text-center fondo">
+                    <div class="card-header">
+                        <form action="#" method="post" class="form-login mt-5">
+                            <center>
+                                <h2 class="text-center mb-2" style="color: white;">Ciclo III</h2>
+                                <img src="https://cdn-icons-png.flaticon.com/512/3979/3979423.png" width="100 px">
+                            </center>
+                            <center>
+                                <div class="form-group">
+                                    <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
+                                    <a href=""  class="btn btn-success">Fechas de Entrega</a>
+                                </div>
+                            </center>
+                        </form>
+                    </div>
+                </div>
+                <!--Fin tarjeta formulario segunda entrega-->
+            </div>
+        </div>
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Fechas para ciclo 1</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        <label for="ciclo1">Fecha Ciclo 1</label>
+                        <input type="date" name="fecha_c1" class="form-date" id="ciclo1">
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-success">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+{% endblock %}
+    

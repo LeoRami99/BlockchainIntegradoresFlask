@@ -1,0 +1,70 @@
+/* Estilos para los botones del navbar */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+.bt-login, .bt-inicio {
+    transition: all 1s;
+    /* dejar un espacio */
+    margin: 0 5px;
+    padding: 5px;
+}
+.navbar{
+    backdrop-filter: blur(5px);
+    background-color: rgba(14, 13, 13, 0.508);
+}
+.bt-login:hover, .bt-inicio:hover, #boton:hover {
+    box-shadow: 3px 2px 0px rgb(117, 112, 112);
+    background-color: rgba(31, 163, 4, 0.637);
+    border-radius: 4px;
+    /* usar efecto blur  */
+    filter: blur(0px);
+} 
+.fondo{
+    backdrop-filter: blur(5px);
+    background-color: rgba(34, 32, 32, 0.5);
+}
+.fondoWhite{
+    backdrop-filter: blur(5px);
+    background-color: rgba(34, 32, 32, 0.5);
+}
+#boton{
+    transition: all 1s;
+    border: solid 1px #000;
+    border-radius: 4px;
+}
+#boton:active{
+    box-shadow: inset 3px 2px 0px rgb(117, 112, 112);
+    background-color: rgba(31, 163, 4, 0.637);
+    border-radius: 4px;
+}
+.form-login{
+    border:solid 1px #000;
+    border-radius: 5px;
+    padding: 1rem;
+    transition: all 1s;
+}
+.form-login:hover{
+    border-radius: 5px;
+    box-shadow: 2px 2px 20px rgb(117, 112, 112);
+}
+#particles-js{
+    /* Centrar a y ocupar la pantalla */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1326%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='url(%23SvgjsLinearGradient1327)'%3e%3c/rect%3e%3cpath d='M1440 0L871.65 0L1440 21.11z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M871.65 0L1440 21.11L1440 267.04L693.56 0z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M693.56 0L1440 267.04L1440 436.75L453.78999999999996 0z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M453.78999999999996 0L1440 436.75L1440 512.05L437.35999999999996 0z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M0 560L641.2 560L0 303.72z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M0 303.72L641.2 560L881.8000000000001 560L0 296.52000000000004z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M0 296.52000000000004L881.8000000000001 560L1023.6700000000001 560L0 193.24000000000004z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M0 193.24L1023.6700000000001 560L1247.24 560L0 76.64000000000001z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1326'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='15.28%25' y1='-39.29%25' x2='84.72%25' y2='139.29%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1327'%3e%3cstop stop-color='%230e2a47' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(155%2c 223%2c 75%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+    /* background-image: url("https://cdn.pixabay.com/photo/2016/03/26/13/09/workspace-1280538_960_720.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.input-fondo{
+    color:#fff; 
+    background-color: rgba(34, 32, 32, 0.5); 
+}
+/* hacer tranisicion de hover */
+.accordion{
+    --accordion-bg:rgba(34, 32, 32, 0.5);
+    
+}
+

@@ -1,0 +1,214 @@
+
+{%url 'registro' as registro%}
+{%url 'login' as login%}
+{%url 'perfilEstudiante' as perfilEstudiante%}
+{%url 'registroGrupo' as registroGrupo%}
+{%url 'registroProyecto' as registroProyecto%}
+
+
+{%url 'perfilProfesor' as perfilProfesor%}
+
+{%url 'perfilAdministrador' as perfilAdministrador%}
+
+{%if request.path == registro%}
+    <nav class="nav navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid float-end">
+            <a class="navbar-brand" href="#" style="color: white;">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+                Registro
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a style="color: white;" class="nav-link active bt-inicio" aria-current="page" href="/"><i
+                                class="bi bi-house"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: white;" class="nav-link active bt-login" href="/inicioEstudiante"><i
+                                class="bi bi-door-open"></i> Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>   
+
+{%elif request.path == login%}
+    <nav class="nav navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid float-end">
+        <a class="navbar-brand" href="#" style="color: white;">
+            <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+                class="d-inline-block align-text-top">
+            Login
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a style="color: white;" class="nav-link active bt-inicio" aria-current="page" href="/"><i
+                            class="bi bi-house"></i> Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>  
+
+{%elif request.path == perfilEstudiante%}
+    <nav class="nav navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid float-end">
+            <a class="navbar-brand" href="#" style="color: white;">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+                Perfil Estudiante
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a style="color: white;" class="nav-link active bt-inicio" aria-current="page"
+                            href="/registroGrupo"><i class="bi bi-file-pdf"></i> Enviar Proyecto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="return confirm('¿Esta seguro de salir?')" style="color: white;"
+                            class="nav-link active bt-login" href="/inicioEstudiante"><i
+                                class="bi bi-door-open"></i>Salir</a>
+                    </li>
+                </ul>
+            </div>
+    </nav> 
+
+{%elif request.path == registroGrupo%}
+    <nav class="nav navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid float-end">
+            <a class="navbar-brand" href="#" style="color: white;">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+                Registro Grupo de Investigación
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a style="color: white;" class="nav-link active bt-login" href="/registroProyecto">Registro
+                            Proyecto <i class="bi bi-arrow-right-square"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="return confirm('¿Esta seguro de salir?')" style="color: white;"
+                            class="nav-link active bt-login" href="/perfilEstudiante"><i
+                                class="bi bi-door-open"></i>Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> 
+
+{%elif request.path == registroProyecto%}
+    <nav class="nav navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid float-end">
+            <a class="navbar-brand" href="#" style="color: white;">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+                Registro Proyecto
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a style="color: white;" class="nav-link active bt-login" href="/registroGrupo"><i
+                                class="bi bi-arrow-left-square"></i>Grupo
+                            de Trabajo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="return confirm('¿Esta seguro de salir?')" style="color: white;"
+                            class="nav-link active bt-login" href="/perfilEstudiante"><i
+                                class="bi bi-door-open"></i>Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+{%elif request.path == perfilProfesor%}
+    <nav class="nav navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid float-end">
+            <a class="navbar-brand" href="#" style="color: white;">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+                Perfil Docente
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a onclick="return confirm('¿Esta seguro de salir?')" style="color: white;"
+                            class="nav-link active bt-login" href="/inicioProfesor"><i
+                                class="bi bi-door-open"></i>Salir</a>
+                    </li>
+                </ul>
+            </div>
+    </nav>
+
+
+{%elif request.path == perfilAdministrador%}
+    <nav class="nav navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid float-end">
+            <a class="navbar-brand" href="#" style="color: white;">
+                <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+                Perfil Administrador
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a onclick="return confirm('¿Esta seguro de salir?')" style="color: white;"
+                            class="nav-link active bt-login" href="/inicioAdministrador"><i
+                                class="bi bi-door-open"></i>Salir</a>
+                    </li>
+                </ul>
+            </div>
+    </nav>
+{%endif%}
+
+
+
+
+
+
+
+
+
+

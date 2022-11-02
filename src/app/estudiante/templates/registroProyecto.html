@@ -1,0 +1,144 @@
+{%extends 'base.html' %}
+    {%block content%}
+        <div class="row">
+            <div class="col justify-content-center align-self-center">
+                <img src="{{url_for('static', filename='imgs/humans_characters.png')}}" alt="" class="img-fluid align-middle"
+                style="width: 50rem;">
+            </div>
+            <div class="col m-2">
+                <div class="card fondo p-4" style="color:#fff;">
+                    <div class="card-header">
+                        <h1>Registro de Proyecto</h1>
+                    </div> 
+                    <div class="card-body">
+                        <form method="POST" action="/estudiantes/registrar_proyecto" enctype="multipart/form-data">
+                         
+                            <div class="ciclos">
+                                <p>Seleccione el ciclo al que pertenece su proyecto integrador,(Recuerde que su
+                                    ciclo
+                                    va
+                                    acorde
+                                    al semestre donde haya mayor numero de número de integrantes).<br>
+                                    Ciclo 1 (1 a 3 semestre); Ciclo 2 (4 a 6 semestre); Ciclo 3 (7 a 9 semestre)</p>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            Seleccione el ciclo
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <select name="ciclo" id="" class="form-select">
+                                                <option value="1">Ciclo I</option>
+                                                <option value="2">Ciclo II</option>
+                                                <option value="3">Ciclo III</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseMembers"
+                                            aria-expanded="false" aria-controls="collapseMembers">
+                                            Seleccione cuantos integrantes está en el grupo de trabajo
+                                        </button>
+                                    </h2>
+                                    <div id="collapseMembers" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <select name="numero_miembros" id="numero_miembros" class="form-select m-2">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                            <a class="btn btn-success w-100 m-2" onclick="miembrosGrupo()">Generar Integrantes</a>
+                                            <!--<div class="m-2" id="miembros_grupo_1" style="display: none;">
+                                                <input type="text" class="form-control m-2" name="Integrante_1" placeholder="Integrante 1">
+                                            </div>
+                                            <div class="m-2"  id="miembros_grupo_2" style="display: none;">
+                                                <input type="text"  disabled class="form-control m-2" name="Integrante_1" placeholder="Integrante 1">
+                                                <input type="text" class="form-control m-2" name="Integrante_2" placeholder="Integrante 2">
+                                            </div> -->
+                                            <div class="m-2" id="">
+                                                <input type="text" class="form-control m-2" name="integrante_1" placeholder="Integrante 1" style="display: none;" id="miembros_grupo_1">
+                                                <input type="text" class="form-control m-2" name="integrante_2" placeholder="Integrante 2" style="display: none;" id="miembros_grupo_2">
+                                                <input type="text" class="form-control m-2" name="integrante_3" placeholder="Integrante 3" style="display: none;" id="miembros_grupo_3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            Escriba el nombre del proyecto
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="form-group">
+                                                <h5>Nombre del proyecto integrador tal cual aparece en el
+                                                    document que va a subir</h5>
+                                                <input type="text" placeholder="Nombre del Proyecto" name="nombrep"
+                                                    id="nombrep" class="form-control m-2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree">
+                                            Suba los documentos del proyecto integrador
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <div class="input-group mb-3">
+                                                        <h5>Seleccione su documento en formato PDF</h5>
+                                                        <input type="file" class="form-control m-2" id="id_docfile" name="docfile" accept="application/pdf">
+                                                    </div>
+                                                    <button class="btn btn-danger"
+                                                        onclick="return confirm('¿Esta seguro de eliminar este documento?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="input-group mb-3">
+                                                        <h5>Seleccione los anexos de su proyecto en PDF</h5>
+                                                        <input type="file" class="form-control m-2" id="id_docfile" name="anexos_proyecto" accept="application/pdf">
+                                                    </div>
+                                                    <button class="btn btn-danger"
+                                                        onclick="return confirm('¿Esta seguro de eliminar este documento?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2">
+                                <button class="w-50" id="boton"
+                                    onclick="return confirm('¿Esta seguro de enviar este proyecto?')"
+                                    type="submit">Enviar proyecto
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{%endblock%}
