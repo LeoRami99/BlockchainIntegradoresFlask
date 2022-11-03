@@ -24,16 +24,13 @@ def registrar_proyecto():
         integrante_tres='1'
         ciclo = request.form['ciclo']
         n_integrantes = request.form['numero_miembros']
-        integrante_1 = request.form['integrante_1']
+        integrante_uno = get_user(request.form['integrante_1'])
         if n_integrantes == '2':
-            integrante_dos = request.form['integrante_dos']
+            integrante_dos = get_user(request.form['integrante_2'])
             integrante_tres = '1'
         elif n_integrantes == '3':
-            integrante_dos = request.form['integrante_dos']
-            integrante_tres = request.form['integrante_tres']
-        
-        # integrante_2 = request.form['integrante_2']
-        # integrante_3 = request.form['integrante_3']
+            integrante_dos = get_user(request.form['integrante_2'])
+            integrante_tres = get_user(request.form['integrante_3'])
         nombrep = request.form['nombrep']
         doc_proyecto = request.files['docfile']
         doc_anexos = request.files['anexos_proyecto']
@@ -71,20 +68,25 @@ def registrar_proyecto():
         hash_trans_anexos = tx_send_trans_anexos.hex()
         #Generar fecha y hora
         fecha_hora = datetime.now() 
-        get_user(integrante_1)
+        
         # Se guarda el proyecto en la base de datos
-        proyecto = Proyectos(nombrep, ciclo, int(get_user(integrante_1)), integrante_dos, integrante_tres, ciclo,fecha_hora,hash_trans_proyecto,hash_trans_anexos)
+        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, ciclo, fecha_hora, hash_trans_proyecto, hash_trans_anexos)
         proyecto.set_proyecto()
         return redirect(url_for('estudiantes.perfilestudiante'))
     else:
         return redirect(url_for('estudiantes.registroproyecto'))
 def get_user(num_doc):
  
-    sql = "SELECT * FROM projecto_usuario WHERE doc_identidad = '{0}'".format(num_doc)
-    cursor.execute(sql)
-    id_usuario=cursor.fetchone()
-    print("Este es el id del usuario: ", id_usuario)
-    return id_usuario[0]
+    sql_user = "SELECT * FROM projecto_usuario WHERE doc_identidad = '{0}'".format(num_doc)
+    cursor.execute(sql_user)
+    id_user = cursor.fetchone()
+    if id_user is not None:
+        return id_user[0]
+    else:
+        return None
+
+
+
         
         
         
