@@ -1,13 +1,18 @@
 from datetime import datetime
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from web3 import Web3
+from flask_login import login_required
 import ipfshttpclient
 from .proyecto import Proyectos
 from config import *
 conn = EstablecerConexion()
 cursor = conn.cursor()
 estudiantes= Blueprint('estudiantes',__name__,url_prefix='/estudiantes', template_folder='templates')
+
+        
+        
 @estudiantes.route('/registroproyecto')
+@login_required
 def registroproyecto():
     return render_template("registroProyecto.html")
 
@@ -70,7 +75,7 @@ def registrar_proyecto():
         fecha_hora = datetime.now() 
         
         # Se guarda el proyecto en la base de datos
-        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, ciclo, fecha_hora, hash_trans_proyecto, hash_trans_anexos)
+        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, ciclo, fecha_hora, hash_trans_proyecto, hash_trans_anexos, 'false')
         proyecto.set_proyecto()
         return redirect(url_for('estudiantes.perfilestudiante'))
     else:
@@ -85,14 +90,8 @@ def get_user(num_doc):
     else:
         return None
 
-
-
-        
-        
-        
-
-        
-    
 @estudiantes.route('/perfilestudiante')
+@login_required
 def perfilestudiante():
     return render_template("perfilEstudiante.html")
+

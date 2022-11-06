@@ -2,12 +2,14 @@ from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for
 from config import *
 from web3 import Web3
+from flask_login import login_required, current_user
 from .calificacion import Calificacion
 conn = EstablecerConexion()
 cursor = conn.cursor()
 w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
 jurado= Blueprint('jurado',__name__,url_prefix='/jurado', template_folder='templates')
 @jurado.route('/perfiljurado')
+@login_required
 def perfiljurado():
     sql="SELECT * FROM projecto_proyecto"
     cursor.execute(sql)
@@ -20,7 +22,7 @@ def perfiljurado():
     # para poder mostrarlos en la vista
     proyecto2 = []
     for i in proyecto:
-        proyecto2.append([i[0],i[1],i[2],i[3],w3.eth.getTransaction(i[4]).input,w3.eth.getTransaction(i[5]).input,get_usuario_nombre(i[6]),get_usuario_nombre(i[7]),get_usuario_nombre(i[8]),i[9]])
+        proyecto2.append([i[0],i[1],i[2],i[3],w3.eth.getTransaction(i[4]).input,w3.eth.getTransaction(i[5]).input,get_usuario_nombre(i[6]),get_usuario_nombre(i[7]),get_usuario_nombre(i[8]),i[9],i[10]])
     return render_template('perfilJurado.html', proyectos=proyecto2, usuario=usuarios)
 def get_usuario_nombre(id_user):
     id_usuario=str(id_user)

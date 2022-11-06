@@ -1,15 +1,51 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 formulario = Blueprint('formulario',__name__, url_prefix='/forms', template_folder='templates')
 from config import *
-from .usuario import Usuarios
+from flask_login import login_user, logout_user
+from .usuario import Usuarios, Usuario
 con_bd = EstablecerConexion()
+
+# Establecer la secret key 
 @formulario.route('/registro')
 def registro():
     return render_template('registro.html')
 @formulario.route('/login')
 def login():
     return render_template('login.html')
+@formulario.route('/logueo', methods=['POST'])
+def logueo():
+    if request.method == 'POST':
+        correo = request.form['email_institucional']
+        password = request.form['contrasena']
+        try:
+            sql="SELECT id FROM projecto_usuario WHERE correo='{0}'".format(correo)
+            cursor = con_bd.cursor()
+            cursor.execute(sql)
+            user_consult=cursor.fetchone()
 
+            user = Usuario(user_consult[0], correo, password)
+            usuario_login = user.login(con_bd)
+            if usuario_login != None:
+                login_user(usuario_login)
+            #    Si el rol es uno dirigir a la vista de perfilestudiante
+                if usuario_login.rol == 1:
+                    return redirect(url_for('estudiantes.perfilestudiante'))
+                # Si el rol es dos dirigir a la vista de perfilprofesor
+                elif usuario_login.rol == 2:
+                    return redirect(url_for('profesor.perfilprofesor'))
+                # Si el rol es tres dirigir a la vista de perfiladministrador
+                elif usuario_login.rol == 3:
+                    return redirect(url_for('admin.perfiladmin'))
+                elif usuario_login.rol == 4:
+                    return redirect(url_for('jurado.perfiljurado'))
+            else:
+                return redirect(url_for('formulario.login'))
+        except:
+            return redirect(url_for('formulario.login'))
+@formulario.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('formulario.login'))
 @formulario.route('/registrar_usuario', methods=['POST'])
 def registrar_usuario():
     if request.method == 'POST':

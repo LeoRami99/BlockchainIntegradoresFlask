@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
+from flask_login import login_required
 from config import *
 from web3 import Web3
 
@@ -7,6 +8,7 @@ cursor = conn.cursor()
 w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
 profesor= Blueprint('profesor',__name__,url_prefix='/profesor', template_folder='templates')
 @profesor.route('/perfilprofesor')
+@login_required
 def perfilprofesor():
     sql="SELECT * FROM projecto_proyecto"
     cursor.execute(sql)
