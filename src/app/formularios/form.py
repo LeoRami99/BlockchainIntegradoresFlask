@@ -17,30 +17,33 @@ def logueo():
     if request.method == 'POST':
         correo = request.form['email_institucional']
         password = request.form['contrasena']
-        try:
-            sql="SELECT id FROM projecto_usuario WHERE correo='{0}'".format(correo)
-            cursor = con_bd.cursor()
-            cursor.execute(sql)
-            user_consult=cursor.fetchone()
+        if correo and password:
+            try:
+                sql="SELECT id FROM projecto_usuario WHERE correo='{0}'".format(correo)
+                cursor = con_bd.cursor()
+                cursor.execute(sql)
+                user_consult=cursor.fetchone()
 
-            user = Usuario(user_consult[0], correo, password)
-            usuario_login = user.login(con_bd)
-            if usuario_login != None:
-                login_user(usuario_login)
-            #    Si el rol es uno dirigir a la vista de perfilestudiante
-                if usuario_login.rol == 1:
-                    return redirect(url_for('estudiantes.perfilestudiante'))
-                # Si el rol es dos dirigir a la vista de perfilprofesor
-                elif usuario_login.rol == 2:
-                    return redirect(url_for('profesor.perfilprofesor'))
-                # Si el rol es tres dirigir a la vista de perfiladministrador
-                elif usuario_login.rol == 3:
-                    return redirect(url_for('admin.perfiladmin'))
-                elif usuario_login.rol == 4:
-                    return redirect(url_for('jurado.perfiljurado'))
-            else:
+                user = Usuario(user_consult[0], correo, password)
+                usuario_login = user.login(con_bd)
+                if usuario_login != None:
+                    login_user(usuario_login)
+                #    Si el rol es uno dirigir a la vista de perfilestudiante
+                    if usuario_login.rol == 1:
+                        return redirect(url_for('estudiantes.perfilestudiante'))
+                    # Si el rol es dos dirigir a la vista de perfilprofesor
+                    elif usuario_login.rol == 2:
+                        return redirect(url_for('profesor.perfilprofesor'))
+                    # Si el rol es tres dirigir a la vista de perfiladministrador
+                    elif usuario_login.rol == 3:
+                        return redirect(url_for('admin.perfiladmin'))
+                    elif usuario_login.rol == 4:
+                        return redirect(url_for('jurado.perfiljurado'))
+                else:
+                    return redirect(url_for('formulario.login'))
+            except:
                 return redirect(url_for('formulario.login'))
-        except:
+        else:
             return redirect(url_for('formulario.login'))
 @formulario.route('/logout')
 def logout():

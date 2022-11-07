@@ -42,8 +42,32 @@ function decryptInput(hash_doc){
 }
 
 function establcerSrc(hash_decrypt) {
-    
     // establecer src con el hash_doc
     const ulr_ipfs="http://localhost:8080/ipfs/"+hash_decrypt;
     window.open(ulr_ipfs);
+}
+// Esta función imp
+function imprimir_resultado_observacion(id, hash_doc){
+    var parrafo=document.getElementById("observacion-"+id);
+    // crear un nodo hijo de tipo parrafo
+    var nodo=document.createElement("p");
+    // crear un nodo hijo de tipo texto
+    var texto=document.createTextNode(decryptInput(hash_doc));
+    // agregar el nodo hijo de tipo texto al nodo hijo de tipo parrafo
+    nodo.appendChild(texto);
+    // agregar el nodo hijo de tipo parrafo al nodo padre
+    parrafo.appendChild(nodo);
+    // Una vez que se imprime la observación se deshabilita el botón de observación
+    document.getElementById("boton-"+id).disabled = true;
+}
+function imprimir_resultado_calificacion(id, hash_doc){
+    var parrafo=document.getElementById("calificacion-"+id);
+    // crear un nodo hijo de tipo parrafo
+    var nodo=document.createElement("p");
+    // crear un nodo hijo de tipo texto
+    var texto=document.createTextNode(decryptInput(hash_doc));
+    // agregar el nodo hijo de tipo texto al nodo hijo de tipo parrafo
+    nodo.appendChild(texto);
+    // agregar el nodo hijo de tipo parrafo al nodo padre
+    parrafo.appendChild(nodo);
 }

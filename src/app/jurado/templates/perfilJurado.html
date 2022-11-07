@@ -163,20 +163,19 @@
                     </thead>
                     <tbody class="table-group-divider">
                         {%for proyecto in proyectos%}
-
                         {%if proyecto[2] == "1" and proyecto[10] == False%}
-                        <tr>
-                            <td>{{proyecto[1]}}</td>
-                            <td>{{proyecto[8]}}</td>
-                            <td>{{proyecto[6]}}</td>
-                            <td>{{proyecto[7]}}</td>
-                            <td><button class="btn btn-success"
-                                    onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
-                            <td><a class="btn btn-success"
-                                    onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
-                            <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                                    data-bs-target="#modal-evaluacion-1">Evaluar</a></td>
-                        </tr>
+                            <tr>
+                                <td>{{proyecto[1]}}</td>
+                                <td>{{proyecto[8]}}</td>
+                                <td>{{proyecto[6]}}</td>
+                                <td>{{proyecto[7]}}</td>
+                                <td><button class="btn btn-success"
+                                        onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
+                                <td><a class="btn btn-success"
+                                        onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
+                                <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
+                                        data-bs-target="#modal-evaluacion-1">Evaluar</a></td>
+                            </tr>
                         {%endif%}
                         {%endfor%}
                     </tbody>
@@ -295,32 +294,32 @@
             </div>
             <div class="modal-body">
                 <form action="/jurado/retroalimentacion" method="post">
-                    {%for proyecto in proyectos%}
-                    {%if proyecto[2] == "1"%}
-                    <h1>Evaluación projecto {{proyecto[1]}}</h1>
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="califacion" name="calificacion"
-                            placeholder="Califcación">
-                        <label for="califacion">Calificación</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <textarea name="observaciones" id="observaciones" class="form-control"
-                            placeholder="Observaciones">
-                                </textarea>
-                        <label for="observaciones">Observaciones</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="hidden" class="form-control disabled" name="id_proyecto" id="id_proyecto"
-                            value="{{proyecto[0]}}">
-                        <label for="id_proyecto">Identificador del proyecto</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="id_usuario_jurado" id="id_jurado" value="1">
-                        <label for="id_jurado">Jurado</label>
-                    </div>
-                    <div class="text-center">
-                        <input type="submit" class="btn btn-success w-50" value="Enviar">
-                    </div>
+                    {%for proyecto in proyectos %}
+                    {%if proyecto[2] == "1" and proyecto[10] == False%}
+                        <h1>Evaluación projecto {{proyecto[1]}}</h1>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="califacion" name="calificacion"
+                                placeholder="Califcación">
+                            <label for="califacion">Calificación</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea name="observaciones" id="observaciones" class="form-control"
+                                placeholder="Observaciones">
+                                    </textarea>
+                            <label for="observaciones">Observaciones</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="hidden" class="form-control disabled" name="id_proyecto" id="id_proyecto"
+                                value="{{proyecto[0]}}">
+                            <label for="id_proyecto">Identificador del proyecto</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="id_usuario_jurado" id="id_jurado" value="1">
+                            <label for="id_jurado">Jurado</label>
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-success w-50" value="Enviar">
+                        </div>
                     {%endif%}
                     {%endfor%}
                 </form>

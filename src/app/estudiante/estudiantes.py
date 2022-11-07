@@ -93,5 +93,22 @@ def get_user(num_doc):
 @estudiantes.route('/perfilestudiante')
 @login_required
 def perfilestudiante():
-    return render_template("perfilEstudiante.html")
+    w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
+    # Traer las ccccccccalifaciones y proyectos del estudiante
+    sql_proyectos = "SELECT id_proyecto, nombre_proyecto, id_hash_documento, id_hash_anexos, estado_calificado, estudiante_uno_id, estudiante_dos_id, estudiante_tres_id FROM projecto_proyecto"
+    sql_calificaciones = "SELECT id_calificacion, calificacion, observaciones, id_proyecto_id FROM projecto_calificaciones"
+    cursor.execute(sql_proyectos)
+    proyectos = cursor.fetchall()
+    cursor.execute(sql_calificaciones)
+    calificaciones = cursor.fetchall()
+    proyectos_nuevo = []
+    calificaciones_hash = []
+    # for proyecto_l in proyectos:
+    for calificaciones_lista, proyecto_l in zip(calificaciones, proyectos):
+        if proyecto_l[0] == calificaciones_lista[3]:
+            # calificaciones_hash.append([calificaciones_lista[0], calificaciones_lista[1], calificaciones_lista[2], calificaciones_lista[3], w3.eth.getTransaction(calificaciones_lista[3]).input])
+            proyectos_nuevo.append([proyecto_l[0], proyecto_l[1], w3.eth.getTransaction(proyecto_l[2]).input, w3.eth.getTransaction(proyecto_l[3]).input, proyecto_l[4], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
+            calificaciones_hash.append([calificaciones_lista[0], w3.eth.getTransaction(calificaciones_lista[1]).input, w3.eth.getTransaction(calificaciones_lista[2]).input, proyecto_l[1], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
+       
+    return render_template("perfilEstudiante.html", proyectos=proyectos_nuevo, calificaciones=calificaciones_hash)
 
