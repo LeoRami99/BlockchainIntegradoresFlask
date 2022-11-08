@@ -32,3 +32,4 @@ def createApp():
     app.register_blueprint(jurado)
 
     return app
+    

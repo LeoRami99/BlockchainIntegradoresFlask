@@ -1,12 +1,15 @@
 {%if current_user.rol == 1:%}
 {% extends 'base.html'%}
+{% block title %}
+    Fomalhaut | Estudiante | {{current_user.nombres}}
+{%endblock%}
 {% block navbar %}
 <nav class="nav navbar sticky-top">
     <div class="container-fluid float-end">
         <a class="navbar-brand" href="#" style="color: white;">
-            <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+            <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" alt="Logo" width="30" height="24"
                 class="d-inline-block align-text-top">
-            Perfil Estudiante
+            Fomalhaut - {{current_user.nombres}}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -67,7 +70,7 @@
                                 class="bi bi-gear-fill" class="text-center mb-2" style="color: white;"></i> Editar
                             perfil</a> -->
                         <center>
-                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" width="100 px">
+                            <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" width="100 px">
                         </center>
                         <center>
                             <div class="form-group">
@@ -163,7 +166,7 @@
                         </div>
                             <!-- <p class="card-text" id="calificacion">
                             </p> -->
-                        <button class="btn btn-primary" id="boton-{{calificaciones_vista[0]}}"onclick="imprimir_resultado_observacion('{{calificaciones_vista[0]}}','{{calificaciones_vista[2]}}'), imprimir_resultado_calificacion('{{calificaciones_vista[0]}}','{{calificaciones_vista[1]}}')">Revelar</button>
+                        <button class="btn btn-primary" id="boton-{{calificaciones_vista[0]}}" onclick="imprimir_resultado_observacion('{{calificaciones_vista[0]}}','{{calificaciones_vista[2]}}'), imprimir_resultado_calificacion('{{calificaciones_vista[0]}}','{{calificaciones_vista[1]}}')">Revelar</button>
                     </div>
                 </div>
             {%endif%}

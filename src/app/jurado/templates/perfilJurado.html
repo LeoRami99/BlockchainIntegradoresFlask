@@ -1,5 +1,8 @@
 {%if current_user.rol == 4:%}
 {%extends 'base.html'%}
+{% block title %}
+    Fomalhaut | Estudiante | {{current_user.nombres}}
+{%endblock%}
 {%block navbar%}
 <nav class="nav navbar navbar-expand-lg sticky-top">
     <div class="container-fluid float-end">
@@ -38,17 +41,17 @@
             aria-labelledby="offcanvasDarkLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasDarkLabel" style="color:#fff;">Perfil</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div class="card text-center fondo">
                     <div class="card-header">
-        
-                        <a style="color: black;" class="nav-link active bt-inicio" aria-current="page" href=""><i
+
+                        <!-- <a style="color: black;" class="nav-link active bt-inicio" aria-current="page" href=""><i
                                 class="bi bi-gear-fill" class="text-center mb-2" style="color: white;"></i> Editar
-                            perfil</a>
-                        <center>                
-                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" width="100 px">
+                            perfil</a> -->
+                        <center>
+                            <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" width="100 px">
                         </center>
                         <center>
                             <div class="form-group">
@@ -63,6 +66,8 @@
                             </div>
                         </center>
                     </div>
+                    <a onclick="return confirm('¿Esta seguro de salir?')" style="color: white;"
+                        class="nav-link active bt-login" href="/forms/logout"><i class="bi bi-door-open"></i>Salir</a>
                 </div>
             </div>
         </div>

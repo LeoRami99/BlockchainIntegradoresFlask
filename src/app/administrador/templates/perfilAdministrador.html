@@ -1,5 +1,8 @@
 {%if current_user.rol == 3:%}
 {%extends 'base.html'%}
+{% block title %}
+    Fomalhaut | Estudiante | {{current_user.nombres}}
+{%endblock%}
 {% block navbar %}
 <nav class="nav navbar navbar-expand-lg sticky-top">
     <div class="container-fluid float-end">

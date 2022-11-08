@@ -1,17 +1,37 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 formulario = Blueprint('formulario',__name__, url_prefix='/forms', template_folder='templates')
 from config import *
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 from .usuario import Usuarios, Usuario
 con_bd = EstablecerConexion()
 
 # Establecer la secret key 
 @formulario.route('/registro')
 def registro():
-    return render_template('registro.html')
+    if current_user.is_authenticated:
+        if current_user.rol == 1:
+            return redirect(url_for('estudiantes.perfilestudiante'))
+        elif current_user.rol == 2:
+            return redirect(url_for('profesor.perfilprofesor'))
+        elif current_user.rol == 3:
+            return redirect(url_for('admin.perfiladmin'))
+        elif current_user.rol == 4:
+            return redirect(url_for('jurado.perfiljurado'))
+    else:
+        return render_template('registro.html')
 @formulario.route('/login')
 def login():
-    return render_template('login.html')
+    if current_user.is_authenticated:
+        if current_user.rol == 1:
+            return redirect(url_for('estudiantes.perfilestudiante'))
+        elif current_user.rol == 2:
+            return redirect(url_for('profesor.perfilprofesor'))
+        elif current_user.rol == 3:
+            return redirect(url_for('admin.perfiladmin'))
+        elif current_user.rol == 4:
+            return redirect(url_for('jurado.perfiljurado'))
+    else:
+        return render_template('login.html')
 @formulario.route('/logueo', methods=['POST'])
 def logueo():
     if request.method == 'POST':

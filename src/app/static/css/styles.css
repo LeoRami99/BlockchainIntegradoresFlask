@@ -1,5 +1,17 @@
 /* Estilos para los botones del navbar */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+/* Crear guente personalizada */
+@font-face {
+  font-family: ethereum;
+  src: url(../fonts/Comfortaa-Regular.ttf);
+
+}
+body{
+  /* importar fuente personalizada */
+  font-family: ethereum;
+
+
+}
 .bt-login, .bt-inicio {
     transition: all 1s;
     /* dejar un espacio */
