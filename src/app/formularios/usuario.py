@@ -31,7 +31,7 @@ class Usuario(UserMixin):
         self.apellidos = apellidos
     def login(self, conexion):
         cursor = conexion.cursor()
-        sql="SELECT * FROM projecto_usuario WHERE correo='{0}'".format(self.correo)
+        sql="SELECT * FROM projecto_usuario WHERE correo='{0}' ".format(self.correo)
         cursor.execute(sql)
         fila=cursor.fetchone()
         if fila !=None:
@@ -46,7 +46,7 @@ class Usuario(UserMixin):
         cursor.execute(sql)
         fila=cursor.fetchone()
         if fila !=None:
-            usuario= Usuario(fila[0], fila[3],None, fila[4], fila[1], fila[2])
+            usuario= Usuario(fila[0], fila[3], None, fila[4], fila[1], fila[2])
             return usuario
         else:
             return None

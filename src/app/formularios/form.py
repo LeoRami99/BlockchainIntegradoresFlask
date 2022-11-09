@@ -47,24 +47,29 @@ def logueo():
                 user = Usuario(user_consult[0], correo, password)
                 usuario_login = user.login(con_bd)
                 if usuario_login != None:
-                    login_user(usuario_login)
+                    if usuario_login.contrasena is True:
+                        login_user(usuario_login)
+                        if usuario_login.rol == 1:
+                            return redirect(url_for('estudiantes.perfilestudiante'))
+                        # Si el rol es dos dirigir a la vista de perfilprofesor
+                        elif usuario_login.rol == 2:
+                            return redirect(url_for('profesor.perfilprofesor'))
+                        # Si el rol es tres dirigir a la vista de perfiladministrador
+                        elif usuario_login.rol == 3:
+                            return redirect(url_for('admin.perfiladmin'))
+                        elif usuario_login.rol == 4:
+                            return redirect(url_for('jurado.perfiljurado'))
+                    else:
+                        return redirect(url_for('formulario.login')) 
                 #    Si el rol es uno dirigir a la vista de perfilestudiante
-                    if usuario_login.rol == 1:
-                        return redirect(url_for('estudiantes.perfilestudiante'))
-                    # Si el rol es dos dirigir a la vista de perfilprofesor
-                    elif usuario_login.rol == 2:
-                        return redirect(url_for('profesor.perfilprofesor'))
-                    # Si el rol es tres dirigir a la vista de perfiladministrador
-                    elif usuario_login.rol == 3:
-                        return redirect(url_for('admin.perfiladmin'))
-                    elif usuario_login.rol == 4:
-                        return redirect(url_for('jurado.perfiljurado'))
                 else:
                     return redirect(url_for('formulario.login'))
             except:
                 return redirect(url_for('formulario.login'))
         else:
             return redirect(url_for('formulario.login'))
+    else:
+        return redirect(url_for('formulario.login'))
 @formulario.route('/logout')
 def logout():
     logout_user()
