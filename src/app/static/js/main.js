@@ -43,7 +43,7 @@ function decryptInput(hash_doc) {
 
 function establcerSrc(hash_decrypt) {
     // establecer src con el hash_doc
-    const ulr_ipfs = "http://192.168.0.13:8080/ipfs/" + hash_decrypt;
+    const ulr_ipfs = "http://localhost:8080/ipfs/" + hash_decrypt;
     window.open(ulr_ipfs);
 }
 // Esta función imp
@@ -119,6 +119,32 @@ $(document).ready( function () {
 } );
 $(document).ready( function () {
     $('#tabla_profe_3').DataTable({
+        "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
+        "iDisplayLength":3,
+        "language":{
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "search": "Buscar",
+            "zeroRecords":"Ningún Registro Encontrado",
+            "info":"Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Ningún registro disponible",
+            "infoFiltered":"(Filtrado de _MAX_ registro(s) totales)",
+            "paginate":{
+                "first":"Primero",
+                "last":"Ultimo",
+                "next":"Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+} );
+
+/*
+Tablas para los modales de administrador
+
+*/
+
+$(document).ready( function () {
+    $('#tabla_admin').DataTable({
         "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
         "iDisplayLength":3,
         "language":{

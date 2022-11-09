@@ -103,12 +103,17 @@ def perfilestudiante():
     calificaciones = cursor.fetchall()
     proyectos_nuevo = []
     calificaciones_hash = []
+    proyectos_all =[]
+    for todos_proyectos in proyectos:
+        proyectos_all.append([todos_proyectos[0], todos_proyectos[1], w3.eth.getTransaction(todos_proyectos[2]).input, w3.eth.getTransaction(todos_proyectos[3]).input, todos_proyectos[4], todos_proyectos[5], todos_proyectos[6], todos_proyectos[7]])
     # for proyecto_l in proyectos:
-    for calificaciones_lista, proyecto_l in zip(calificaciones, proyectos):
+    for calificaciones_lista, proyecto_l, todos_proyectos in zip(calificaciones, proyectos, proyectos):
+        
         if proyecto_l[0] == calificaciones_lista[3]:
             # calificaciones_hash.append([calificaciones_lista[0], calificaciones_lista[1], calificaciones_lista[2], calificaciones_lista[3], w3.eth.getTransaction(calificaciones_lista[3]).input])
             proyectos_nuevo.append([proyecto_l[0], proyecto_l[1], w3.eth.getTransaction(proyecto_l[2]).input, w3.eth.getTransaction(proyecto_l[3]).input, proyecto_l[4], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
             calificaciones_hash.append([calificaciones_lista[0], w3.eth.getTransaction(calificaciones_lista[1]).input, w3.eth.getTransaction(calificaciones_lista[2]).input, proyecto_l[1], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
-       
-    return render_template("perfilEstudiante.html", proyectos=proyectos_nuevo, calificaciones=calificaciones_hash)
+        
+    print(proyectos_all)  
+    return render_template("perfilEstudiante.html", proyectos=proyectos_nuevo, calificaciones=calificaciones_hash, allproyectos=proyectos_all)
 

@@ -1,22 +1,21 @@
 {%if current_user.rol == 3:%}
 {%extends 'base.html'%}
 {% block title %}
-    Fomalhaut | Estudiante | {{current_user.nombres}}
+Fomalhaut | Administrador | {{current_user.nombres}}
 {%endblock%}
 {% block navbar %}
-<nav class="nav navbar navbar-expand-lg sticky-top">
+<nav class="nav navbar sticky-top">
     <div class="container-fluid float-end">
         <a class="navbar-brand" href="#" style="color: white;">
-            <img src="http://cdn.onlinewebfonts.com/svg/img_140098.png" alt="Logo" width="30" height="24"
+            <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" alt="Logo" width="30" height="24"
                 class="d-inline-block align-text-top">
-            Perfil Estudiante
+            Fomalhaut - {{current_user.nombres}}
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          </button>
+      
+        <!-- <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a style="color: white;" class="nav-link active bt-inicio" aria-current="page"
@@ -24,189 +23,290 @@
                 </li>
                 <li class="nav-item">
                     <a onclick="return confirm('¿Esta seguro de salir?')" style="color: white;"
-                        class="nav-link active bt-login" href="/forms/logout"><i
-                            class="bi bi-door-open"></i>Salir</a>
+                        class="nav-link active bt-login" href="/forms/logout"><i class="bi bi-door-open"></i>Salir</a>
                 </li>
             </ul>
-        </div>
-</nav> 
+        </div> -->
+</nav>
 {%endblock%}
 {%block content%}
-        <div class="row align-items-center justify-content-between mt-5">
-            <div class="col-md-3">
-        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark"
-            aria-controls="staticBackdrop">
-            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="" width="100px" height="100px">
-            <h1 style="color:#fff;" class="shadows-lg">Perfil - {{current_user.nombres}}</h1>
-        </button>
-        <!--Tarjeta formulario-->
-        <div class="offcanvas offcanvas-start show fondo" tabindex="-1" id="offcanvasDark"
-            aria-labelledby="offcanvasDarkLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasDarkLabel" style="color:#fff;">Perfil</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div class="card text-center fondo">
-                    <div class="card-header">
-        
-                        <a style="color: black;" class="nav-link active bt-inicio" aria-current="page" href=""><i
-                                class="bi bi-gear-fill" class="text-center mb-2" style="color: white;"></i> Editar
-                            perfil</a>
-                        <center>                
-                            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" width="100 px">
-                        </center>
-                        <center>
-                            <div class="form-group">
-                                <h5 class="text-center mb-2" style="color: white;">{{current_user.nombres}}</h5>
-                            </div>
-                            <div class="form-group">
-                                <h6 class="text-center mb-2" style="color: white;">Ingenieria de Sistemas</h6>
-                            </div>
-                            <div class="form-group">
-                                <h6 class="text-center mb-2" style="color: white;">Universidad de Cundinamarca
-                                    Seccional Ubaté</h6>
-                            </div>
-                        </center>
-                    </div>
-                </div>
-            </div>
+<div class="offcanvas offcanvas-end show fondo" tabindex="-1" id="offcanvasDark"
+        aria-labelledby="offcanvasDarkLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkLabel" style="color:#fff;">Perfil</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        <div class="offcanvas-body">
+            <div class="card text-center fondo">
+                <div class="card-header">
 
-        <!--Fin tarjeta formulario-->
-    </div>
-            <!--Inicio carta primer entrega-->
-            <div class="col-md-3">
-                <!--Tarjeta formulario-->
-                <div class="card text-center fondo">
-                    <div class="card-header">
-
-                        <form action="#" method="post" class="form-login mt-5">
-                            <center>
-                                <h2 class="text-center mb-2" style="color: white;">Ciclo I</h2>
-                                <img src="https://cdn-icons-png.flaticon.com/512/3979/3979423.png" width="100 px">
-                            </center>
-                            <center>
-                                <div class="form-group">
-                                    <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
-                                    <a href=""  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" >Fechas de Entrega</a>
-                                </div>
-                            </center>
-
-                        </form>
-                    </div>
-                </div>
-                <!--Fin tarjeta formulario primer entrega-->
-            </div>
-            <!--Inicio carta segunda entrega-->
-            <div class="col-md-3">
-                <!--Tarjeta formulario-->
-                <div class="card text-center fondo">
-                    <div class="card-header">
-                        <form action="#" method="post" class="form-login mt-5">
-                            <center>
-                                <h2 class="text-center mb-2" style="color: white;">Ciclo II</h2>
-                                <img src="https://cdn-icons-png.flaticon.com/512/3979/3979423.png" width="100 px">
-                            </center>
-                            <center>
-                                <div class="form-group">
-                                    <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
-                                    <a href="" class="btn btn-success">Fechas de Entrega</a>
-                                </div>
-                            </center>
-                        </form>
-                    </div>
-                </div>
-                <!--Fin tarjeta formulario segunda entrega-->
-            </div>
-            <!--Inicio carta segunda entrega-->
-            <div class="col-md-3">
-                <!--Tarjeta formulario-->
-                <div class="card text-center fondo">
-                    <div class="card-header">
-                        <form action="#" method="post" class="form-login mt-5">
-                            <center>
-                                <h2 class="text-center mb-2" style="color: white;">Ciclo III</h2>
-                                <img src="https://cdn-icons-png.flaticon.com/512/3979/3979423.png" width="100 px">
-                            </center>
-                            <center>
-                                <div class="form-group">
-                                    <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
-                                    <a href=""  class="btn btn-success">Fechas de Entrega</a>
-                                </div>
-                            </center>
-                        </form>
-                    </div>
-                </div>
-                <!--Fin tarjeta formulario segunda entrega-->
-            </div>
-        </div>
-        
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Fechas para ciclo 1</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        <label for="ciclo1">Fecha Ciclo 1</label>
-                        <input type="date" name="fecha_c1" class="form-date" id="ciclo1">
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-success">Enviar</button>
+                    <!-- <a style="color: black;" class="nav-link active bt-inicio" aria-current="page" href=""><i
+                            class="bi bi-gear-fill" class="text-center mb-2" style="color: white;"></i> Editar
+                        perfil</a> -->
+                    <center>
+                        <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" width="100 px">
+                    </center>
+                    <center>
+                        <div class="form-group">
+                            <h5 class="text-center mb-2" style="color: white;">{{current_user.nombres}}</h5>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <h6 class="text-center mb-2" style="color: white;">Ingenieria de Sistemas</h6>
+                        </div>
+                        <div class="form-group">
+                            <h6 class="text-center mb-2" style="color: white;">Universidad de Cundinamarca
+                                Seccional Ubaté</h6>
+                        </div>
+                    </center>
                 </div>
-              </div>
+                <a onclick="return confirm('¿Esta seguro de salir?')" style="color: white;"
+                    class="nav-link active bt-login" href="/forms/logout"><i class="bi bi-door-open"></i>Salir</a>
             </div>
-{% endblock %}
-{%elif current_user.rol == 1 or current_user.rol == 2 or current_user.rol == 4%}
-<!-- Realizar un indicador de carga -->
+        </div>
+    </div>
+<div class="row align-items-center justify-content-between mt-5 mb-5">
+    <div class="col mb-2">
+        <div class="card text-center fondo shadow-lg ">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso No Autorizado</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='/css/styles.css')}}">
-    {%if current_user.rol ==1%}
-        <meta http-equiv="refresh" content="5; URL={{url_for('estudiantes.perfilestudiante')}}" />
-    {%elif current_user.rol ==2%}
-        <meta http-equiv="refresh" content="5; URL={{url_for('profesor.perfilprofesor')}}" />
-    {%elif current_user.rol ==4%}
-        <meta http-equiv="refresh" content="5; URL={{url_for('jurado.perfiljurado')}}" />
-    {%endif%}
-</head>
-<body>
-    <div id="particles-js"></div>
-    <div class="m-0 vh-100 row justify-content-center align-items-center">
-        <div class="container col-auto text-center">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="text-center"><strong>¡Hola {{current_user.nombres +' '+current_user.apellidos}} creo que estás perdido!</h1></strong>
+            <center>
+                <img src="https://cdn.pixabay.com/photo/2018/04/12/16/13/flower-3313905_960_720.jpg"
+                    class="card-img-top" alt="...">
+                <h2 class="text-center mb-2" style="color: white;">{{current_user.nombres}}</h2>
+            </center>
+            <center>
+                <div class="card-body">
+                    <!-- <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-proyectos">Mis proyectos</button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-observaciones">Observaciones y Califcaciones</button>
+                      </div> -->
+                </div>
+            </center>
+
+        </div>
+    </div>
+
+    <!--Inicio carta primer entrega-->
+    <div class="col-md-3 mb-2">
+        <!--Tarjeta formulario-->
+        <div class="card text-center fondo">
+            <div class="card-header">
+                <center>
+                    <img src="{{url_for('static', filename='imgs/filter-team.svg')}}" height="290" class="card-img-top" >
+                    <!-- <img src="https://cdn-icons-png.flaticon.com/512/3979/3979423.png" width="100 px"
+                        class="card-img-top"> -->
+                    </center>
+                </div>
+                <div class="card-body">
+                    <center>
+                    <h2 class="text-center mb-2" style="color: white;">Asignar roles</h2>
+                    <div class="form-group">
+                        <!-- <h4 class="text-center mb-2" style="color: white;">U</h4> -->
+                        <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-gear"></i> Configuración</a>
+                    </div>
+                </center>
             </div>
-            <iframe src="https://giphy.com/embed/3o7aTskHEUdgCQAXde" width="480" height="204" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-            <h5>¡ESTA VISTA, NO ESTA DISEÑADA PARA TI!</h5>
-            <h5>Serás redireccionado en unos instantes...</h5>
-            <!-- <a href="{{url_for('estudiantes.perfilestudiante')}}">Regresar</a> -->
+        </div>
+        <!--Fin tarjeta formulario primer entrega-->
+    </div>
+    <!--Inicio carta segunda entrega-->
+    <div class="col-md-3 mb-2">
+        <!--Tarjeta formulario-->
+        <div class="card text-center fondo">
+            <div class="card-header">
+                <center>
+                    <img src="{{url_for('static', filename='imgs/nice-team.svg')}}" height="250" class="card-img-top" >
+                </center>
+            </div>
+            <div class="card-body">
+                <center>
+                    <h2 class="text-center mb-2" style="color: white;">Asignar fechas</h2>
+                    <div class="form-group">
+                        <!-- <h4 class="text-center mb-2" style="color: white;">Proyectos</h4> -->
+                        <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-calendar-check"></i> Fechas
+                            de entrega</a>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <!--Fin tarjeta formulario segunda entrega-->
+    </div>
+    <!--Inicio carta segunda entrega-->
+    <div class="col-md-3 mb-2">
+        <!--Tarjeta formulario-->
+        <div class="card text-center fondo">
+            <div class="card-header">
+                <center>
+                    <img src="{{url_for('static', filename='imgs/estadisticas-team.svg')}}" height="250" class="card-img-top" >
+                </center>
+            </div>
+            <div class="card-body">
+                <center>
+                    <h2 class="text-center mb-2" style="color: white;">Estadisticas de proyectos</h2>
+                    <div class="form-group">
+                        <!-- <h4 class="text-center mb-2" style="color: white;">Proyectos</h4> -->
+                        <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-bar-chart-line"></i> Estadisticas</a>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <!--Fin tarjeta formulario segunda entrega-->
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Configuración de roles</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body table-responsive">
+                <table class=" table table-striped text-center" id="tabla_admin">
+                    <thead>
+                        <tr>
+                            <th>Id-Usuario</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Tipo de Documento</th>
+                            <th>Número Documento</th>
+                            <th>Ciclo</th>
+                            <th>Rol</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for profe_rol in profesores%}
+                        {%if profe_rol[7]==2 or profe_rol[7]==4%}
+                        <tr>
+                            <td>{{profe_rol[0]}}</td>
+                            <td>{{profe_rol[1]}}</td>
+                            <td>{{profe_rol[2]}}</td>
+                            <td>{{profe_rol[3]}}</td>
+                            <td>{{profe_rol[4]}}</td>
+                            <td>{{profe_rol[5]}}</td>
+                            <td>{{profe_rol[6]}}</td>
+                            {%if profe_rol[7]==2%}
+                            <td>Profesor</td>
+                            {%elif profe_rol[7]==4%}
+                            <td>Jurado</td>
+                            {%endif%}
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit-{{profe_rol[0]}}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                  
+                            </td>
+                            
+                           
+                        </tr>
+                        {%endif%}
+                        {%endfor%}
+                    </tbody>
+
+                </table>
+            </div>
         </div>
     </div>
 </div>
-</body>
-
-<script src="{{url_for('static', filename='/js/particles.js')}}"></script>
-<script>
-    particlesJS.load('particles-js', "{{url_for('static', filename='/js/particles-space.json')}}", function () {
-        console.log('callback - particles.js config loaded');
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-</html>
-
+{%for profe_rol in profesores%}
+{%if profe_rol[7]==2 or profe_rol[7]==4%}
+<div class="modal fade" id="modal-edit-{{profe_rol[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{profe_rol[1]}} {{profe_rol[2]}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin/actualizar" method="post">
+            <div class="form-group">
+              <input type="hidden" name="id_modificar" value="{{profe_rol[0]}}">
+              <label for="rol">Rol</label>
+              <select class="form-select" name="rol" id="rol">
+                <!-- Tener un valor de default -->
+                {%if profe_rol[7]==2%}
+                <option value="2" selected>Profesor</option>
+                <option value="4">Jurado</option>
+                {%elif profe_rol[7]==4%}
+                <option value="2">Profesor</option>
+                <option value="4" selected>Jurado</option>
+                {%endif%}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ciclo">Ciclo</label>
+              <select class="form-select" name="ciclo" id="ciclo">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary" onclick="return confirm('¿Desea guardar los cambios?')">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 {%endif%}
-    
+{%endfor%}
+    <!-- Modal  -->
+
+
+    {% endblock %}
+    {%elif current_user.rol == 1 or current_user.rol == 2 or current_user.rol == 4%}
+    <!-- Realizar un indicador de carga -->
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Acceso No Autorizado</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='/css/styles.css')}}">
+        {%if current_user.rol ==1%}
+        <meta http-equiv="refresh" content="5; URL={{url_for('estudiantes.perfilestudiante')}}" />
+        {%elif current_user.rol ==2%}
+        <meta http-equiv="refresh" content="5; URL={{url_for('profesor.perfilprofesor')}}" />
+        {%elif current_user.rol ==4%}
+        <meta http-equiv="refresh" content="5; URL={{url_for('jurado.perfiljurado')}}" />
+        {%endif%}
+    </head>
+
+    <body>
+        <div id="particles-js"></div>
+        <div class="m-0 vh-100 row justify-content-center align-items-center">
+            <div class="container col-auto text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-center"><strong>¡Hola {{current_user.nombres +' '+current_user.apellidos}} creo
+                                que estás perdido!</h1></strong>
+                    </div>
+                    <iframe src="https://giphy.com/embed/3o7aTskHEUdgCQAXde" width="480" height="204" frameBorder="0"
+                        class="giphy-embed" allowFullScreen></iframe>
+                    <h5>¡ESTA VISTA, NO ESTA DISEÑADA PARA TI!</h5>
+                    <h5>Serás redireccionado en unos instantes...</h5>
+                    <!-- <a href="{{url_for('estudiantes.perfilestudiante')}}">Regresar</a> -->
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src="{{url_for('static', filename='/js/particles.js')}}"></script>
+    <script>
+        particlesJS.load('particles-js', "{{url_for('static', filename='/js/particles-space.json')}}", function () {
+            console.log('callback - particles.js config loaded');
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    </html>
+
+    {%endif%}

@@ -9,15 +9,15 @@
         {% block title %}
         {% endblock %}
     </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
     <!-- hacer el favicon -->
     <link rel="icon" href="{{url_for('static', filename='imgs/FomalHauticon.svg')}}">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="{{url_for('static', filename='js/jquery-3.6.1.min.js')}}" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.dataTables.min.css')}}">
+    <script src="{{url_for('static', filename='js/jquery.dataTables.min.js')}}"></script>
 
 </head>
 
@@ -75,7 +75,7 @@
 <script>
     AOS.init();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
 <!-- <script src="{{url_for('static', filename='js/web3.min.js')}}"> </script>
 <script src="{{url_for('static', filename='js/web3.min.js.map')}}"> </script> -->
 <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>

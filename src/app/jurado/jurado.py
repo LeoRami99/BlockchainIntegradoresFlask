@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 from .calificacion import Calificacion
 conn = EstablecerConexion()
 cursor = conn.cursor()
-w3 = Web3(Web3.HTTPProvider("http://192.168.0.13:8545"))
+w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
 jurado= Blueprint('jurado',__name__,url_prefix='/jurado', template_folder='templates')
 @jurado.route('/perfiljurado')
 @login_required

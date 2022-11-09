@@ -56,7 +56,7 @@
             <h1 style="color:#fff;" class="shadows-lg">Perfil - {{current_user.nombres}}</h1>
         </button> -->
         <!--Tarjeta formulario-->
-        <div class="offcanvas offcanvas-start show fondo" tabindex="-1" id="offcanvasDark"
+        <div class="offcanvas offcanvas-end show fondo" tabindex="-1" id="offcanvasDark"
             aria-labelledby="offcanvasDarkLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasDarkLabel" style="color:#fff;">Perfil</h5>
@@ -188,7 +188,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            {%for proyectos_vista in proyectos%}
+            
+            {%for proyectos_vista in allproyectos%}
             {%if proyectos_vista[4] == current_user.id or proyectos_vista[5] == current_user.id or proyectos_vista[6] == current_user.id%}
             <div class="card mb-2">
                 <div class="card-header">
@@ -198,7 +199,7 @@
                     <h5 class="card-title">Proyecto: {{proyectos_vista[1]}}</h5>
                     {%if proyectos_vista[4] == true%}
                     <h5 class="card-title">Calificado: Si</h5>
-                    {%else%}
+                    {%elif proyectos_vista[4] == false%}
                     <h5 class="card-title text-danger">Calificado: No</h5>
                     {%endif%}
                     <p class="card-text" id="proyecto">
