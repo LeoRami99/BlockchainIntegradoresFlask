@@ -5,20 +5,18 @@ from config import *
 conn = EstablecerConexion()
 cursor = conn.cursor()
 class Usuarios():
-    def __init__(self, nombre, apellidos, correo, doc_identidad, cod_universidad, contrasena, ciclo, rol_id, tipo_documento):
+    def __init__(self, nombre, apellidos, correo, doc_identidad, contrasena, rol_id, tipo_documento):
         self.nombre = nombre
         self.apellidos = apellidos
         self.correo = correo
         self.tipo_documento = tipo_documento
         self.doc_identidad = doc_identidad
-        self.cod_universidad = cod_universidad
         self.contrasena = contrasena
         self.rol_id = rol_id
-        self.ciclo = ciclo
     def set_usuario(self):
         # el id es autoincremental
-        sql="INSERT INTO projecto_usuario (nombre, apellidos, correo, doc_identidad, cod_universidad, contrasena, ciclo, rol_id_id, tipo_documento_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(sql, (self.nombre, self.apellidos, self.correo, self.doc_identidad, self.cod_universidad, generate_password_hash(self.contrasena), self.ciclo, self.rol_id, self.tipo_documento))
+        sql="INSERT INTO projecto_usuario (nombre, apellidos, correo, doc_identidad, contrasena, rol_id_id, tipo_documento_id) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(sql, (self.nombre, self.apellidos, self.correo, self.doc_identidad, generate_password_hash(self.contrasena), self.rol_id, self.tipo_documento))
         conn.commit()
 
 class Usuario(UserMixin):
@@ -35,7 +33,7 @@ class Usuario(UserMixin):
         cursor.execute(sql)
         fila=cursor.fetchone()
         if fila !=None:
-            usuario= Usuario(fila[0], fila[3], check_password_hash(fila[6], self.contrasena), fila[8], fila[1], fila[2])
+            usuario= Usuario(fila[0], fila[3], check_password_hash(fila[5], self.contrasena), fila[6], fila[1], fila[2])
             return usuario
         else:
             return None

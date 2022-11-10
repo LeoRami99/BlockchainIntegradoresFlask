@@ -1,12 +1,12 @@
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for
 from config import *
-from web3 import Web3
+from config_eth import *
 from flask_login import login_required, current_user
 from .calificacion import Calificacion
 conn = EstablecerConexion()
 cursor = conn.cursor()
-w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
+w3 = conection_eth()
 jurado= Blueprint('jurado',__name__,url_prefix='/jurado', template_folder='templates')
 @jurado.route('/perfiljurado')
 @login_required
@@ -64,5 +64,6 @@ def retroalimentacion():
         calificacion = Calificacion(hash_trans_califacion, hash_trans_observacion, fecha_hora, id_proyecto, id_jurado)
         calificacion.set_calificaciones()
         return redirect(url_for('jurado.perfiljurado'))
+
 
 

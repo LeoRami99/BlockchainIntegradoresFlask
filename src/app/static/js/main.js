@@ -25,6 +25,65 @@ function miembrosGrupo() {
         document.getElementById("miembros_grupo_3").disabled = false;
     }
 }
+function numero_jurados_ciclo() {
+    numero_integrantes = document.getElementById("num_jurados").value;
+    if (numero_integrantes == 1) {
+        document.getElementById("jurado_uno").style.display = "block";
+        document.getElementById("jurado_dos").style.display = "none";
+        document.getElementById("jurado_tres").style.display = "none";
+        document.getElementById("jurado_cuatro").style.display = "none";
+        document.getElementById("jurado_cinco").style.display = "none";
+        
+        document.getElementById("jurado_dos").disabled = true;
+        document.getElementById("jurado_tres").disabled = true;
+        document.getElementById("jurado_cuatro").disabled = true;
+        document.getElementById("jurado_cinco").disabled = true;
+    }else if (numero_integrantes == 2) {
+        document.getElementById("jurado_uno").style.display = "block";
+        document.getElementById("jurado_dos").style.display = "block";
+        document.getElementById("jurado_tres").style.display = "none";
+        document.getElementById("jurado_cuatro").style.display = "none";
+        document.getElementById("jurado_cinco").style.display = "none";
+
+        document.getElementById("jurado_dos").disabled = false;
+        document.getElementById("jurado_tres").disabled = true;
+        document.getElementById("jurado_cuatro").disabled = true;
+        document.getElementById("jurado_cinco").disabled = true;
+    }else if (numero_integrantes == 3) {
+        document.getElementById("jurado_uno").style.display = "block";
+        document.getElementById("jurado_dos").style.display = "block";
+        document.getElementById("jurado_tres").style.display = "block";
+        document.getElementById("jurado_cuatro").style.display = "none";
+        document.getElementById("jurado_cinco").style.display = "none";
+
+        document.getElementById("jurado_dos").disabled = false;
+        document.getElementById("jurado_tres").disabled = false;
+        document.getElementById("jurado_cuatro").disabled = true;
+        document.getElementById("jurado_cinco").disabled = true;
+    }else if (numero_integrantes == 4) {
+        document.getElementById("jurado_uno").style.display = "block";
+        document.getElementById("jurado_dos").style.display = "block";
+        document.getElementById("jurado_tres").style.display = "block";
+        document.getElementById("jurado_cuatro").style.display = "block";
+        document.getElementById("jurado_cinco").style.display = "none";
+
+        document.getElementById("jurado_dos").disabled = false;
+        document.getElementById("jurado_tres").disabled = false;
+        document.getElementById("jurado_cuatro").disabled = false;
+        document.getElementById("jurado_cinco").disabled = true;
+    }else if (numero_integrantes == 5) {
+        document.getElementById("jurado_uno").style.display = "block";
+        document.getElementById("jurado_dos").style.display = "block";
+        document.getElementById("jurado_tres").style.display = "block";
+        document.getElementById("jurado_cuatro").style.display = "block";
+        document.getElementById("jurado_cinco").style.display = "block";
+
+        document.getElementById("jurado_dos").disabled = false;
+        document.getElementById("jurado_tres").disabled = false;
+        document.getElementById("jurado_cuatro").disabled = false;
+        document.getElementById("jurado_cinco").disabled = false;
+    }
+}
 window.addEventListener('load', function () {
     if (typeof web3 !== 'undefined') {
         console.log("Web3 fallando" + web3.currentProvider.constructor.name);
@@ -120,7 +179,7 @@ $(document).ready( function () {
 $(document).ready( function () {
     $('#tabla_profe_3').DataTable({
         "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
-        "iDisplayLength":3,
+        "iDisplayLength":5,
         "language":{
             "lengthMenu": "Mostrar _MENU_ registros por página",
             "search": "Buscar",
@@ -145,6 +204,27 @@ Tablas para los modales de administrador
 
 $(document).ready( function () {
     $('#tabla_admin').DataTable({
+        "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
+        "iDisplayLength":3,
+        "language":{
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "search": "Buscar",
+            "zeroRecords":"Ningún Registro Encontrado",
+            "info":"Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Ningún registro disponible",
+            "infoFiltered":"(Filtrado de _MAX_ registro(s) totales)",
+            "paginate":{
+                "first":"Primero",
+                "last":"Ultimo",
+                "next":"Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+} );
+// Tabla proyectos
+$(document).ready( function () {
+    $('#tabla_proyecto').DataTable({
         "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
         "iDisplayLength":3,
         "language":{

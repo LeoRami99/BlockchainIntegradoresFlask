@@ -82,10 +82,9 @@ def registrar_usuario():
         tipo_documento = request.form['tipo_documento']
         tipo_rol = request.form['tipo_rol']
         numero_identificacion = request.form['numero_identificacion']
-        numero_universidad = request.form['numero_universidad']
         email_institucional = request.form['correoinstitucional']
         contraseña = request.form['contraseña']
-        usuario = Usuarios(nombres, apellidos, email_institucional, numero_identificacion, numero_universidad, contraseña, 1, tipo_rol, tipo_documento)
+        usuario = Usuarios(nombres, apellidos, email_institucional, numero_identificacion, contraseña, tipo_rol, tipo_documento)
         usuario.set_usuario()
         return redirect(url_for('formulario.login'))
     else:

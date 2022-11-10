@@ -1,10 +1,11 @@
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from web3 import Web3
+# from web3 import Web3
 from flask_login import login_required
 import ipfshttpclient
 from .proyecto import Proyectos
 from config import *
+from config_eth import *
 conn = EstablecerConexion()
 cursor = conn.cursor()
 estudiantes= Blueprint('estudiantes',__name__,url_prefix='/estudiantes', template_folder='templates')
@@ -21,7 +22,7 @@ def registrar_proyecto():
     # Instancia de la conexión a IPFS
     fs = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001')
     # Instancia de web3 para envio de transacción a blockchain
-    w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
+    w3 = conection_eth()
     
     # Variables para guardar los integrantes del equipo
     if request.method == 'POST':
@@ -93,7 +94,7 @@ def get_user(num_doc):
 @estudiantes.route('/perfilestudiante')
 @login_required
 def perfilestudiante():
-    w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
+    w3 = conection_eth()
     # Traer las ccccccccalifaciones y proyectos del estudiante
     sql_proyectos = "SELECT id_proyecto, nombre_proyecto, id_hash_documento, id_hash_anexos, estado_calificado, estudiante_uno_id, estudiante_dos_id, estudiante_tres_id FROM projecto_proyecto"
     sql_calificaciones = "SELECT id_calificacion, calificacion, observaciones, id_proyecto_id FROM projecto_calificaciones"
@@ -112,8 +113,6 @@ def perfilestudiante():
         if proyecto_l[0] == calificaciones_lista[3]:
             # calificaciones_hash.append([calificaciones_lista[0], calificaciones_lista[1], calificaciones_lista[2], calificaciones_lista[3], w3.eth.getTransaction(calificaciones_lista[3]).input])
             proyectos_nuevo.append([proyecto_l[0], proyecto_l[1], w3.eth.getTransaction(proyecto_l[2]).input, w3.eth.getTransaction(proyecto_l[3]).input, proyecto_l[4], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
-            calificaciones_hash.append([calificaciones_lista[0], w3.eth.getTransaction(calificaciones_lista[1]).input, w3.eth.getTransaction(calificaciones_lista[2]).input, proyecto_l[1], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
-        
-    print(proyectos_all)  
+            calificaciones_hash.append([calificaciones_lista[0], w3.eth.getTransaction(calificaciones_lista[1]).input, w3.eth.getTransaction(calificaciones_lista[2]).input, proyecto_l[1], proyecto_l[5], proyecto_l[6], proyecto_l[7]]) 
     return render_template("perfilEstudiante.html", proyectos=proyectos_nuevo, calificaciones=calificaciones_hash, allproyectos=proyectos_all)
 
