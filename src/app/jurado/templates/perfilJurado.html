@@ -189,7 +189,7 @@
                                                         <td><a class="btn btn-success"
                                                                 onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
                                                         <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                                                                data-bs-target="#modal-evaluacion-1">Evaluar</a></td>
+                                                                data-bs-target="#modal-evaluacion-{{proyecto[0]}}">Evaluar</a></td>
                                                     </tr>
                                                 {%endif%}
                                             {%endif%}    
@@ -305,7 +305,7 @@
                                                         <td><a class="btn btn-success"
                                                                 onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
                                                         <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                                                                data-bs-target="#modal-evaluacion-1">Evaluar</a></td>
+                                                                data-bs-target="#modal-evaluacion-{{proyecto[0]}}">Evaaluar</a></td>
                                                     </tr>
                                                 {%endif%}
                                             {%endif%}    
@@ -325,7 +325,10 @@
     </div>
 </div>
 <!-- Modal para la evaluación del proyecto -->
-<div class="modal fade" id="modal-evaluacion-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% for proyecto in proyectos %}
+
+        
+<div class="modal fade" id="modal-evaluacion-{{proyecto[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -334,10 +337,13 @@
             </div>
             <div class="modal-body">
                 <form action="/jurado/retroalimentacion" method="post">
-                    
-                    {%for proyecto in proyectos %}
+        
                     {%if proyecto[2] == "1" and proyecto[10] == False%}
                         <h1>Evaluación projecto {{proyecto[1]}}</h1>
+                        <input type="hidden" name="id_jurado" value="{{current_user.id}}">
+                        <input type="hidden" name="id_proyecto" value="{{proyecto[0]}}">
+                        <input type="hidden" name="id_grupo" value="{{proyecto[9]}}">
+                        <input type="hidden" name="ciclo" value="{{proyecto[2]}}">
                         <div class="form-floating mb-3">
                             <input type="number" class="form-control" id="califacion" name="calificacion"
                                 placeholder="Califcación">
@@ -345,33 +351,26 @@
                         </div>
                         <div class="form-floating mb-3">
                             <textarea name="observaciones" id="observaciones" class="form-control"
-                                placeholder="Observaciones">
-                                    </textarea>
-                            <label for="observaciones">Observaciones</label>
+                            placeholder="Observaciones">
+                            
+                            </textarea>
+                        <label for="observaciones">Observaciones</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="hidden" class="form-control disabled" name="id_proyecto" id="id_proyecto"
-                                value="{{proyecto[0]}}">
-                            <label for="id_proyecto">Identificador del proyecto</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="id_usuario_jurado" id="id_jurado" value="1">
-                            <label for="id_jurado">Jurado</label>
-                        </div>
+        
                         <div class="text-center">
                             <input type="submit" class="btn btn-success w-50" value="Enviar">
                         </div>
-                    {%endif%}
-                    {%endfor%}
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        {%endif%}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
-    </div>
 </div>
-<!-- Modal de evaluación del proyecto ciclo II -->
+{% endfor %}
+    <!-- Modal de evaluación del proyecto ciclo II -->
 <div class="modal fade" id="modal-evaluacion-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
