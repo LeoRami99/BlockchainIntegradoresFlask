@@ -76,7 +76,7 @@ def registrar_proyecto():
         fecha_hora = datetime.now() 
         
         # Se guarda el proyecto en la base de datos
-        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, ciclo, fecha_hora, hash_trans_proyecto, hash_trans_anexos, 'false')
+        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, 11, fecha_hora, hash_trans_proyecto, hash_trans_anexos, 'false')
         proyecto.set_proyecto()
         return redirect(url_for('estudiantes.perfilestudiante'))
     else:
@@ -96,23 +96,24 @@ def get_user(num_doc):
 def perfilestudiante():
     w3 = conection_eth()
     # Traer las ccccccccalifaciones y proyectos del estudiante
-    sql_proyectos = "SELECT id_proyecto, nombre_proyecto, id_hash_documento, id_hash_anexos, estado_calificado, estudiante_uno_id, estudiante_dos_id, estudiante_tres_id FROM projecto_proyecto"
-    sql_calificaciones = "SELECT id_calificacion, calificacion, observaciones, id_proyecto_id FROM projecto_calificaciones"
-    cursor.execute(sql_proyectos)
-    proyectos = cursor.fetchall()
-    cursor.execute(sql_calificaciones)
-    calificaciones = cursor.fetchall()
-    proyectos_nuevo = []
-    calificaciones_hash = []
-    proyectos_all =[]
-    for todos_proyectos in proyectos:
-        proyectos_all.append([todos_proyectos[0], todos_proyectos[1], w3.eth.getTransaction(todos_proyectos[2]).input, w3.eth.getTransaction(todos_proyectos[3]).input, todos_proyectos[4], todos_proyectos[5], todos_proyectos[6], todos_proyectos[7]])
-    # for proyecto_l in proyectos:
-    for calificaciones_lista, proyecto_l, todos_proyectos in zip(calificaciones, proyectos, proyectos):
+    # sql_proyectos = "SELECT id_proyecto, nombre_proyecto, id_hash_documento, id_hash_anexos, estado_calificado, estudiante_uno_id, estudiante_dos_id, estudiante_tres_id FROM projecto_proyecto"
+    # sql_calificaciones = "SELECT id_calificacion, fecha id_proyecto_id, id_usuario_id, cali_jurado_uno
+    # cursor.execute(sql_proyectos)
+    # proyectos = cursor.fetchall()
+    # cursor.execute(sql_calificaciones)
+    # calificaciones = cursor.fetchall()
+    # proyectos_nuevo = []
+    # calificaciones_hash = []
+    # proyectos_all =[]
+    # for todos_proyectos in proyectos:
+    #     proyectos_all.append([todos_proyectos[0], todos_proyectos[1], w3.eth.getTransaction(todos_proyectos[2]).input, w3.eth.getTransaction(todos_proyectos[3]).input, todos_proyectos[4], todos_proyectos[5], todos_proyectos[6], todos_proyectos[7]])
+    # # for proyecto_l in proyectos:
+    # for calificaciones_lista, proyecto_l, todos_proyectos in zip(calificaciones, proyectos, proyectos):
         
-        if proyecto_l[0] == calificaciones_lista[3]:
-            # calificaciones_hash.append([calificaciones_lista[0], calificaciones_lista[1], calificaciones_lista[2], calificaciones_lista[3], w3.eth.getTransaction(calificaciones_lista[3]).input])
-            proyectos_nuevo.append([proyecto_l[0], proyecto_l[1], w3.eth.getTransaction(proyecto_l[2]).input, w3.eth.getTransaction(proyecto_l[3]).input, proyecto_l[4], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
-            calificaciones_hash.append([calificaciones_lista[0], w3.eth.getTransaction(calificaciones_lista[1]).input, w3.eth.getTransaction(calificaciones_lista[2]).input, proyecto_l[1], proyecto_l[5], proyecto_l[6], proyecto_l[7]]) 
-    return render_template("perfilEstudiante.html", proyectos=proyectos_nuevo, calificaciones=calificaciones_hash, allproyectos=proyectos_all)
+    #     if proyecto_l[0] == calificaciones_lista[3]:
+    #         # calificaciones_hash.append([calificaciones_lista[0], calificaciones_lista[1], calificaciones_lista[2], calificaciones_lista[3], w3.eth.getTransaction(calificaciones_lista[3]).input])
+    #         proyectos_nuevo.append([proyecto_l[0], proyecto_l[1], w3.eth.getTransaction(proyecto_l[2]).input, w3.eth.getTransaction(proyecto_l[3]).input, proyecto_l[4], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
+    #         calificaciones_hash.append([calificaciones_lista[0], w3.eth.getTransaction(calificaciones_lista[1]).input, w3.eth.getTransaction(calificaciones_lista[2]).input, proyecto_l[1], proyecto_l[5], proyecto_l[6], proyecto_l[7]]) 
+    # return render_template("perfilEstudiante.html", proyectos=proyectos_nuevo, calificaciones=calificaciones_hash, allproyectos=proyectos_all)
+    return render_template("perfilEstudiante.html")
 

@@ -20,6 +20,14 @@ class Proyectos():
         sql="INSERT INTO projecto_proyecto (nombre_proyecto, ciclo, fecha_hora_entrega, id_hash_documento, id_hash_anexos, estudiante_dos_id, estudiante_tres_id, estudiante_uno_id, jurados_ciclo_id, estado_calificado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, (self.nombre, self.ciclo, self.fecha_hora_entrega, self.hash_proyecto, self.hash_anexos, self.estudiante_uno, self.estudiante_dos, self.estudiante_tres, self.jurado_ciclo, self.estado))
         conn.commit()
+        if cursor.rowcount == 1:
+            sql_proyecto = "SELECT id_proyecto FROM projecto_proyecto WHERE nombre_proyecto = %s"
+            cursor.execute(sql_proyecto, (self.nombre,))
+            proyecto = cursor.fetchone()
+            sql_calificacion = "INSERT INTO projecto_calificaciones (id_proyecto_id) VALUES (%s)"
+            cursor.execute(sql_calificacion, (proyecto[0],))
+            conn.commit()
+
 def get_proyectos():
     sql="SELECT * FROM projecto_proyecto"
     cursor.execute(sql)

@@ -17,13 +17,18 @@ def perfiljurado():
     sql_usuarios = "SELECT * FROM projecto_usuario"
     cursor.execute(sql_usuarios)
     usuarios = cursor.fetchall()
-
-    # De proyecto los campos 4 y 5 son datos de la transacción se crea una nueva lista con esos datos
+    sql_calificaciones = "SELECT * FROM projecto_calificaciones"
+    cursor.execute(sql_calificaciones)
+    calificaciones = cursor.fetchall()
+    sql_juradosciclo = "SELECT * FROM projecto_juradosciclo"
+    cursor.execute(sql_juradosciclo)
+    juradosciclo = cursor.fetchall()
+    
     # para poder mostrarlos en la vista
     proyecto2 = []
     for i in proyecto:
         proyecto2.append([i[0],i[1],i[2],i[3],w3.eth.getTransaction(i[4]).input,w3.eth.getTransaction(i[5]).input,get_usuario_nombre(i[6]),get_usuario_nombre(i[7]),get_usuario_nombre(i[8]),i[9],i[10]])
-    return render_template('perfilJurado.html', proyectos=proyecto2, usuario=usuarios)
+    return render_template('perfilJurado.html', proyectos=proyecto2, usuario=usuarios, calificaciones=calificaciones, juradosxciclo=juradosciclo)
 def get_usuario_nombre(id_user):
     id_usuario=str(id_user)
     sql_usuari = "SELECT * FROM projecto_usuario WHERE id = %s"

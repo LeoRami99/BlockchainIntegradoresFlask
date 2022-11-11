@@ -30,7 +30,6 @@
 </nav>
 {%endblock%}
 {%block content%}
-
 <div class="row align-items-center justify-content-between mt-5">
     <div class="col-md-3">
         <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark"
@@ -169,21 +168,35 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        {%for proyecto in proyectos%}
-                        {%if proyecto[2] == "1" and proyecto[10] == False%}
-                            <tr>
-                                <td>{{proyecto[1]}}</td>
-                                <td>{{proyecto[8]}}</td>
-                                <td>{{proyecto[6]}}</td>
-                                <td>{{proyecto[7]}}</td>
-                                <td><button class="btn btn-success"
-                                        onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
-                                <td><a class="btn btn-success"
-                                        onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
-                                <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                                        data-bs-target="#modal-evaluacion-1">Evaluar</a></td>
-                            </tr>
-                        {%endif%}
+
+                        {# 
+                            traer de calificaciones el id del proyecto 
+                        #}
+                        {% for calif in calificaciones%}
+                            {% for proyecto in proyectos%}
+                                {%if calif[2] == proyecto[0]%}
+                                    {%for juradogrupo in juradosxciclo%}
+                                        {%if proyecto[9]==juradogrupo[0]%}
+                                            {%if current_user.id == juradogrupo[2] or current_user.id == juradogrupo[3] or current_user.id == juradogrupo[4] or current_user.id == juradogrupo[5] or current_user.id == juradogrupo[6]%}
+                                                {%if proyecto[2] == '1'%}
+                                                    <tr>
+                                                        <td>{{proyecto[1]}}</td>
+                                                        <td>{{proyecto[8]}}</td>
+                                                        <td>{{proyecto[6]}}</td>
+                                                        <td>{{proyecto[7]}}</td>
+                                                        <td><button class="btn btn-success"
+                                                                onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
+                                                        <td><a class="btn btn-success"
+                                                                onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
+                                                        <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-evaluacion-1">Evaluar</a></td>
+                                                    </tr>
+                                                {%endif%}
+                                            {%endif%}    
+                                        {%endif%}
+                                    {%endfor%}
+                                {%endif%}
+                            {%endfor%}
                         {%endfor%}
                     </tbody>
 
@@ -217,21 +230,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {%for proyecto in proyectos%}
-                        {%if proyecto[2] == "2" and proyecto[10] == False%}
-                        <tr>
-                            <td>{{proyecto[1]}}</td>
-                            <td>{{proyecto[8]}}</td>
-                            <td>{{proyecto[6]}}</td>
-                            <td>{{proyecto[7]}}</td>
-                            <td><button class="btn btn-success"
-                                    onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
-                            <td><a class="btn btn-success"
-                                    onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
-                            <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                                    data-bs-target="#modal-evaluacion-2">Evaluar</a></td>
-                        </tr>
-                        {%endif%}
+                        {% for calif in calificaciones%}
+                            {% for proyecto in proyectos%}
+                                {%if calif[2] == proyecto[0]%}
+                                    {%for juradogrupo in juradosxciclo%}
+                                        {%if proyecto[9]==juradogrupo[0]%}
+                                            {%if current_user.id == juradogrupo[2] or current_user.id == juradogrupo[3] or current_user.id == juradogrupo[4] or current_user.id == juradogrupo[5] or current_user.id == juradogrupo[6]%}
+                                                {%if proyecto[2] == '2'%}
+                                                    <tr>
+                                                        <td>{{proyecto[1]}}</td>
+                                                        <td>{{proyecto[8]}}</td>
+                                                        <td>{{proyecto[6]}}</td>
+                                                        <td>{{proyecto[7]}}</td>
+                                                        <td><button class="btn btn-success"
+                                                                onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
+                                                        <td><a class="btn btn-success"
+                                                                onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
+                                                        <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-evaluacion-1">Evaluar</a></td>
+                                                    </tr>
+                                                {%endif%}
+                                            {%endif%}    
+                                        {%endif%}
+                                    {%endfor%}
+                                {%endif%}
+                            {%endfor%}
                         {%endfor%}
                     </tbody>
 
@@ -265,21 +288,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {%for proyecto in proyectos%}
-                        {%if proyecto[2] == "3" and proyecto[10] == False%}
-                        <tr>
-                            <td>{{proyecto[1]}}</td>
-                            <td>{{proyecto[8]}}</td>
-                            <td>{{proyecto[6]}}</td>
-                            <td>{{proyecto[7]}}</td>
-                            <td><button class="btn btn-success"
-                                    onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
-                            <td><a class="btn btn-success"
-                                    onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
-                            <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                                    data-bs-target="#modal-evaluacion-3">Evaluar</a></td>
-                        </tr>
-                        {%endif%}
+                        {% for calif in calificaciones%}
+                            {% for proyecto in proyectos%}
+                                {%if calif[2] == proyecto[0]%}
+                                    {%for juradogrupo in juradosxciclo%}
+                                        {%if proyecto[9]==juradogrupo[0]%}
+                                            {%if current_user.id == juradogrupo[2] or current_user.id == juradogrupo[3] or current_user.id == juradogrupo[4] or current_user.id == juradogrupo[5] or current_user.id == juradogrupo[6]%}
+                                                {%if proyecto[2] == '3'%}
+                                                    <tr>
+                                                        <td>{{proyecto[1]}}</td>
+                                                        <td>{{proyecto[8]}}</td>
+                                                        <td>{{proyecto[6]}}</td>
+                                                        <td>{{proyecto[7]}}</td>
+                                                        <td><button class="btn btn-success"
+                                                                onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
+                                                        <td><a class="btn btn-success"
+                                                                onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
+                                                        <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-evaluacion-1">Evaluar</a></td>
+                                                    </tr>
+                                                {%endif%}
+                                            {%endif%}    
+                                        {%endif%}
+                                    {%endfor%}
+                                {%endif%}
+                            {%endfor%}
                         {%endfor%}
                     </tbody>
 
@@ -301,6 +334,7 @@
             </div>
             <div class="modal-body">
                 <form action="/jurado/retroalimentacion" method="post">
+                    
                     {%for proyecto in proyectos %}
                     {%if proyecto[2] == "1" and proyecto[10] == False%}
                         <h1>Evaluación projecto {{proyecto[1]}}</h1>

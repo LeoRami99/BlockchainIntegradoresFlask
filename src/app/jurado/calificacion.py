@@ -14,12 +14,14 @@ class Calificacion():
         self.nota_jurado_4 = nota_jurado_4
         self.nota_jurado_5 = nota_jurado_5
         
-    def set_calificaciones(self):
-        sql = "INSERT INTO projecto_calificaciones (calificacion, observaciones, fecha, id_proyecto_id, id_usuario_id) VALUES (%s,%s,%s,%s,%s)"
-        sql_update_estado = "UPDATE projecto_proyecto SET estado_calificado = true WHERE id_proyecto = {}".format(self.id_proyecto)
-        cursor.execute(sql, (self.calificacion, self.observaciones, self.fecha, self.id_proyecto, self.id_jurado))
-        cursor.execute(sql_update_estado)
-        conn.commit()
+    def set_calificacion_observacion_jurado_uno(self):
+        try:
+            cursor.execute("UPDATE calificacion SET calificacion = %s, observaciones = %s, nota_jurado = %s WHERE id_proyecto = %s AND id_jurado = %s", (self.calificacion, self.observaciones, self.nota_jurado, self.id_proyecto, self.id_jurado))
+            conn.commit()
+            return True
+        except:
+            return False
+        
         
 def get_califaciones(id_proyecto):
     sql = "SELECT * FROM projecto_calificaciones WHERE id_proyecto_id = {}".format(id_proyecto)
