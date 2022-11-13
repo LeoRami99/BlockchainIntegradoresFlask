@@ -98,16 +98,18 @@ Fomalhaut | Administrador | {{current_user.nombres}}
             </div>
             <div class="card-body">
                 <center>
-                    <h2 class="text-center mb-2" style="color: white;">Asignar roles</h2>
+                    <h2 class="text-center mb-2" style="color: white;">Adminstrar Profesores</h2>
                     <div class="form-group">
                         <!-- <h4 class="text-center mb-2" style="color: white;">U</h4> -->
                         <a href="" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                                 class="bi bi-gear"></i> Configuración</a>
-                        <a href="" class="btn btn-success" data-bs-toggle="modal"
+                        <a href="" class="btn btn-success mb-2" data-bs-toggle="modal"
                             data-bs-target="#modal-jurados-ciclo"><i class="bi bi-gear"></i> Jurados x Ciclo</a>
-                        <a href="" class="btn btn-success" data-bs-toggle="modal"
+                        <a href="" class="btn btn-success mb-2" data-bs-toggle="modal"
                             data-bs-target="#modal-proyecto-grupo"><i class="bi bi-gear"></i> Asignar Proyectos x
                             Grupo</a>
+                        <a href="/forms/registro_profesor" class="btn btn-success mb-2"><i class="bi bi-gear"></i> Regitrar Profesor</a>
+                            
 
                     </div>
                 </center>
@@ -129,7 +131,7 @@ Fomalhaut | Administrador | {{current_user.nombres}}
                     <h2 class="text-center mb-2" style="color: white;">Asignar fechas</h2>
                     <div class="form-group">
                         <!-- <h4 class="text-center mb-2" style="color: white;">Proyectos</h4> -->
-                        <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                        <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-fechas"><i
                                 class="bi bi-calendar-check"></i> Fechas
                             de entrega</a>
                     </div>
@@ -232,6 +234,14 @@ Fomalhaut | Administrador | {{current_user.nombres}}
                 <form action="/admin/actualizar" method="post">
                     <div class="form-group">
                         <input type="hidden" name="id_modificar" value="{{profe_rol[0]}}">
+                        <label for="Nombres">Nombres</label>
+                        <input type="text" id="nombres" name="nombres" class="form-control" value="{{profe_rol[1]}}">
+                        <label for="Apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" name="apellidos" class="form-control" value="{{profe_rol[2]}}">
+                        <label for="Correo">Correo</label>
+                        <input type="text" id="Correo" name="correo"  class="form-control" value="{{profe_rol[3]}}">
+                        <label for="n_documento">Número de documento</label>
+                        <input type="text" id="n_documento" name="n_documento"  class="form-control" value="{{profe_rol[5]}}">
                         <label for="rol">Rol</label>
                         <select class="form-select" name="rol" id="rol">
                             <!-- Tener un valor de default -->
@@ -242,14 +252,6 @@ Fomalhaut | Administrador | {{current_user.nombres}}
                             <option value="2">Profesor</option>
                             <option value="4" selected>Jurado</option>
                             {%endif%}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="ciclo">Ciclo</label>
-                        <select class="form-select" name="ciclo" id="ciclo">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
                         </select>
                     </div>
 
@@ -458,8 +460,42 @@ Fomalhaut | Administrador | {{current_user.nombres}}
     </div>
 </div>
 {%endfor%}
-
-<!-- Modal basado en la selección del usuario -->
+<!-- Modal Asignar Fechas -->
+<div class="modal fade" id="modal-fechas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo I</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/asignarfechas" method="post">
+                    <div class="form-group">
+                        <h1>Primera entrega</h1>
+                        <label for="fecha_inicio_e1">Fecha de inicio</label>
+                        <input type="date" name="fecha_inicio_e1" id="fecha_inicio_e1" class="form-control">
+                        <label for="fecha_fin_e1">Fecha de fin</label>
+                        <input type="date" name="fecha_fin_e1" id="fecha_fin_e1" class="form-control">
+                    </div>
+                    <!-- Segunda fecha de entrega  -->
+                    <div class="form-group">
+                        <h1>Segunda entrega</h1>
+                        <label for="fecha_inicio_e2">Fecha de inicio</label>
+                        <input type="date" name="fecha_inicio_e2" id="fecha_inicio_e2" class="form-control">
+                        <label for="fecha_fin_e2">Fecha de fin</label>
+                        <input type="date" name="fecha_fin_e2" id="fecha_fin_e2" class="form-control">
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" value="Enviar" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

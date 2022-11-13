@@ -68,11 +68,11 @@
             <div class="col-md-5">
                 <div class="card fondo p-4" style="color:#fff;">
                     <div class="card-header">
-                        <h1>Registro de Proyecto</h1>
+                        <h1>Registro de Proyecto - Segunda Entrega</h1>
                     </div> 
                     <div class="card-body">
                         <form method="POST" action="/estudiantes/registrar_proyecto" enctype="multipart/form-data">
-                            <input type="hidden" name="entrega" value="1era Entrega">
+                            <input type="hidden" name="entrega" value="2da Entrega">
                             <div class="ciclos">
                                 <p>Seleccione el ciclo al que pertenece su proyecto integrador,(Recuerde que su
                                     ciclo
@@ -118,13 +118,6 @@
                                                 <option value="3">3</option>
                                             </select>
                                             <a class="btn btn-success w-100 m-2" onclick="miembrosGrupo()">Generar Integrantes</a>
-                                            <!--<div class="m-2" id="miembros_grupo_1" style="display: none;">
-                                                <input type="text" class="form-control m-2" name="Integrante_1" placeholder="Integrante 1">
-                                            </div>
-                                            <div class="m-2"  id="miembros_grupo_2" style="display: none;">
-                                                <input type="text"  disabled class="form-control m-2" name="Integrante_1" placeholder="Integrante 1">
-                                                <input type="text" class="form-control m-2" name="Integrante_2" placeholder="Integrante 2">
-                                            </div> -->
                                             <div class="m-2" id="">
                                                 <input type="text" class="form-control m-2" name="integrante_1" placeholder="Integrante 1" style="display: none;" id="miembros_grupo_1" required>
                                                 <input type="text" class="form-control m-2" name="integrante_2" placeholder="Integrante 2" style="display: none;" id="miembros_grupo_2" required>
@@ -170,20 +163,20 @@
                                                         <h5>Seleccione su documento en formato PDF</h5>
                                                         <input type="file" class="form-control m-2" id="id_docfile" name="docfile" accept="application/pdf" required>
                                                     </div>
-                                                    <button class="btn btn-danger"
+                                                    <!-- <button class="btn btn-danger"
                                                         onclick="return confirm('¿Esta seguro de eliminar este documento?')">
                                                         <i class="bi bi-trash"></i>
-                                                    </button>
+                                                    </button> -->
                                                 </li>
                                                 <li class="list-group-item">
                                                     <div class="input-group mb-3">
                                                         <h5>Seleccione los anexos de su proyecto en PDF</h5>
                                                         <input type="file" class="form-control m-2" id="id_docfile" name="anexos_proyecto" accept="application/pdf">
                                                     </div>
-                                                    <button class="btn btn-danger"
+                                                    <!-- <button class="btn btn-danger"
                                                         onclick="return confirm('¿Esta seguro de eliminar este documento?')">
                                                         <i class="bi bi-trash"></i>
-                                                    </button>
+                                                    </button> -->
                                                 </li>
                                             </ul>
                                         </div>

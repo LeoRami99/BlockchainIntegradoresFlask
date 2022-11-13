@@ -18,11 +18,15 @@ def actualizar():
     if request.method == 'POST':
         try:
             id_usuario = request.form['id_modificar']
+            nombre = request.form['nombres']
+            apellidos = request.form['apellidos']
+            correo = request.form['correo']
+            doc_identidad = request.form['n_documento']
             rol = request.form['rol']
             # ciclo = request.form['ciclo']
             # print(id_usuario, " ", rol, " ", ciclo)
-            sql_actualizar = """UPDATE projecto_usuario SET rol_id_id = %s WHERE id = %s"""
-            cursor.execute(sql_actualizar, (rol, id_usuario))
+            sql_actualizar = """UPDATE projecto_usuario SET nombre = %s, apellidos = %s, correo = %s, doc_identidad = %s, rol_id_id = %s WHERE id = %s"""
+            cursor.execute(sql_actualizar, (nombre, apellidos, correo, doc_identidad, rol, id_usuario))
             conn.commit()
             return redirect(url_for('admin.perfiladmin'))
         except:
@@ -92,6 +96,18 @@ def asignargrupo():
         grupo=jurados[0]
         sql_actualizar = """UPDATE projecto_proyecto SET jurados_ciclo_id = %s WHERE id_proyecto = %s"""
         cursor.execute(sql_actualizar, (grupo, id_proyecto))
+        conn.commit()
+        return redirect(url_for('admin.perfiladmin'))
+@admin.route("/asignarfechas" , methods=['POST'])
+def asignarfechas():
+    if request.method == 'POST':
+        fecha_inicio_e1 = request.form['fecha_inicio_e1']
+        fecha_fin_e1 = request.form['fecha_fin_e1']
+        # Fecha de entrega dos
+        fecha_inicio_e2 = request.form['fecha_inicio_e2']
+        fecha_fin_e2 = request.form['fecha_fin_e2']
+        sql_fechas = """UPDATE projecto_parametrosistemas SET fecha_inicio_e1 = %s, fecha_fin_e1 = %s, fecha_inicio_e2 = %s, fecha_fin_e2 = %s WHERE id = 1"""
+        cursor.execute(sql_fechas, (fecha_inicio_e1, fecha_fin_e1, fecha_inicio_e2, fecha_fin_e2))
         conn.commit()
         return redirect(url_for('admin.perfiladmin'))
 

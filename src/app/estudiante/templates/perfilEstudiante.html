@@ -66,9 +66,10 @@
                 <div class="card text-center fondo">
                     <div class="card-header">
 
-                        <!-- <a style="color: black;" class="nav-link active bt-inicio" aria-current="page" href=""><i
+                        <a class="nav-link active bt-inicio" style="color: white;" aria-current="page" data-bs-toggle="modal"
+                        data-bs-target="#editar_perfil_{{current_user.id}}"><i
                                 class="bi bi-gear-fill" class="text-center mb-2" style="color: white;"></i> Editar
-                            perfil</a> -->
+                            perfil</a>
                         <center>
                             <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" width="100 px">
                         </center>
@@ -106,7 +107,21 @@
                 <div class="card-body">
                     <h2 class="text-center mb-2" style="color: white;">Primera entrega</h2>
                     <h4 class="text-center mb-2" style="color: white;">Enviar Proyecto</h4>
+                    <div class="alert alert-success">
+                        fecha de apertura: {{fecha[1]}}
+                        <br>
+                        fecha de cierre: {{fecha[2]}}
+                        <br>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {%if estado_e1 == true%}
                     <a href="{{url_for('estudiantes.registroproyecto')}}" class="btn btn-success w-100">Enviar Proyecto</a>
+                    {%else%}
+                    <div class="alert alert-warning">
+                        ¡Lo sentimos no puedes enviar el proyecto 🙊!
+                    </div>
+                    <a href="#" class="btn btn-success w-100 disabled">Enviar Proyecto</a>
+                    {%endif%}
                     <!-- <h4 class="text-center mb-2" style="color: white;">Observaciones</h4>
                     <a href="" class="btn btn-success w-100">Observaciones</a> -->
                 </div>
@@ -128,9 +143,21 @@
                 <div class="card-body">
                     <h2 class="text-center mb-2" style="color: white;">Segunda entrega</h2>
                     <h4 class="text-center mb-2" style="color: white;">Enviar Proyecto</h4>
-                    <a href="{{url_for('estudiantes.registroproyecto')}}"  class="btn btn-success w-100">Enviar Proyecto</a>
-                    <!-- <h4 class="text-center mb-2" style="color: white;">Observaciones</h4>
-                    <a href="" class="btn btn-success w-100">Observaciones</a> -->
+                    <div class="alert alert-success">
+                        fecha de apertura: {{fecha[3]}}
+                        <br>
+                        fecha de cierre: {{fecha[4]}}
+                        <br>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {%if estado_e2 == true%}
+                    <a href="{{url_for('estudiantes.registroproyecto_segunda')}}"  class="btn btn-success w-100">Enviar Proyecto</a>
+                    {%else%}
+                    <div class="alert alert-danger">
+                        ¡Lo sentimos no puedes enviar el proyecto 🙊!
+                    </div>
+                    <a href="#" class="btn btn-success w-100 disabled">Enviar Proyecto</a>
+                    {%endif%}
                 </div>
             </center>
 
@@ -219,6 +246,54 @@
     </div>
   </div>
 </div>
+<!-- Modal editar usuario -->
+{%for usuario in usuarios%}
+{%if usuario[0] == current_user.id%}
+<div class="modal fade" id="editar_perfil_{{usuario[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{usuario[1]}} {{usuario[2]}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/estudiantes/actualizar" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="id_modificar" value="{{usuario[0]}}">
+                        <label for="Nombres">Nombres</label>
+                        <input type="text" id="nombres" name="nombres" class="form-control" value="{{usuario[1]}}">
+                        <label for="Apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" name="apellidos" class="form-control" value="{{usuario[2]}}">
+                        <label for="Correo">Correo</label>
+                        <input type="text" id="Correo" name="correo"  class="form-control" value="{{usuario[3]}}">
+                        <label for="tip_doc">Tipo Documento</label>
+                        <select class="form-select" name="tip_doc" id="tip_doc">
+                            <!-- Tener un valor de default -->
+                            {%if usuario[6]==1%}
+                                <option value="1" selected>CC</option>
+                                <option value="2">TI</option>
+                            {%elif usuario[6]==2%}
+                            <option value="1">CC</option>
+                            <option value="2" selected>TI</option>
+                            {%endif%}
+                        </select>
+                        <label for="n_documento">Número de documento</label>
+                        <input type="text" id="n_documento" name="n_documento"  class="form-control" value="{{usuario[4]}}">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary"
+                            onclick="return confirm('¿Desea guardar los cambios?')">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+{%endfor%}
 
 
 

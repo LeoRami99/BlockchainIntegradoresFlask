@@ -24,11 +24,15 @@ def perfiljurado():
     cursor.execute(sql_juradosciclo)
     juradosciclo = cursor.fetchall()
     
+    sql_entregado = "SELECT * FROM projecto_entrega"
+    cursor.execute(sql_entregado)
+    entregado = cursor.fetchall()
+    
     # para poder mostrarlos en la vista
     proyecto2 = []
     for i in proyecto:
         proyecto2.append([i[0],i[1],i[2],i[3],w3.eth.getTransaction(i[4]).input,w3.eth.getTransaction(i[5]).input,get_usuario_nombre(i[6]),get_usuario_nombre(i[7]),get_usuario_nombre(i[8]),i[9],i[10]])
-    return render_template('perfilJurado.html', proyectos=proyecto2, usuario=usuarios, calificaciones=calificaciones, juradosxciclo=juradosciclo)
+    return render_template('perfilJurado.html', proyectos=proyecto2, usuario=usuarios, calificaciones=calificaciones, juradosxciclo=juradosciclo, entregado=entregado)
 def get_usuario_nombre(id_user):
     id_usuario=str(id_user)
     sql_usuari = "SELECT * FROM projecto_usuario WHERE id = %s"
@@ -75,25 +79,40 @@ def retroalimentacion():
         grupo_jurado = cursor.fetchall()
         
         for jurado_casilla in grupo_jurado:
-            print(jurado_casilla)
+
             if jurado_casilla[4]==int(id_jurado):
                 calif_jurado_uno=Calificacion(id_proyecto,id_jurado,hash_trans_califacion, None, None, None, None, hash_trans_observacion, None, None, None, None)
                 calif_jurado_uno.set_calificacion_observacion_jurado_uno()
+                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
+                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
+                conn.commit()
             elif jurado_casilla[2]==int(id_jurado):
                 calif_jurado_dos=Calificacion(id_proyecto,id_jurado,None,hash_trans_califacion, None, None, None, None, hash_trans_observacion, None, None, None)
                 calif_jurado_dos.set_calificacion_observacion_jurado_dos()
+                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
+                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
+                conn.commit()
             elif jurado_casilla[3]==int(id_jurado):
 
                 calif_jurado_tres=Calificacion(id_proyecto,id_jurado,None,None, hash_trans_califacion, None, None, None, None, hash_trans_observacion, None, None)
                 calif_jurado_tres.set_calificacion_observacion_jurado_tres()
+                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
+                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
+                conn.commit()
             elif jurado_casilla[5]==int(id_jurado):
 
                 calif_jurado_cuatro=Calificacion(id_proyecto,id_jurado,None,None, None,hash_trans_califacion,None, None, None, None, hash_trans_observacion, None)
                 calif_jurado_cuatro.set_calificacion_observacion_jurado_cuatro()
+                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
+                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
+                conn.commit()
             elif jurado_casilla[6]==int(id_jurado):
 
                 calif_jurado_cinco=Calificacion(id_proyecto,id_jurado,None,None, None,None,hash_trans_califacion, None, None, None, None, hash_trans_observacion)
                 calif_jurado_cinco.set_calificacion_observacion_jurado_cinco()
+                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
+                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
+                conn.commit()
         return redirect(url_for('jurado.perfiljurado'))
 
     

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    Fomalhaut | Registro
+    Fomalhaut | Registro | Profesor
 {%endblock%}
 {% block navbar %}
 <nav class="nav navbar navbar-expand-lg sticky-top">
@@ -8,7 +8,7 @@
         <a class="navbar-brand" href="#" style="color: white;">
             <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" alt="Logo" width="30" height="24"
                 class="d-inline-block align-text-top">
-            Fomalhaut - Registro
+                Fomalhaut | Registro | Profesor
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -20,13 +20,13 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a style="color: white;" class="nav-link active bt-inicio" aria-current="page" href="/"><i
-                            class="bi bi-house"></i> Inicio</a>
+                    <a style="color: white;" class="nav-link active bt-inicio" aria-current="page" href="/admin/perfiladmin"><i
+                            class="bi bi-house"></i> Volver</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a style="color: white;" class="nav-link active bt-inicio" aria-current="page" href="/forms/login"><i
                             class="bi bi-door-open"></i> Login</a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
@@ -41,7 +41,7 @@
                 <form action="/forms/registrar_usuario" method="post" class="form-login mt-5 mb-5 text-center fondo" data-aos="fade-right"
                     data-aos-offset="300" data-aos-easing="ease-in-sine">
                     <h1 class="text-center mb-2" style="color: white;">
-                        Registro
+                        Registro - Profesor
                     </h1>
                     <div class="input-group mb-2">
                         <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-circle"
@@ -70,7 +70,7 @@
                             style="color:#fff;"></i></span>
                     <select name="tipo_rol" class="form-select"
                         style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
-                        <option value="1">Estudiante</option>
+                        <option value="2">Docente</option>
                     </select>
                     </div>
                     <div class="input-group mb-2">
@@ -80,6 +80,13 @@
                             placeholder="Número de identificación"
                             style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
                     </div>
+                    <!-- <div class="input-group mb-2">
+                        <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-hash"
+                                style="color:#fff;"></i></span>
+                        <input class="form-control" type="text" name="numero_universidad"
+                            placeholder="Número de universidad"
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                    </div> -->
                     <div class="input-group mb-2">
                         <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-envelope"
                                 style="color:#fff;"></i></span>

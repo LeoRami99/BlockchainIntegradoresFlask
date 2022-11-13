@@ -89,6 +89,36 @@ def registrar_usuario():
         return redirect(url_for('formulario.login'))
     else:
         return redirect(url_for('formulario.registro'))
+@formulario.route('/registrar_docente', methods=['POST'])
+def registrar_docente():
+    if request.method == 'POST':
+        nombres = request.form['nombres']
+        apellidos = request.form['apellidos']
+        tipo_documento = request.form['tipo_documento']
+        tipo_rol = request.form['tipo_rol']
+        numero_identificacion = request.form['numero_identificacion']
+        email_institucional = request.form['correoinstitucional']
+        contraseña = request.form['contraseña']
+        usuario = Usuarios(nombres, apellidos, email_institucional, numero_identificacion, contraseña, tipo_rol, tipo_documento)
+        usuario.set_usuario()
+        return redirect(url_for('admin.perfiladmin'))
+    else:
+            return redirect(url_for('formulario.registro'))
+
+@formulario.route('/registro_profesor')
+def registro_profe():
+    if current_user.is_authenticated:
+        if current_user.rol == 1:
+            return redirect(url_for('estudiantes.perfilestudiante'))
+        elif current_user.rol == 2:
+            return redirect(url_for('profesor.perfilprofesor'))
+        elif current_user.rol == 3:
+            return render_template('registroAdmin.html')
+        elif current_user.rol == 4:
+            return redirect(url_for('jurado.perfiljurado'))
+    else:
+        return redirect(url_for('formulario.login'))
+
 
 
   

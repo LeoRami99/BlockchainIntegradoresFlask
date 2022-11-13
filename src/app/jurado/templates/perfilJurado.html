@@ -89,7 +89,7 @@
                 <div class="card-body">
                     <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
                     <a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                        data-bs-target="#modal-ciclo-1">Evaluar Proyecto</a>
+                        data-bs-target="#modal-ciclo-1">Evaluar Proyectos</a>
                     <h4 class="text-center mb-2" style="color: white;">Observaciones</h4>
                     <a href="" class="btn btn-success w-100">Observaciones</a>
                 </div>
@@ -112,7 +112,7 @@
                 <div class="card-body">
                     <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
                     <a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                        data-bs-target="#modal-ciclo-2">Proyectos</a>
+                        data-bs-target="#modal-ciclo-2">Evaluar Proyectos</a>
                     <h4 class="text-center mb-2" style="color: white;">Observaciones</h4>
                     <a href="" class="btn btn-success w-100">Observaciones</a>
                 </div>
@@ -135,7 +135,7 @@
                 <div class="card-body">
                     <h4 class="text-center mb-2" style="color: white;">Proyectos</h4>
                     <a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                        data-bs-target="#modal-ciclo-3">Proyectos</a>
+                        data-bs-target="#modal-ciclo-3">Evaluar Proyectos</a>
                     <h4 class="text-center mb-2" style="color: white;">Observaciones</h4>
                     <a href="" class="btn btn-success w-100">Observaciones</a>
                 </div>
@@ -163,41 +163,30 @@
                             <th>Estudiante Tres</th>
                             <th>Documento</th>
                             <th>Anexos</th>
+                            <th>Calificado</th>
                             <th>Observaciones y calificación</th>
 
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-
-                        {# 
-                            traer de calificaciones el id del proyecto 
-                        #}
-                        {% for calif in calificaciones%}
-                            {% for proyecto in proyectos%}
-                                {%if calif[2] == proyecto[0]%}
-                                    {%for juradogrupo in juradosxciclo%}
-                                        {%if proyecto[9]==juradogrupo[0]%}
-                                            {%if current_user.id == juradogrupo[2] or current_user.id == juradogrupo[3] or current_user.id == juradogrupo[4] or current_user.id == juradogrupo[5] or current_user.id == juradogrupo[6]%}
-                                                {%if proyecto[2] == '1'%}
-                                                    <tr>
-                                                        <td>{{proyecto[1]}}</td>
-                                                        <td>{{proyecto[8]}}</td>
-                                                        <td>{{proyecto[6]}}</td>
-                                                        <td>{{proyecto[7]}}</td>
-                                                        <td><button class="btn btn-success"
-                                                                onclick="establcerSrc(decryptInput('{{proyecto[4]}}'))">Documento</button></td>
-                                                        <td><a class="btn btn-success"
-                                                                onclick="establcerSrc(decryptInput('{{proyecto[5]}}'))">Anexos</a></td>
-                                                        <td><a href="" class="btn btn-success w-100" data-bs-toggle="modal"
-                                                                data-bs-target="#modal-evaluacion-{{proyecto[0]}}">Evaluar</a></td>
-                                                    </tr>
-                                                {%endif%}
-                                            {%endif%}    
+                        {% for proyecto in proyectos %}
+                            {% for jurado_ciclo in juradosxciclo %}
+                                {% if jurado_ciclo[0]== proyecto[9]%}
+                                   {%for calif in calificaciones%}
+                                        {%if calif[2]==proyecto[0]%}
+                                            {%if jurado_ciclo[0] == proyecto[9]%}
+                                                <tr>
+                                                    {{calif}}
+                                                </tr>
+                                            {%endif%}
                                         {%endif%}
-                                    {%endfor%}
-                                {%endif%}
-                            {%endfor%}
-                        {%endfor%}
+                                   {%endfor%}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        
+                        
+                        
                     </tbody>
 
                 </table>
@@ -295,6 +284,7 @@
                                         {%if proyecto[9]==juradogrupo[0]%}
                                             {%if current_user.id == juradogrupo[2] or current_user.id == juradogrupo[3] or current_user.id == juradogrupo[4] or current_user.id == juradogrupo[5] or current_user.id == juradogrupo[6]%}
                                                 {%if proyecto[2] == '3'%}
+
                                                     <tr>
                                                         <td>{{proyecto[1]}}</td>
                                                         <td>{{proyecto[8]}}</td>
