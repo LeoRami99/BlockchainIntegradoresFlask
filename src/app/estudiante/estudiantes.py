@@ -88,7 +88,7 @@ def registrar_proyecto():
         #Generar fecha y hora
         
         # Se guarda el proyecto en la base de datos
-        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, 11, fecha_hora, hash_trans_proyecto, hash_trans_anexos, 'false', entrega)
+        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, 11, fecha_hora, hash_trans_proyecto, hash_trans_anexos, entrega)
         proyecto.set_proyecto()
         # obtener el id del proyecto
         return redirect(url_for('estudiantes.perfilestudiante'))

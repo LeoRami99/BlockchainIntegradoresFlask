@@ -23,16 +23,119 @@ def perfiljurado():
     sql_juradosciclo = "SELECT * FROM projecto_juradosciclo"
     cursor.execute(sql_juradosciclo)
     juradosciclo = cursor.fetchall()
-    
-    sql_entregado = "SELECT * FROM projecto_entrega"
-    cursor.execute(sql_entregado)
-    entregado = cursor.fetchall()
-    
-    # para poder mostrarlos en la vista
     proyecto2 = []
-    for i in proyecto:
-        proyecto2.append([i[0],i[1],i[2],i[3],w3.eth.getTransaction(i[4]).input,w3.eth.getTransaction(i[5]).input,get_usuario_nombre(i[6]),get_usuario_nombre(i[7]),get_usuario_nombre(i[8]),i[9],i[10]])
-    return render_template('perfilJurado.html', proyectos=proyecto2, usuario=usuarios, calificaciones=calificaciones, juradosxciclo=juradosciclo, entregado=entregado)
+    jurado_cali_1=[]
+    jurado_cali_2=[]
+    jurado_cali_3=[]
+    jurado_cali_4=[]
+    jurado_cali_5=[]
+    # for jurado,calif in zip(calificaciones,juradosciclo):
+    for proyect in proyecto:
+        sql_jurados="SELECT * FROM projecto_juradosciclo WHERE id_jurado_ciclo = {}".format(proyect[9])
+        cursor.execute(sql_jurados)
+        jurado = cursor.fetchone()
+        for calif in calificaciones:
+            if calif[2]==proyect[0]:
+                jurado_cali_1.append([calif[2],calif[3],jurado[4]])
+                jurado_cali_2.append([calif[2],calif[4],jurado[2]])
+                jurado_cali_3.append([calif[2],calif[5],jurado[3]])
+                jurado_cali_4.append([calif[2],calif[6],jurado[5]])
+                jurado_cali_5.append([calif[2],calif[7],jurado[6]])  
+    # Hacer la verificación por poryecto si ya el jurado correspondiente ya califico
+    # Condición para la casilla de jurado 1
+    for proyect in proyecto:
+        for nota in jurado_cali_1:
+            if proyect[0]==nota[0]:
+                if nota[2]==current_user.id:
+                    if nota[1]==None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                    elif nota[1]!=None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+    # Condición para la casilla de jurado 2
+    for proyect in proyecto:
+        for nota in jurado_cali_2:
+            if proyect[0]==nota[0]:
+                if nota[2]==current_user.id:
+                    if nota[1]==None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                    elif nota[1]!=None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+    # Condición para la casilla de jurado 3
+    for proyect in proyecto:
+        for nota in jurado_cali_3:
+            if proyect[0]==nota[0]:
+                if nota[2]==current_user.id:
+                    if nota[1]==None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                    elif nota[1]!=None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+    # Condición para la casilla de jurado 4
+    for proyect in proyecto:
+        for nota in jurado_cali_4:
+            if proyect[0]==nota[0]:
+                if nota[2]==current_user.id:
+                    if nota[1]==None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                    elif nota[1]!=None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+    # Condición para la casilla de jurado 5
+    for proyect in proyecto:
+        for nota in jurado_cali_5:
+            if proyect[0]==nota[0]:
+                if nota[2]==current_user.id:
+                    if nota[1]==None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], False])
+                    elif nota[1]!=None:
+                        if proyect[5]=="Sin anexos":
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, 'Sin anexos', get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+                        else:
+                            proyecto2.append([proyect[0], proyect[1], proyect[2], w3.eth.getTransaction(proyect[4]).input, w3.eth.getTransaction(proyect[5]).input, get_usuario_nombre(proyect[8]), get_usuario_nombre(proyect[6]), get_usuario_nombre(proyect[7]), proyect[10], True])
+                       
+    return render_template('perfilJurado.html',proyecto=proyecto2, proyectos=proyecto)
+        
+        
+        
+    
+            
+            
+
+
+                
+        
+    # para poder mostrarlos en la vista
+    # for i in proyecto:
+    #     if i[5]=='Sin anexos':
+    #         proyecto2.append([i[0],i[1],i[2],i[3],w3.eth.getTransaction(i[4]).input,'Sin anexos',get_usuario_nombre(i[6]),get_usuario_nombre(i[7]),get_usuario_nombre(i[8]),i[9],i[10], i[11]])
+    #     else:
+    #         proyecto2.append([i[0],i[1],i[2],i[3],w3.eth.getTransaction(i[4]).input,w3.eth.getTransaction(i[5]).input,get_usuario_nombre(i[6]),get_usuario_nombre(i[7]),get_usuario_nombre(i[8]),i[9],i[10], i[11]])
+    return render_template('perfilJurado.html', proyectos=proyecto2, usuario=usuarios, calificaciones=calificaciones, juradosxciclo=juradosciclo)
 def get_usuario_nombre(id_user):
     id_usuario=str(id_user)
     sql_usuari = "SELECT * FROM projecto_usuario WHERE id = %s"
@@ -77,42 +180,27 @@ def retroalimentacion():
         sql_grupo_jurado="SELECT * FROM projecto_juradosciclo WHERE ciclo =%s and id_jurado_ciclo = %s"
         cursor.execute(sql_grupo_jurado, (ciclo, jurados_ciclo_id))
         grupo_jurado = cursor.fetchall()
-        
         for jurado_casilla in grupo_jurado:
-
             if jurado_casilla[4]==int(id_jurado):
                 calif_jurado_uno=Calificacion(id_proyecto,id_jurado,hash_trans_califacion, None, None, None, None, hash_trans_observacion, None, None, None, None)
                 calif_jurado_uno.set_calificacion_observacion_jurado_uno()
-                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
-                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
-                conn.commit()
+                
             elif jurado_casilla[2]==int(id_jurado):
                 calif_jurado_dos=Calificacion(id_proyecto,id_jurado,None,hash_trans_califacion, None, None, None, None, hash_trans_observacion, None, None, None)
                 calif_jurado_dos.set_calificacion_observacion_jurado_dos()
-                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
-                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
-                conn.commit()
+                
             elif jurado_casilla[3]==int(id_jurado):
-
                 calif_jurado_tres=Calificacion(id_proyecto,id_jurado,None,None, hash_trans_califacion, None, None, None, None, hash_trans_observacion, None, None)
                 calif_jurado_tres.set_calificacion_observacion_jurado_tres()
-                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
-                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
-                conn.commit()
+                
             elif jurado_casilla[5]==int(id_jurado):
-
                 calif_jurado_cuatro=Calificacion(id_proyecto,id_jurado,None,None, None,hash_trans_califacion,None, None, None, None, hash_trans_observacion, None)
                 calif_jurado_cuatro.set_calificacion_observacion_jurado_cuatro()
-                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
-                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
-                conn.commit()
+                
             elif jurado_casilla[6]==int(id_jurado):
 
                 calif_jurado_cinco=Calificacion(id_proyecto,id_jurado,None,None, None,None,hash_trans_califacion, None, None, None, None, hash_trans_observacion)
                 calif_jurado_cinco.set_calificacion_observacion_jurado_cinco()
-                sql_entrega="INSERT INTO projecto_entrega (enviado, id_proyecto, id_usuario ) VALUES (%s, %s, %s)"
-                cursor.execute(sql_entrega, (True, id_proyecto, id_jurado))
-                conn.commit()
         return redirect(url_for('jurado.perfiljurado'))
 
     

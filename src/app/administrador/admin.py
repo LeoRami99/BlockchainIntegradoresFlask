@@ -44,23 +44,23 @@ def actualizarjurados():
         jurado_cinco="1"
         if num_jurados == "1":
             jurado_uno = request.form['jurado_uno']
-            sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s  WHERE ciclo = %s and grupo_ciclo=%s"""
-            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, ciclo, grupo))
+            sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s, numero_jurados = %s WHERE ciclo = %s AND grupo_ciclo=%s"""
+            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, num_jurados, ciclo, grupo))
             conn.commit()
             return redirect(url_for('admin.perfiladmin'))
         elif num_jurados == "2":
             jurado_uno = request.form['jurado_uno']
             jurado_dos = request.form['jurado_dos']
-            sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s  WHERE ciclo = %s and grupo_ciclo=%s"""
-            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, ciclo, grupo))
+            sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s, numero_jurados = %s WHERE ciclo = %s AND grupo_ciclo=%s"""
+            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, num_jurados, ciclo, grupo))
             conn.commit()
             return redirect(url_for('admin.perfiladmin'))
         elif num_jurados == "3":
             jurado_uno = request.form['jurado_uno']
             jurado_dos = request.form['jurado_dos']
             jurado_tres = request.form['jurado_tres']
-            sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s  WHERE ciclo = %s and grupo_ciclo=%s"""
-            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, ciclo, grupo))
+            sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s, numero_jurados = %s WHERE ciclo = %s AND grupo_ciclo=%s"""
+            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, num_jurados, ciclo, grupo))
             conn.commit()
             return redirect(url_for('admin.perfiladmin'))
         elif num_jurados == "4":
@@ -68,8 +68,8 @@ def actualizarjurados():
             jurado_dos = request.form['jurado_dos']
             jurado_tres = request.form['jurado_tres']
             jurado_cuatro = request.form['jurado_cuatro']
-            sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s  WHERE ciclo = %s and grupo_ciclo=%s"""
-            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, ciclo, grupo))
+            sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s, numero_jurados = %s WHERE ciclo = %s AND grupo_ciclo=%s"""
+            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, num_jurados, ciclo, grupo))
             conn.commit()
             return redirect(url_for('admin.perfiladmin'))
         elif num_jurados == "5":
@@ -79,7 +79,7 @@ def actualizarjurados():
             jurado_cuatro = request.form['jurado_cuatro']
             jurado_cinco = request.form['jurado_cinco']
             sql_actualizar = """UPDATE projecto_juradosciclo SET id_jurado_uno_id = %s, id_jurado_dos_id = %s, id_jurado_tres_id = %s, id_jurado_cuatro_id = %s, id_jurado_cinco_id = %s  WHERE ciclo = %s and grupo_ciclo=%s"""
-            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, ciclo, grupo))
+            cursor.execute(sql_actualizar, (jurado_uno, jurado_dos, jurado_tres, jurado_cuatro, jurado_cinco, num_jurados, ciclo, grupo))
             conn.commit()
             return redirect(url_for('admin.perfiladmin'))
         else:
@@ -90,12 +90,15 @@ def asignargrupo():
         id_proyecto = request.form['id_proyecto']
         ciclo=request.form['ciclo_proyecto']
         grupo = request.form['grupo']
-        sql_consulta_jurados = """SELECT id_jurado_ciclo FROM projecto_juradosciclo WHERE ciclo = %s and grupo_ciclo=%s"""
+        sql_consulta_jurados = """SELECT id_jurado_ciclo, numero_jurados FROM projecto_juradosciclo WHERE ciclo = %s and grupo_ciclo=%s"""
         cursor.execute(sql_consulta_jurados, (ciclo, grupo))
         jurados = cursor.fetchone()
         grupo=jurados[0]
-        sql_actualizar = """UPDATE projecto_proyecto SET jurados_ciclo_id = %s WHERE id_proyecto = %s"""
-        cursor.execute(sql_actualizar, (grupo, id_proyecto))
+        num_jurados=jurados[1]
+
+        print("------------------",jurados[1],"------------------")
+        sql_actualizar = """UPDATE projecto_proyecto SET jurados_ciclo_id = %s, num_jurados = %s WHERE id_proyecto = %s"""
+        cursor.execute(sql_actualizar, (grupo, num_jurados, id_proyecto))
         conn.commit()
         return redirect(url_for('admin.perfiladmin'))
 @admin.route("/asignarfechas" , methods=['POST'])

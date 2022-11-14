@@ -102,8 +102,8 @@ function decryptInput(hash_doc) {
 
 function establcerSrc(hash_decrypt) {
     // establecer src con el hash_doc
-    const ulr_ipfs = "http://localhost:8080/ipfs/" + hash_decrypt;
-    window.open(ulr_ipfs);
+    const ulr_ipfs = "http://192.168.0.15:8080/ipfs/" + hash_decrypt;
+    window.open(ulr_ipfs, '_blank','location=0,height=570,width=520,scrollbars=yes,status=yes');
 }
 // Esta función imp
 function imprimir_resultado_observacion(id, hash_doc) {
@@ -225,6 +225,129 @@ $(document).ready( function () {
 // Tabla proyectos
 $(document).ready( function () {
     $('#tabla_proyecto').DataTable({
+        "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
+        "iDisplayLength":3,
+        "language":{
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "search": "Buscar",
+            "zeroRecords":"Ningún Registro Encontrado",
+            "info":"Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Ningún registro disponible",
+            "infoFiltered":"(Filtrado de _MAX_ registro(s) totales)",
+            "paginate":{
+                "first":"Primero",
+                "last":"Ultimo",
+                "next":"Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+} );
+
+
+/* Tablas para jurados */
+$(document).ready( function () {
+    $('#tabla_ciclo_1').DataTable({
+        "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
+        "iDisplayLength":3,
+        "language":{
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "search": "Buscar",
+            "zeroRecords":"Ningún Registro Encontrado",
+            "info":"Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Ningún registro disponible",
+            "infoFiltered":"(Filtrado de _MAX_ registro(s) totales)",
+            "paginate":{
+                "first":"Primero",
+                "last":"Ultimo",
+                "next":"Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+} );
+$(document).ready( function () {
+    $('#tabla_ciclo_2').DataTable({
+        "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
+        "iDisplayLength":3,
+        "language":{
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "search": "Buscar",
+            "zeroRecords":"Ningún Registro Encontrado",
+            "info":"Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Ningún registro disponible",
+            "infoFiltered":"(Filtrado de _MAX_ registro(s) totales)",
+            "paginate":{
+                "first":"Primero",
+                "last":"Ultimo",
+                "next":"Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+} );
+$(document).ready( function () {
+    $('#tabla_ciclo_3').DataTable({
+        "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
+        "iDisplayLength":3,
+        "language":{
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "search": "Buscar",
+            "zeroRecords":"Ningún Registro Encontrado",
+            "info":"Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Ningún registro disponible",
+            "infoFiltered":"(Filtrado de _MAX_ registro(s) totales)",
+            "paginate":{
+                "first":"Primero",
+                "last":"Ultimo",
+                "next":"Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+} );
+$(document).ready( function () {
+    $('#tabla_ciclo_evaluado_1').DataTable({
+        "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
+        "iDisplayLength":3,
+        "language":{
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "search": "Buscar",
+            "zeroRecords":"Ningún Registro Encontrado",
+            "info":"Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Ningún registro disponible",
+            "infoFiltered":"(Filtrado de _MAX_ registro(s) totales)",
+            "paginate":{
+                "first":"Primero",
+                "last":"Ultimo",
+                "next":"Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+} );
+$(document).ready( function () {
+    $('#tabla_ciclo_evaluado_2').DataTable({
+        "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
+        "iDisplayLength":3,
+        "language":{
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "search": "Buscar",
+            "zeroRecords":"Ningún Registro Encontrado",
+            "info":"Página _PAGE_ de _PAGES_",
+            "infoEmpty": "Ningún registro disponible",
+            "infoFiltered":"(Filtrado de _MAX_ registro(s) totales)",
+            "paginate":{
+                "first":"Primero",
+                "last":"Ultimo",
+                "next":"Siguiente",
+                "previous": "Anterior"
+            }
+        }
+    });
+} );
+$(document).ready( function () {
+    $('#tabla_ciclo_evaluado_3').DataTable({
         "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
         "iDisplayLength":3,
         "language":{
