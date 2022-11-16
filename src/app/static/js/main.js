@@ -102,7 +102,7 @@ function decryptInput(hash_doc) {
 
 function establcerSrc(hash_decrypt) {
     // establecer src con el hash_doc
-    const ulr_ipfs = "http://192.168.0.15:8080/ipfs/" + hash_decrypt;
+    const ulr_ipfs = "http://localhost:8080/ipfs/" + hash_decrypt;
     window.open(ulr_ipfs, '_blank','location=0,height=570,width=520,scrollbars=yes,status=yes');
 }
 // Esta función imp
@@ -366,3 +366,103 @@ $(document).ready( function () {
         }
     });
 } );
+
+// Funciones para las notas
+function nota_1(nota1){
+    return web3.utils.hexToUtf8(nota1)
+}
+function nota_2(nota1, nota2){
+    var notas1=parseFloat(web3.utils.hexToUtf8(nota1))
+    var notas2=parseFloat(web3.utils.hexToUtf8(nota2))
+    var promedio=(notas1+notas2)/2
+    return promedio
+}
+function nota_3(nota1, nota2, nota3){
+    var notas1=parseFloat(web3.utils.hexToUtf8(nota1))
+    var notas2=parseFloat(web3.utils.hexToUtf8(nota2))
+    var notas3=parseFloat(web3.utils.hexToUtf8(nota3))
+    var promedio=(notas1+notas2+notas3)/3
+    return promedio
+}
+function nota_4(nota1, nota2, nota3, nota4){
+    var notas1=parseFloat(web3.utils.hexToUtf8(nota1))
+    var notas2=parseFloat(web3.utils.hexToUtf8(nota2))
+    var notas3=parseFloat(web3.utils.hexToUtf8(nota3))
+    var notas4=parseFloat(web3.utils.hexToUtf8(nota4))
+    var promedio=notas1+notas2+notas3+notas4
+    return promedio/4
+    
+
+}
+function nota_5(nota1, nota2, nota3, nota4, nota5){
+    var notas1=parseFloat(web3.utils.hexToUtf8(nota1))
+    var notas2=parseFloat(web3.utils.hexToUtf8(nota2))
+    var notas3=parseFloat(web3.utils.hexToUtf8(nota3))
+    var notas4=parseFloat(web3.utils.hexToUtf8(nota4))
+    var notas5=parseFloat(web3.utils.hexToUtf8(nota5))
+    var promedio=(notas1+notas2+notas3+notas4+notas5)/5
+    return promedio
+}
+
+function imprimir_promedio_calificacion(id, nota) {
+    var parrafo = document.getElementById("calificacion-"+id);
+    // crear un nodo hijo de tipo parrafo
+    var nodo = document.createElement("p");
+    // crear un nodo hijo de tipo texto
+    var texto = document.createTextNode(nota);
+    // agregar el nodo hijo de tipo texto al nodo hijo de tipo parrafo
+    nodo.appendChild(texto);
+    // agregar el nodo hijo de tipo parrafo al nodo padre
+    parrafo.appendChild(nodo);
+    // Una vez que se imprime la calificación se deshabilita el botón de calificación
+    document.getElementById("boton-" + id).disabled = true;
+}
+function obser_1(nota1){
+    return web3.utils.hexToUtf8(nota1)
+}
+function obser_2(nota1, nota2){
+    var notas1=web3.utils.hexToUtf8(nota1)
+    var notas2=web3.utils.hexToUtf8(nota2)
+    var observacion=notas1+"\n"+notas2
+    return observacion
+}
+function obser_3(nota1, nota2, nota3){
+    var notas1=web3.utils.hexToUtf8(nota1)
+    var notas2=web3.utils.hexToUtf8(nota2)
+    var notas3=web3.utils.hexToUtf8(nota3)
+    var observacion=notas1+"\n"+notas2+"\n"+notas3
+    return observacion
+}
+function obser_4(nota1, nota2, nota3, nota4){
+    var notas1=web3.utils.hexToUtf8(nota1)
+    var notas2=web3.utils.hexToUtf8(nota2)
+    var notas3=web3.utils.hexToUtf8(nota3)
+    var notas4=web3.utils.hexToUtf8(nota4)
+    var observacion=notas1+"\n"+notas2+"\n"+notas3+"\n"+notas4
+    return observacion
+    
+
+}
+function obser_5(nota1, nota2, nota3, nota4, nota5){
+    var notas1=web3.utils.hexToUtf8(nota1)
+    var notas2=web3.utils.hexToUtf8(nota2)
+    var notas3=web3.utils.hexToUtf8(nota3)
+    var notas4=web3.utils.hexToUtf8(nota4)
+    var notas5=web3.utils.hexToUtf8(nota5)
+    var observacion=notas1+"\n"+notas2+"\n"+notas3+"\n"+notas4+"\n"+notas5
+    return observacion
+}
+
+function imprimir_observaciones(id, obser) {
+    var parrafo = document.getElementById("observacion-" + id);
+    // crear un nodo hijo de tipo parrafo
+    var nodo = document.createElement("p");
+    // crear un nodo hijo de tipo texto
+    var texto = document.createTextNode(obser);
+    // agregar el nodo hijo de tipo texto al nodo hijo de tipo parrafo
+    nodo.appendChild(texto);
+    // agregar el nodo hijo de tipo parrafo al nodo padre
+    parrafo.appendChild(nodo);
+    // Una vez que se imprime la observación se deshabilita el botón de observación
+    document.getElementById("boton-" + id).disabled = true;
+}

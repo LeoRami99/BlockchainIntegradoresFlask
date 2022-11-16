@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, session
 # from web3 import Web3
-from flask_login import login_required
+from flask_login import login_required, current_user
 import ipfshttpclient
 from .proyecto import Proyectos
 from config import *
@@ -111,6 +111,13 @@ def perfilestudiante():
     sql_usuario = "SELECT * FROM projecto_usuario"
     cursor.execute(sql_usuario)
     usuarios = cursor.fetchall()
+    sql_proyectos_all="SELECT * FROM projecto_proyecto"
+    cursor.execute(sql_proyectos_all)
+    proyectos_all=cursor.fetchall()
+
+
+
+
     # Fechas de entregas
     sql_fechas = "SELECT * FROM projecto_parametrosistemas"
     cursor.execute(sql_fechas)
@@ -128,32 +135,87 @@ def perfilestudiante():
         estado_entrega_e1 = True
     else:
         estado_entrega_e1 = False
-    if fecha_hoy > fecha_entrega_inicio_e2 and fecha_hoy < fecha_entrega_fin_e2:
+    if fecha_hoy >= fecha_entrega_inicio_e2 and fecha_hoy < fecha_entrega_fin_e2:
         estado_entrega_e2 = True
     else:
         estado_entrega_e2 = False
- 
-    #    # Traer las ccccccccalifaciones y proyectos del estudiante
-    # sql_proyectos = "SELECT id_proyecto, nombre_proyecto, id_hash_documento, id_hash_anexos, estado_calificado, estudiante_uno_id, estudiante_dos_id, estudiante_tres_id FROM projecto_proyecto"
-    # sql_calificaciones = "SELECT id_calificacion, fecha id_proyecto_id, id_usuario_id, cali_jurado_uno
-    # cursor.execute(sql_proyectos)
-    # proyectos = cursor.fetchall()
-    # cursor.execute(sql_calificaciones)
-    # calificaciones = cursor.fetchall()
-    # proyectos_nuevo = []
-    # calificaciones_hash = []
-    # proyectos_all =[]
-    # for todos_proyectos in proyectos:
-    #     proyectos_all.append([todos_proyectos[0], todos_proyectos[1], w3.eth.getTransaction(todos_proyectos[2]).input, w3.eth.getTransaction(todos_proyectos[3]).input, todos_proyectos[4], todos_proyectos[5], todos_proyectos[6], todos_proyectos[7]])
-    # # for proyecto_l in proyectos:
-    # for calificaciones_lista, proyecto_l, todos_proyectos in zip(calificaciones, proyectos, proyectos):
-        
-    #     if proyecto_l[0] == calificaciones_lista[3]:
-    #         # calificaciones_hash.append([calificaciones_lista[0], calificaciones_lista[1], calificaciones_lista[2], calificaciones_lista[3], w3.eth.getTransaction(calificaciones_lista[3]).input])
-    #         proyectos_nuevo.append([proyecto_l[0], proyecto_l[1], w3.eth.getTransaction(proyecto_l[2]).input, w3.eth.getTransaction(proyecto_l[3]).input, proyecto_l[4], proyecto_l[5], proyecto_l[6], proyecto_l[7]])
-    #         calificaciones_hash.append([calificaciones_lista[0], w3.eth.getTransaction(calificaciones_lista[1]).input, w3.eth.getTransaction(calificaciones_lista[2]).input, proyecto_l[1], proyecto_l[5], proyecto_l[6], proyecto_l[7]]) 
-    # return render_template("perfilEstudiante.html", proyectos=proyectos_nuevo, calificaciones=calificaciones_hash, allproyectos=proyectos_all)
-    return render_template("perfilEstudiante.html", usuarios=usuarios,fecha=fechas, estado_e1=estado_entrega_e1, estado_e2=estado_entrega_e2)
+    
+    calif_obser=[]
+    # Traer usuario 
+    sql_usuario = "SELECT * FROM projecto_usuario WHERE id = '{0}'".format(current_user.id)
+    cursor.execute(sql_usuario)
+    usuario = cursor.fetchone()
+    # Traer los proyectos donde el usuario esta inscrito
+    sql_proyectos = "SELECT * FROM projecto_proyecto WHERE estudiante_uno_id = '{0}' OR estudiante_dos_id = '{0}' OR estudiante_tres_id = '{0}'".format(current_user.id)
+    cursor.execute(sql_proyectos)
+    proyectos = cursor.fetchall()
+
+    # Traer las calificaciones del usuario
+    for proyects in proyectos:
+        sql_calificaciones = "SELECT * FROM projecto_calificaciones WHERE id_proyecto_id = '{0}'".format(proyects[0])
+        cursor.execute(sql_calificaciones)
+        calificaciones = cursor.fetchall()
+        for calif in calificaciones:
+            if proyects[11] == 1:
+                if calif[3] == None:
+                    print('No hay calificacion')
+                else:
+                    nota_1=w3.eth.getTransaction(calif[3]).input
+                    observ_1=w3.eth.getTransaction(calif[8]).input
+                    calif_obser.append([proyects[11],calif[0],calif[2], nota_1, observ_1])
+            elif proyects[11] == 2:
+                if calif[3] == None or calif[4] == None:
+                    print('No hay calificacion')
+                else:
+                    nota_1=w3.eth.getTransaction(calif[3]).input
+                    nota_2=w3.eth.getTransaction(calif[4]).input
+                    observ_1=w3.eth.getTransaction(calif[8]).input
+                    observ_2=w3.eth.getTransaction(calif[9]).input
+                    calif_obser.append([proyects[11],calif[0],calif[2], nota_1, nota_2, observ_1, observ_2])
+            elif proyects[11] == 3:
+                if calif[3] == None or calif[4] == None or calif[5] == None:
+                    print('No hay calificacion')
+                else:
+                    nota_1=w3.eth.getTransaction(calif[3]).input
+                    nota_2=w3.eth.getTransaction(calif[4]).input
+                    nota_3=w3.eth.getTransaction(calif[5]).input
+                    observ_1=w3.eth.getTransaction(calif[8]).input
+                    observ_2=w3.eth.getTransaction(calif[9]).input
+                    observ_3=w3.eth.getTransaction(calif[10]).input
+                    calif_obser.append([proyects[11],calif[0],calif[2], nota_1, nota_2, nota_3, observ_1, observ_2, observ_3])
+            elif proyects[11] == 4:
+                if calif[3] == None or calif[4] == None or calif[5] == None or calif[6] == None:
+                    print('No hay calificacion')
+                else:
+                    nota_1=w3.eth.getTransaction(calif[3]).input
+                    nota_2=w3.eth.getTransaction(calif[4]).input
+                    nota_3=w3.eth.getTransaction(calif[5]).input
+                    nota_4=w3.eth.getTransaction(calif[6]).input
+                    observ_1=w3.eth.getTransaction(calif[8]).input
+                    observ_2=w3.eth.getTransaction(calif[9]).input
+                    observ_3=w3.eth.getTransaction(calif[10]).input
+                    observ_4=w3.eth.getTransaction(calif[11]).input
+                    calif_obser.append([proyects[11],calif[0],calif[2], nota_1, nota_2, nota_3, nota_4, observ_1, observ_2, observ_3, observ_4])
+            elif proyects[11] == 5:
+                if calif[3] == None or calif[4] == None or calif[5] == None or calif[6] == None or calif[7] == None:
+                    print('No hay calificacion')
+                else:
+                    nota_1=w3.eth.getTransaction(calif[3]).input
+                    nota_2=w3.eth.getTransaction(calif[4]).input
+                    nota_3=w3.eth.getTransaction(calif[5]).input
+                    nota_4=w3.eth.getTransaction(calif[6]).input
+                    nota_5=w3.eth.getTransaction(calif[7]).input
+                    observ_1=w3.eth.getTransaction(calif[8]).input
+                    observ_2=w3.eth.getTransaction(calif[9]).input
+                    observ_3=w3.eth.getTransaction(calif[10]).input
+                    observ_4=w3.eth.getTransaction(calif[11]).input
+                    observ_5=w3.eth.getTransaction(calif[12]).input
+                    calif_obser.append([proyects[11],calif[0],calif[2], nota_1, nota_2, nota_3, nota_4, nota_5, observ_1, observ_2, observ_3, observ_4, observ_5])
+    
+               
+                   
+
+    return render_template("perfilEstudiante.html", usuarios=usuarios,fecha=fechas, cal_ob=calif_obser, estado_e1=estado_entrega_e1, estado_e2=estado_entrega_e2, allproyectos=proyectos_all)
 @estudiantes.route("/actualizar" , methods=['POST'])
 def actualizar():
     if request.method == 'POST':

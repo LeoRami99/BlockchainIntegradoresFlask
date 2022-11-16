@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 formulario = Blueprint('formulario',__name__, url_prefix='/forms', template_folder='templates')
 from config import *
 from flask_login import login_user, logout_user, current_user

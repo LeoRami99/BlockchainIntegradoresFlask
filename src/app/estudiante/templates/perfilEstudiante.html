@@ -30,6 +30,7 @@
 </nav>
 {%endblock%}
 {%block content%}
+{{allproyectos}}
 <div class="row align-items-center justify-content-between m-5 ">
     
     <div class="col-md-4 mb-2">
@@ -175,30 +176,66 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            {%for calificaciones_vista in calificaciones%}
-            {%if calificaciones_vista[4] == current_user.id or calificaciones_vista[5] == current_user.id or calificaciones_vista[6] == current_user.id%}
+            {%for calificaciones_vista in cal_ob%}
                 <div class="card mb-2">
                     <div class="card-header">
-                        {{calificaciones_vista[3]}}
+                        {{calificaciones_vista[2]}}
                     </div>
                         <div class="card-body">
                             <h5 class="card-title">Observaciones:</h5>
-                            <div id="observacion-{{calificaciones_vista[0]}}">
-                            </div>
-                            <!-- <p class="card-text" id="observacion"> -->
-                            <!-- </p> -->
-                        <h5 class="card-title">Calificaciones:</h5>
-                        <div id="calificacion-{{calificaciones_vista[0]}}">
-
-                        </div>
+                            {%if calificaciones_vista[0]==1%}
+                                <div id="observacion-{{calificaciones_vista[1]}}">
+                                </div>
+                                <h5 class="card-title">Calificaciones:</h5>
+                                <div id="calificacion-{{calificaciones_vista[1]}}">
+                                </div>
                             <!-- <p class="card-text" id="calificacion">
                             </p> -->
-                        <button class="btn btn-primary" id="boton-{{calificaciones_vista[0]}}" onclick="imprimir_resultado_observacion('{{calificaciones_vista[0]}}','{{calificaciones_vista[2]}}'), imprimir_resultado_calificacion('{{calificaciones_vista[0]}}','{{calificaciones_vista[1]}}')">Revelar</button>
-                    </div>
+                            <button class="btn btn-primary" id="boton-{{calificaciones_vista[1]}}" onclick="imprimir_promedio_calificacion('{{calificaciones_vista[1]}}',nota_1('{{calificaciones_vista[3]}}')), imprimir_observaciones('{{calificaciones_vista[1]}}', obser_1('{{calificaciones_vista[4]}}'))">Revelar</button>
+                            {%endif%}
+                            {%if calificaciones_vista[0]==2%}
+                                <div id="observacion-{{calificaciones_vista[1]}}">
+                                </div>
+                                <h5 class="card-title">Calificaciones:</h5>
+                                <div id="calificacion-{{calificaciones_vista[1]}}">
+                                </div>
+                            <!-- <p class="card-text" id="calificacion">
+                            </p> -->
+                            <button class="btn btn-primary" id="boton-{{calificaciones_vista[1]}}" onclick="imprimir_promedio_calificacion('{{calificaciones_vista[1]}}',nota_2('{{calificaciones_vista[3]}}','{{calificaciones_vista[4]}}')), imprimir_observaciones('{{calificaciones_vista[1]}}', obser_2('{{calificaciones_vista[5]}}','{{calificaciones_vista[5]}}'))">Revelar</button>
+                            {%endif%}
+                            {%if calificaciones_vista[0]==3%}
+                                <div id="observacion-{{calificaciones_vista[1]}}">
+                                </div>
+                                <h5 class="card-title">Calificaciones:</h5>
+                                <div id="calificacion-{{calificaciones_vista[1]}}">
+                                </div>
+                            <!-- <p class="card-text" id="calificacion">
+                            </p> -->
+                                <button class="btn btn-primary" id="boton-{{calificaciones_vista[1]}}" onclick="imprimir_promedio_calificacion('{{calificaciones_vista[1]}}',nota_3('{{calificaciones_vista[3]}}','{{calificaciones_vista[4]}}','{{calificaciones_vista[5]}}')), imprimir_observaciones('{{calificaciones_vista[1]}}', obser_3('{{calificaciones_vista[6]}}','{{calificaciones_vista[7]}}','{{calificaciones_vista[8]}}'))">Revelar</button>
+                            {%endif%}
+                            {%if calificaciones_vista[0]==4%}
+                                <div id="observacion-{{calificaciones_vista[1]}}">
+                                </div>
+                                <h5 class="card-title">Calificaciones:</h5>
+                                <div id="calificacion-{{calificaciones_vista[1]}}">
+                                </div>
+                            <!-- <p class="card-text" id="calificacion">
+                            </p> -->
+                            <button class="btn btn-primary" id="boton-{{calificaciones_vista[1]}}" onclick="imprimir_promedio_calificacion('{{calificaciones_vista[1]}}',nota_4('{{calificaciones_vista[3]}}','{{calificaciones_vista[4]}}','{{calificaciones_vista[5]}}','{{calificaciones_vista[6]}}')), imprimir_observaciones('{{calificaciones_vista[1]}}', obser_4('{{calificaciones_vista[7]}}','{{calificaciones_vista[8]}}','{{calificaciones_vista[9]}}','{{calificaciones_vista[10]}}'))">Revelar</button>
+                            {%endif%}
+                            {%if calificaciones_vista[0]==5%}
+                                <div id="observacion-{{calificaciones_vista[1]}}">
+                                </div>
+                                <h5 class="card-title">Calificaciones:</h5>
+                                <div id="calificacion-{{calificaciones_vista[1]}}">
+                                </div>
+                            <!-- <p class="card-text" id="calificacion">
+                            </p> -->
+                            <button class="btn btn-primary" id="boton-{{calificaciones_vista[1]}}" onclick="imprimir_promedio_calificacion('{{calificaciones_vista[1]}}',nota_5('{{calificaciones_vista[3]}}','{{calificaciones_vista[4]}}','{{calificaciones_vista[5]}}','{{calificaciones_vista[6]}}','{{calificaciones_vista[7]}}')), imprimir_observaciones('{{calificaciones_vista[1]}}', obser_4('{{calificaciones_vista[8]}}','{{calificaciones_vista[9]}}','{{calificaciones_vista[10]}}','{{calificaciones_vista[11]}}','{{calificaciones_vista[12]}}'))">Revelar</button>
+                            {%endif%}
+                        </div>
                 </div>
-            {%endif%}
-
-            {%endfor %}  
+        {%endfor %}  
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -206,6 +243,7 @@
       </div>
     </div>
   </div>
+
   <!-- Modal para proyectos -->
   <div class="modal fade" id="modal-proyectos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -217,7 +255,7 @@
         <div class="modal-body">
             
             {%for proyectos_vista in allproyectos%}
-            {%if proyectos_vista[4] == current_user.id or proyectos_vista[5] == current_user.id or proyectos_vista[6] == current_user.id%}
+            {%if proyectos_vista[8] == current_user.id or proyectos_vista[6] == current_user.id or proyectos_vista[7] == current_user.id%}
             <div class="card mb-2">
                 <div class="card-header">
                     {{proyectos_vista[1]}}
@@ -231,9 +269,12 @@
                     {%endif%}
                     <p class="card-text" id="proyecto">
                     </p>
-                    <button class="btn btn-primary" onclick="establcerSrc(decryptInput('{{proyectos_vista[2]}}'))">Documento</button>
-                    <button class="btn btn-primary" onclick="establcerSrc(decryptInput('{{proyectos_vista[3]}}'))">Anexo</button>
-                 
+                    <button class="btn btn-primary" onclick="establcerSrc(decryptInput('{{proyectos_vista[4]}}'))">Documento</button>
+                    {%if proyectos_vista[5] == 'Sin anexos'%}
+                        <strong>Sin anexo</strong>
+                    {%else%}
+                        <button class="btn btn-primary" onclick="establcerSrc(decryptInput('{{proyectos_vista[5]}}'))">Anexo</button>
+                    {%endif%}
                 </div>
               </div>
             {%endif%}

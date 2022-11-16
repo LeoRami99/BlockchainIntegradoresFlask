@@ -151,7 +151,24 @@ def retroalimentacion():
         id_jurado = request.form['id_jurado']
         observaciones = request.form['observaciones']
         ciclo = request.form['ciclo']
-        data_calificacion=w3.toHex(text=calificacion)
+        entrega = request.form['entrega']
+        if entrega == '2da entrega':
+            item_1=request.form['item-1']
+            item_2=request.form['item-2']
+            item_3=request.form['item-3']
+            item_4=request.form['item-4']
+            item_5=request.form['item-5']
+            item_6=request.form['item-6']
+            item_7=request.form['item-7']
+            item_8=request.form['item-8']
+            item_9=request.form['item-9']
+            item_10=request.form['item-10']
+            calificacion = request.form['calificacion']
+            promedio=(float(item_1)+float(item_2)+float(item_3)+float(item_4)+float(item_5)+float(item_6)+float(item_7)+float(item_8)+float(item_9)+float(item_10)+ float(calificacion))/11
+        else:
+            promedio = calificacion
+
+        data_calificacion=w3.toHex(text=promedio)
         
         data_observaciones=w3.toHex(text=observaciones)
         tx_calificacion={

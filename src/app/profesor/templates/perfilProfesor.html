@@ -179,21 +179,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {%for proyecto in proyectos%}
-                        
-                        {%if proyecto[2] == "1"%}
-                        <tr>
-                            <td>{{proyecto[1]}}</td>
-                            <td>{{proyecto[8] }}<br>{{proyecto[13]}}</td>
-                            <td>{{proyecto[6]}}<br>{{proyecto[11]}}</td>
-                            <td>{{proyecto[7]}}<br>{{proyecto[12]}}</td>
-                            <td id="calificacion-{{proyecto[0]}}"></td>
-                            <td><button class="btn btn-success" id="boton-{{proyecto[0]}}"
-                                    onclick="imprimir_resultado_calificacion('{{proyecto[0]}}','{{proyecto[10]}}')">Revelar</button></td>
-                        </tr>
-                        {%endif%}
-                       
-                        {%endfor%}
+                        {% for proyecto in calif  %}
+                            {% if proyecto[3]=='1'%}
+                                <tr>
+                                    <td>{{proyecto[2]}}</td>
+                                    <td>{{proyecto[4]}}</td>
+                                    <td>{{proyecto[5]}}</td>
+                                    <td>{{proyecto[6]}}</td>
+                                {% if proyecto[0]==1 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_1('{{proyecto[9]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==2 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_2('{{proyecto[9]}}','{{proyecto[10]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==3 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_3('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==4 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_4('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}','{{proyecto[12]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==5 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_5('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}','{{proyecto[12]}}','{{proyecto[13]}}'))">Revelar</button></td>
+                                {% endif %}
+                                </tr>    
+                            {% endif %}
+                        {% endfor %}
                     </tbody>
 
                 </table>
@@ -225,21 +245,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {%for proyecto in proyectos%}
-                        
-                        {%if proyecto[2] == "2"%}
-                        <tr>
-                            <td>{{proyecto[1]}}</td>
-                            <td>{{proyecto[8] }}<br>{{proyecto[13]}}</td>
-                            <td>{{proyecto[6]}}<br>{{proyecto[11]}}</td>
-                            <td>{{proyecto[7]}}<br>{{proyecto[12]}}</td>
-                            <td id="calificacion-{{proyecto[0]}}"></td>
-                            <td><button class="btn btn-success" id="boton-{{proyecto[0]}}"
-                                    onclick="imprimir_resultado_calificacion('{{proyecto[0]}}','{{proyecto[10]}}')">Revelar</button></td>
-                        </tr>
-                        {%endif%}
-                       
-                        {%endfor%}
+                        {% for proyecto in calif  %}
+                            {% if proyecto[3]=='2'%}
+                                <tr>
+                                    <td>{{proyecto[2]}}</td>
+                                    <td>{{proyecto[4]}}</td>
+                                    <td>{{proyecto[5]}}</td>
+                                    <td>{{proyecto[6]}}</td>
+                                {% if proyecto[0]==1 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_1('{{proyecto[9]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==2 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_2('{{proyecto[9]}}','{{proyecto[10]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==3 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_3('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==4 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_4('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}','{{proyecto[12]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==5 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_5('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}','{{proyecto[12]}}','{{proyecto[13]}}'))">Revelar</button></td>
+                                {% endif %}
+                                </tr>    
+                            {% endif %}
+                        {% endfor %}
                     </tbody>
 
                 </table>
@@ -271,21 +311,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {%for proyecto in proyectos%}
-                        
-                        {%if proyecto[2] == "3"%}
-                        <tr>
-                            <td>{{proyecto[1]}}</td>
-                            <td>{{proyecto[8] }}<br>{{proyecto[13]}}</td>
-                            <td>{{proyecto[6]}}<br>{{proyecto[11]}}</td>
-                            <td>{{proyecto[7]}}<br>{{proyecto[12]}}</td>
-                            <td id="calificacion-{{proyecto[0]}}"></td>
-                            <td><button class="btn btn-success" id="boton-{{proyecto[0]}}"
-                                    onclick="imprimir_resultado_calificacion('{{proyecto[0]}}','{{proyecto[10]}}')">Revelar</button></td>
-                        </tr>
-                        {%endif%}
-                       
-                        {%endfor%}
+                        {% for proyecto in calif  %}
+                            {% if proyecto[3]=='3'%}
+                                <tr>
+                                    <td>{{proyecto[2]}}</td>
+                                    <td>{{proyecto[4]}}</td>
+                                    <td>{{proyecto[5]}}</td>
+                                    <td>{{proyecto[6]}}</td>
+                                {% if proyecto[0]==1 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_1('{{proyecto[9]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==2 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_2('{{proyecto[9]}}','{{proyecto[10]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==3 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_3('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==4 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_4('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}','{{proyecto[12]}}'))">Revelar</button></td>
+                                {% endif %}
+                                {% if proyecto[0]==5 %}
+                                    <td id="calificacion-{{proyecto[1]}}"></td>
+                                    <td><button class="btn btn-success" id="boton-{{proyecto[1]}}"
+                                        onclick="imprimir_promedio_calificacion('{{proyecto[1]}}',nota_5('{{proyecto[9]}}','{{proyecto[10]}}','{{proyecto[11]}}','{{proyecto[12]}}','{{proyecto[13]}}'))">Revelar</button></td>
+                                {% endif %}
+                                </tr>    
+                            {% endif %}
+                        {% endfor %}
                     </tbody>
 
                 </table>
