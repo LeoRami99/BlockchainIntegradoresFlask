@@ -5,5 +5,5 @@ inicio = Blueprint('inicio',__name__,url_prefix='/', template_folder='templates'
 con_bd = EstablecerConexion()
 @inicio.route('/')
 def index():
-    return render_template("index.html")
+    return redirect(url_for('formulario.login'))
     

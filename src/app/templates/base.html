@@ -22,6 +22,8 @@
 </head>
 
 <body class="d-flex flex-column h-100">
+    <!-- Colocar toast con el funcion de flash de flask -->
+   
     <div class="loader">
         <div class="loading">
             <div></div>
@@ -46,6 +48,30 @@
     {%block navbar%}
     {%endblock%}
     <div class="container">
+        <!-- Crear un toast de boostratp y ubicarlo a la izquierda -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="toast float-end fondo m-2" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header text-bg-success">
+                    <strong class="me-auto">Fomalhaut</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" style="color: #fff;">
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+                </div>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('.toast').toast('show');
+                });
+            </script>
+        {% endif %}
+        {% endwith %}
+  
+    </div>
+    <div class="container">
         {%block content%}
         {%endblock%}
     </div>
@@ -66,6 +92,14 @@
 </script>
 <script src="{{url_for('static', filename='js/main.js')}}"> </script>
 <script src="{{url_for('static', filename='js/particles.js')}}"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+
+
 <script>
     particlesJS.load('particles-js', "{{url_for('static', filename='js/particles.json')}}", function () {
         console.log('callback - particles.js config loaded');

@@ -138,6 +138,10 @@ Tablas para los modales de profesor
 */
 $(document).ready( function () {
     $('#tabla_profe_1').DataTable({
+        "dom": 'Bfrtip',
+    "buttons": [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ],
         "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
         "iDisplayLength":3,
         "language":{
@@ -153,9 +157,15 @@ $(document).ready( function () {
                 "next":"Siguiente",
                 "previous": "Anterior"
             }
-        }
+        },
+
+
     });
 } );
+
+
+    
+
 $(document).ready( function () {
     $('#tabla_profe_2').DataTable({
         "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
@@ -407,6 +417,7 @@ function nota_5(nota1, nota2, nota3, nota4, nota5){
 function imprimir_promedio_calificacion(id, nota) {
     var parrafo = document.getElementById("calificacion-"+id);
     // crear un nodo hijo de tipo parrafo
+    
     var nodo = document.createElement("p");
     // crear un nodo hijo de tipo texto
     var texto = document.createTextNode(nota);
@@ -417,6 +428,7 @@ function imprimir_promedio_calificacion(id, nota) {
     // Una vez que se imprime la calificación se deshabilita el botón de calificación
     document.getElementById("boton-" + id).disabled = true;
 }
+
 function obser_1(nota1){
     return web3.utils.hexToUtf8(nota1)
 }
@@ -466,3 +478,4 @@ function imprimir_observaciones(id, obser) {
     // Una vez que se imprime la observación se deshabilita el botón de observación
     document.getElementById("boton-" + id).disabled = true;
 }
+

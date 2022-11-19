@@ -32,13 +32,26 @@
 {%block content%}
 <div class="row align-items-center justify-content-between mt-5">
     <div class="col-md-3">
-        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark"
-            aria-controls="staticBackdrop">
-            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="" width="100px" height="100px">
-            <h1 style="color:#fff;" class="shadows-lg">Perfil - {{current_user.nombres}}</h1>
-        </button>
+        <div class="card text-center fondo shadow-lg ">
+            <div class="card-header">
+                <img src="https://cdn.pixabay.com/photo/2018/04/12/16/13/flower-3313905_960_720.jpg"
+                    class="card-img-top" alt="...">
+            </div>
+            <center>
+                <h2 class="text-center mb-2" style="color: white;">{{current_user.nombres}}</h2>
+            </center>
+            <center>
+                <div class="card-body">
+                    <!-- <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-proyectos">Mis proyectos</button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-observaciones">Observaciones y Califcaciones</button>
+                    </div> -->
+                </div>
+            </center>
+
+        </div>
         <!--Tarjeta formulario-->
-        <div class="offcanvas offcanvas-end show fondo" tabindex="-1" id="offcanvasDark"
+        <div class="offcanvas offcanvas-end fondo" tabindex="-1" id="offcanvasDark"
             aria-labelledby="offcanvasDarkLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasDarkLabel" style="color:#fff;">Perfil</h5>
@@ -154,7 +167,7 @@
 <div class="modal fade" id="modal-ciclo-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-bg-success">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo I</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -211,7 +224,7 @@
 <div class="modal fade" id="modal-ciclo-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-bg-success">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo II</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -267,7 +280,7 @@
 <div class="modal fade" id="modal-ciclo-3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-bg-success">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo III</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -324,7 +337,7 @@
 <div class="modal fade" id="modal-evaluacion-{{proyecto[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-bg-success">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo I</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -445,7 +458,7 @@
     <div class="modal fade" id="modal-evaluacion-dos-{{proyecto[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-bg-success">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo II</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -566,7 +579,7 @@
     <div class="modal fade" id="modal-evaluacion-tres-{{proyecto[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-bg-success">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo III</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -687,7 +700,7 @@
 <div class="modal fade" id="modal-obser-ciclo-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-bg-success">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo I</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -744,7 +757,7 @@
 <div class="modal fade" id="modal-obser-ciclo-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-bg-success">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo II</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -801,7 +814,7 @@
 <div class="modal fade" id="modal-obser-ciclo-3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-bg-success">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ciclo III</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

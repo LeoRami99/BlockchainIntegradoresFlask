@@ -30,7 +30,6 @@
 </nav>
 {%endblock%}
 {%block content%}
-{{allproyectos}}
 <div class="row align-items-center justify-content-between m-5 ">
     
     <div class="col-md-4 mb-2">
@@ -57,7 +56,7 @@
             <h1 style="color:#fff;" class="shadows-lg">Perfil - {{current_user.nombres}}</h1>
         </button> -->
         <!--Tarjeta formulario-->
-        <div class="offcanvas offcanvas-end show fondo" tabindex="-1" id="offcanvasDark"
+        <div class="offcanvas offcanvas-end fondo" tabindex="-1" id="offcanvasDark"
             aria-labelledby="offcanvasDarkLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasDarkLabel" style="color:#fff;">Perfil</h5>
@@ -171,15 +170,20 @@
   <div class="modal fade" id="modal-observaciones" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header text-bg-success">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Observaciones y Calificaciones</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             {%for calificaciones_vista in cal_ob%}
                 <div class="card mb-2">
-                    <div class="card-header">
-                        {{calificaciones_vista[2]}}
+                    <div class="card-header text-bg-success">
+                        {%for proyectos_vista in allproyectos%}
+                            {%if calificaciones_vista[2]== proyectos_vista[0]%}
+                                <h5 class="text-center mb-2" style="color: white;">{{proyectos_vista[1]}}</h5>
+                            {%endif%}
+                        {%endfor%}
+
                     </div>
                         <div class="card-body">
                             <h5 class="card-title">Observaciones:</h5>
@@ -248,7 +252,7 @@
   <div class="modal fade" id="modal-proyectos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header text-bg-success">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Mis proyectos</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -258,6 +262,7 @@
             {%if proyectos_vista[8] == current_user.id or proyectos_vista[6] == current_user.id or proyectos_vista[7] == current_user.id%}
             <div class="card mb-2">
                 <div class="card-header">
+
                     {{proyectos_vista[1]}}
                 </div>
                 <div class="card-body">
@@ -269,7 +274,7 @@
                     {%endif%}
                     <p class="card-text" id="proyecto">
                     </p>
-                    <button class="btn btn-primary" onclick="establcerSrc(decryptInput('{{proyectos_vista[4]}}'))">Documento</button>
+                    <button class="btn btn-success" onclick="establcerSrc(decryptInput('{{proyectos_vista[4]}}'))">Documento</button>
                     {%if proyectos_vista[5] == 'Sin anexos'%}
                         <strong>Sin anexo</strong>
                     {%else%}
@@ -281,7 +286,7 @@
             {%endfor %}  
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>

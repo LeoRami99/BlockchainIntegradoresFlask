@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 # from web3 import Web3
 from flask_login import login_required, current_user
 import ipfshttpclient
@@ -24,7 +24,7 @@ def registroproyecto_segunda():
 @estudiantes.route('/registrar_proyecto', methods=['POST'])
 def registrar_proyecto():
     # Instancia de la conexión a IPFS
-    fs = ipfshttpclient.connect('/ip4/192.168.0.15/tcp/5001')
+    fs = ipfshttpclient.connect('/ip4/localhost/tcp/5001')
     # Instancia de web3 para envio de transacción a blockchain
     w3 = conection_eth()
     
@@ -91,8 +91,10 @@ def registrar_proyecto():
         proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, 11, fecha_hora, hash_trans_proyecto, hash_trans_anexos, entrega)
         proyecto.set_proyecto()
         # obtener el id del proyecto
+        flash('Proyecto registrado correctamente')
         return redirect(url_for('estudiantes.perfilestudiante'))
     else:
+        flash('Error al registrar el proyecto')
         return redirect(url_for('estudiantes.registroproyecto'))
 def get_user(num_doc):
  
@@ -107,6 +109,7 @@ def get_user(num_doc):
 @estudiantes.route('/perfilestudiante')
 @login_required
 def perfilestudiante():
+    flash('Bienvenido {0}'.format(current_user.nombres))
     w3 = conection_eth()
     sql_usuario = "SELECT * FROM projecto_usuario"
     cursor.execute(sql_usuario)
@@ -114,6 +117,13 @@ def perfilestudiante():
     sql_proyectos_all="SELECT * FROM projecto_proyecto"
     cursor.execute(sql_proyectos_all)
     proyectos_all=cursor.fetchall()
+    proyectos_parceado=[]
+    for proyecto in proyectos_all:
+        if proyecto[5]=='Sin anexos':
+            proyectos_parceado.append([proyecto[0], proyecto[1],proyecto[2],proyecto[3],w3.eth.getTransaction(proyecto[4]).input,'Sin anexos',proyecto[6],proyecto[7],proyecto[8],proyecto[9],proyecto[10],proyecto[11]])
+        else:
+            proyectos_parceado.append([proyecto[0], proyecto[1],proyecto[2],proyecto[3],w3.eth.getTransaction(proyecto[4]).input,w3.eth.getTransaction(proyecto[5]).input,proyecto[6],proyecto[7],proyecto[8],proyecto[9],proyecto[10],proyecto[11]])
+
 
 
 
@@ -212,10 +222,7 @@ def perfilestudiante():
                     observ_5=w3.eth.getTransaction(calif[12]).input
                     calif_obser.append([proyects[11],calif[0],calif[2], nota_1, nota_2, nota_3, nota_4, nota_5, observ_1, observ_2, observ_3, observ_4, observ_5])
     
-               
-                   
-
-    return render_template("perfilEstudiante.html", usuarios=usuarios,fecha=fechas, cal_ob=calif_obser, estado_e1=estado_entrega_e1, estado_e2=estado_entrega_e2, allproyectos=proyectos_all)
+    return render_template("perfilEstudiante.html", usuarios=usuarios,fecha=fechas, cal_ob=calif_obser, estado_e1=estado_entrega_e1, estado_e2=estado_entrega_e2, allproyectos=proyectos_parceado)
 @estudiantes.route("/actualizar" , methods=['POST'])
 def actualizar():
     if request.method == 'POST':

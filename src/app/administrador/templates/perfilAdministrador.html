@@ -31,7 +31,7 @@ Fomalhaut | Administrador | {{current_user.nombres}}
 </nav>
 {%endblock%}
 {%block content%}
-<div class="offcanvas offcanvas-end show fondo" tabindex="-1" id="offcanvasDark" aria-labelledby="offcanvasDarkLabel">
+<div class="offcanvas offcanvas-end fondo" tabindex="-1" id="offcanvasDark" aria-labelledby="offcanvasDarkLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasDarkLabel" style="color:#fff;">Perfil</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -74,11 +74,14 @@ Fomalhaut | Administrador | {{current_user.nombres}}
                 <h2 class="text-center mb-2" style="color: white;">{{current_user.nombres}}</h2>
             </center>
             <center>
+                
                 <div class="card-body">
-                    <!-- <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-proyectos">Mis proyectos</button>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-observaciones">Observaciones y Califcaciones</button>
-                      </div> -->
+                    <h5 style="color: white;">Reporte</h5>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">   
+                        <a href="{{url_for('admin.reporte_ciclo1')}}" class="btn btn-success">Ciclo I</a>
+                        <a href="{{url_for('admin.reporte_ciclo2')}}" class="btn btn-success">Ciclo II</a>
+                        <a href="{{url_for('admin.reporte_ciclo3')}}" class="btn btn-success">Ciclo III</a>
+                    </div>
                 </div>
             </center>
 
@@ -108,7 +111,7 @@ Fomalhaut | Administrador | {{current_user.nombres}}
                         <a href="" class="btn btn-success mb-2" data-bs-toggle="modal"
                             data-bs-target="#modal-proyecto-grupo"><i class="bi bi-gear"></i> Asignar Proyectos x
                             Grupo</a>
-                        <a href="/forms/registro_profesor" class="btn btn-success mb-2"><i class="bi bi-gear"></i> Regitrar Profesor</a>
+                        <a href="/forms/registro_profesor" class="btn btn-success mb-2"><i class="bi bi-gear"></i> Registrar Profesor</a>
                             
 
                     </div>
@@ -206,6 +209,7 @@ Fomalhaut | Administrador | {{current_user.nombres}}
                                     data-bs-target="#modal-edit-{{profe_rol[0]}}">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
+                                <a href="{{url_for('admin.eliminar', id=profe_rol[0])}}" class="btn btn-danger" onclick="return confirm('¿Esta seguro de salir?')"><i class="bi bi-trash"></i></a>
 
                             </td>
 

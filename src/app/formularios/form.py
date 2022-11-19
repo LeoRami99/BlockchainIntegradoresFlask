@@ -3,6 +3,7 @@ formulario = Blueprint('formulario',__name__, url_prefix='/forms', template_fold
 from config import *
 from flask_login import login_user, logout_user, current_user
 from .usuario import Usuarios, Usuario
+from flask_mail import Mail, Message
 con_bd = EstablecerConexion()
 
 # Establecer la secret key 
@@ -50,25 +51,33 @@ def logueo():
                     if usuario_login.contrasena is True:
                         login_user(usuario_login)
                         if usuario_login.rol == 1:
+                            
                             return redirect(url_for('estudiantes.perfilestudiante'))
                         # Si el rol es dos dirigir a la vista de perfilprofesor
                         elif usuario_login.rol == 2:
+                           
                             return redirect(url_for('profesor.perfilprofesor'))
                         # Si el rol es tres dirigir a la vista de perfiladministrador
                         elif usuario_login.rol == 3:
+                            
                             return redirect(url_for('admin.perfiladmin'))
                         elif usuario_login.rol == 4:
                             return redirect(url_for('jurado.perfiljurado'))
                     else:
+                        flash('Contraseña incorrecta')
                         return redirect(url_for('formulario.login')) 
                 #    Si el rol es uno dirigir a la vista de perfilestudiante
                 else:
+                    flash('Usuario no registrado')
                     return redirect(url_for('formulario.login'))
             except:
+                flash('Usuario no registrado')
                 return redirect(url_for('formulario.login'))
         else:
+            flash('Por favor ingrese todos los campos')
             return redirect(url_for('formulario.login'))
     else:
+        flash('Por favor ingrese todos los campos')
         return redirect(url_for('formulario.login'))
 @formulario.route('/logout')
 def logout():
@@ -84,9 +93,29 @@ def registrar_usuario():
         numero_identificacion = request.form['numero_identificacion']
         email_institucional = request.form['correoinstitucional']
         contraseña = request.form['contraseña']
-        usuario = Usuarios(nombres, apellidos, email_institucional, numero_identificacion, contraseña, tipo_rol, tipo_documento)
-        usuario.set_usuario()
-        return redirect(url_for('formulario.login'))
+        # Verificar que el numeo de identificacion no este registrado
+        sql="SELECT id FROM projecto_usuario WHERE doc_identidad='{0}'".format(numero_identificacion)
+        cursor = con_bd.cursor()
+        cursor.execute(sql)
+        user_consult=cursor.fetchone()
+        if user_consult is None:
+            # Verificar que el correo no este registrado
+            sql="SELECT id FROM projecto_usuario WHERE correo='{0}'".format(email_institucional)
+            cursor = con_bd.cursor()
+            cursor.execute(sql)
+            user_consult=cursor.fetchone()
+            if user_consult is None:
+                # Registrar el usuario
+                usuario = Usuarios(nombres, apellidos, email_institucional, numero_identificacion, contraseña, tipo_rol, tipo_documento)
+                usuario.set_usuario()
+                flash('Usuario registrado correctamente')
+                return redirect(url_for('formulario.login'))
+            else:
+                flash('El correo ya se encuentra registrado')
+                return redirect(url_for('formulario.registro'))
+        else:
+            flash('El numero de identificacion ya se encuentra registrado')
+            return redirect(url_for('formulario.registro'))
     else:
         return redirect(url_for('formulario.registro'))
 @formulario.route('/registrar_docente', methods=['POST'])
@@ -99,11 +128,41 @@ def registrar_docente():
         numero_identificacion = request.form['numero_identificacion']
         email_institucional = request.form['correoinstitucional']
         contraseña = request.form['contraseña']
-        usuario = Usuarios(nombres, apellidos, email_institucional, numero_identificacion, contraseña, tipo_rol, tipo_documento)
-        usuario.set_usuario()
-        return redirect(url_for('admin.perfiladmin'))
-    else:
+        if nombres and apellidos and tipo_documento and tipo_rol and numero_identificacion and email_institucional and contraseña:
+            # Verificar que el numero de identificacion
+            # no se encuentre registrado
+            sql="SELECT id FROM projecto_usuario WHERE numero_identificacion='{0}'".format(numero_identificacion)
+            cursor = con_bd.cursor()
+            cursor.execute(sql)
+            user_consult=cursor.fetchone()
+            if user_consult is None:
+                # Verificar que el correo no se encuentre registrado
+                sql="SELECT id FROM projecto_usuario WHERE correo='{0}'".format(email_institucional)
+                cursor = con_bd.cursor()
+                cursor.execute(sql)
+                user_consult=cursor.fetchone()
+                if user_consult is None:
+                    # Registrar el usuario
+                    usuario = Usuarios(nombres, apellidos, email_institucional, numero_identificacion, contraseña, tipo_rol, tipo_documento)
+                    usuario.set_usuario()
+                    flash('Usuario registrado correctamente')
+                    return redirect(url_for('formulario.login'))
+                else:
+                    flash('El correo ya se encuentra registrado')
+                    return redirect(url_for('formulario.registro'))
+            else:
+                flash('El numero de identificacion ya se encuentra registrado')
+                return redirect(url_for('formulario.registro'))
+        else:
+            flash('Por favor ingrese todos los campos')
             return redirect(url_for('formulario.registro'))
+    else:
+        return redirect(url_for('formulario.registro'))
+    #     usuario = Usuarios(nombres, apellidos, email_institucional, numero_identificacion, contraseña, tipo_rol, tipo_documento)
+    #     usuario.set_usuario()
+    #     return redirect(url_for('admin.perfiladmin'))
+    # else:
+    #     return redirect(url_for('formulario.registro'))
 
 @formulario.route('/registro_profesor')
 def registro_profe():
@@ -118,6 +177,8 @@ def registro_profe():
             return redirect(url_for('jurado.perfiljurado'))
     else:
         return redirect(url_for('formulario.login'))
+
+    
 
 
 

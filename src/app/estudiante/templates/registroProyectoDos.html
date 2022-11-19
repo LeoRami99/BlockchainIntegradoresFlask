@@ -2,11 +2,14 @@
 {% block navbar %}
 <nav class="nav navbar sticky-top">
     <div class="container-fluid float-end">
-        <a class="navbar-brand" href="#" style="color: white;">
+        <a class="btn btn-outline-light" href="/"
+            role="button"><i class="bi bi-arrow-left"></i></a>
+        <a class="navbar-brand" href="/" style="color: white;">
             <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" alt="Logo" width="30" height="24"
                 class="d-inline-block align-text-top">
             Fomalhaut - {{current_user.nombres}}
         </a>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,7 +29,7 @@
 </nav>
 {%endblock%}
     {%block content%}
-    <div class="offcanvas offcanvas-end show fondo" tabindex="-1" id="offcanvasDark"
+    <div class="offcanvas offcanvas-end fondo" tabindex="-1" id="offcanvasDark"
     aria-labelledby="offcanvasDarkLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasDarkLabel" style="color:#fff;">Perfil</h5>
@@ -34,6 +37,7 @@
     </div>
     <div class="offcanvas-body">
         <div class="card text-center fondo">
+            
             <div class="card-header">
 
                 <!-- <a style="color: black;" class="nav-link active bt-inicio" aria-current="page" href=""><i
@@ -119,9 +123,9 @@
                                             </select>
                                             <a class="btn btn-success w-100 m-2" onclick="miembrosGrupo()">Generar Integrantes</a>
                                             <div class="m-2" id="">
-                                                <input type="text" class="form-control m-2" name="integrante_1" placeholder="Integrante 1" style="display: none;" id="miembros_grupo_1" required>
-                                                <input type="text" class="form-control m-2" name="integrante_2" placeholder="Integrante 2" style="display: none;" id="miembros_grupo_2" required>
-                                                <input type="text" class="form-control m-2" name="integrante_3" placeholder="Integrante 3" style="display: none;" id="miembros_grupo_3" required>
+                                                <input type="text" class="form-control m-2" name="integrante_1" placeholder="número de identificación" style="display: none;" id="miembros_grupo_1" required>
+                                                <input type="text" class="form-control m-2" name="integrante_2" placeholder="número de identificación" style="display: none;" id="miembros_grupo_2" required>
+                                                <input type="text" class="form-control m-2" name="integrante_3" placeholder="número de identificación" style="display: none;" id="miembros_grupo_3" required>
                                             </div>
                                         </div>
                                     </div>

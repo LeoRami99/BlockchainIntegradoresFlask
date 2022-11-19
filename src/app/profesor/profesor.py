@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required
 from config import *
 from config_eth import *
+import codecs
 # from web3 import Web3
 
 conn = EstablecerConexion()
@@ -51,6 +52,8 @@ def perfilprofesor():
                 else:
                     nota_1=w3.eth.getTransaction(calif[3]).input
                     nota_2=w3.eth.getTransaction(calif[4]).input
+                    # convertir de hexadecimal a string
+                    
                     calif_obser.append([proyects[11],proyects[0],proyects[1],proyects[2],get_usuario_doc(proyects[8]),get_usuario_doc(proyects[6]),get_usuario_doc(proyects[7]),calif[0],calif[2], nota_1, nota_2])
             elif proyects[11] == 3:
                 if calif[3] == None or calif[4] == None or calif[5] == None:
