@@ -102,7 +102,7 @@ function decryptInput(hash_doc) {
 
 function establcerSrc(hash_decrypt) {
     // establecer src con el hash_doc
-    const ulr_ipfs = "http://localhost:8080/ipfs/" + hash_decrypt;
+    const ulr_ipfs = "http://8990-186-84-89-9.ngrok.io/ipfs/" + hash_decrypt;
     window.open(ulr_ipfs, '_blank','location=0,height=570,width=520,scrollbars=yes,status=yes');
 }
 // Esta función imp
@@ -138,10 +138,6 @@ Tablas para los modales de profesor
 */
 $(document).ready( function () {
     $('#tabla_profe_1').DataTable({
-        "dom": 'Bfrtip',
-    "buttons": [
-        'copy', 'csv', 'excel', 'pdf', 'print'
-    ],
         "aLengthMenu":[[3,5,10,25,-1],[3,5,10,24], "todo"],
         "iDisplayLength":3,
         "language":{

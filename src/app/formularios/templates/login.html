@@ -60,7 +60,7 @@
                     </div>
                     <br>
                     <div class="text-center">
-                        <a href="/recuperarPass">He olvidado mi contraseña</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-reset-password">He olvidado mi contraseña</a>
                     </div>
 
                 </form>
@@ -71,4 +71,28 @@
                 <img src="{{url_for('static', filename='imgs/human_character_2.png')}}" alt="" class="img-fluid" style="width: 50rem;">
             </div>
         </div>
+<!-- Modal reset passowrd-->
+<div class="modal fade" id="modal-reset-password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">He olvidado mi contraseña</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/forms/reset_password" method="post">
+            <label for="email">Ingrese el email</label>
+            <input type="email" name="email" id="email" required class="form-control" placeholder="email">
+            <div class="text-center m-2">
+                <input type="submit" class="btn btn-success" value="Enviar">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 {% endblock %}

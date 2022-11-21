@@ -1,6 +1,6 @@
 {%extends 'base.html'%}
 {% block title %}
-    Fomalhaut | Login
+    Fomalhaut | Recuperación de contraseña
 {%endblock%}
 {%block navbar%}
 <nav class="nav navbar navbar-expand-lg sticky-top">
@@ -8,7 +8,7 @@
         <a class="navbar-brand" href="#" style="color: white;">
             <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" alt="Logo" width="30" height="24"
                 class="d-inline-block align-text-top">
-            Fomalhaut - Login
+            Fomalhaut - Recuperación de contraseña
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -37,31 +37,29 @@
         <div class="row align-items-center justify-content-between">
             
             <div class="col-md-5 mt-5">
-                <form action="/forms/logueo" method="post" class="form-login mt-5 text-center fondo">
-                    
+                <form action="/forms/actualizar_password" method="post" class="form-login mt-5 text-center fondo">
+                    <input type="hidden" name="token" value="{{token}}">
                     <h1 class="text-center mb-2" style="color: white;">
-                        Inicio de Sesión
+                        Digita la contraseña nueva
                     </h1>
                     <div class="input-group mb-2">
                         <span class="input-group-text input-fondo" id="basic-addon1"><i
-                                class="bi bi-envelope"></i></span>
-                        <input type="email" name="email_institucional" placeholder="Correo Institucional"
+                                class="bi bi-key"></i></span>
+                        <input type="password" name="contrasena_uno" placeholder="Nueva contraseña"
                             class="form-control input-fondo"
                             style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
                     </div>
                     <div class="input-group mb-2">
+
                         <span class="input-group-text input-fondo" id="basic-addon1"><i class="bi bi-key"></i></span>
                         <input class="form-control fondo" type="password"
-                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" name="contrasena" id=""
-                            placeholder="Contraseña">
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" name="contrasena_dos" id=""
+                            placeholder="Repite la Contraseña">
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg btn-block mt-2">Iniciar Sesion</button>   
+                        <button type="submit" class="btn btn-success btn-lg btn-block mt-2">Actualizar contraseña</button>   
                     </div>
                     <br>
-                    <div class="text-center">
-                        <a href="/recuperarPass">He olvidado mi contraseña</a>
-                    </div>
 
                 </form>
             </div>
