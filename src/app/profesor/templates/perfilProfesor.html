@@ -6,14 +6,18 @@
 {% block navbar %}
 <nav class="nav navbar sticky-top">
     <div class="container-fluid float-end">
+        {%if current_user.rol == 4:%}
+            <a class="btn btn-outline-light" href="/"
+            role="button"><i class="bi bi-arrow-left"></i></a>
+        {%endif%}
         <a class="navbar-brand" href="#" style="color: white;">
             <img src="{{url_for('static', filename='imgs/FomalhauticonWhite.svg')}}" alt="Logo" width="30" height="24"
                 class="d-inline-block align-text-top">
             Fomalhaut - {{current_user.nombres}}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark" aria-controls="offcanvasNavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+            <i class="bi bi-list" style="color: white;"></i>    
+        </button>
       
         <!-- <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
@@ -34,8 +38,7 @@
     <div class="col-md-3">
         <div class="card text-center fondo shadow-lg ">
             <div class="card-header">
-                <img src="https://cdn.pixabay.com/photo/2018/04/12/16/13/flower-3313905_960_720.jpg"
-                    class="card-img-top" alt="...">
+                <img src="{{url_for('static', filename='imgs/space.svg')}}" class="card-img-top" alt="...">
             </div>
             <center>
                 <h2 class="text-center mb-2" style="color: white;">{{current_user.nombres}}</h2>

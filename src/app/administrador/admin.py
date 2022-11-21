@@ -206,6 +206,9 @@ def asignargrupo():
         conn.commit()
         flash('Proyecto asignado correctamente')
         return redirect(url_for('admin.perfiladmin'))
+    else:
+        flash('Error al asignar proyecto')
+        return redirect(url_for('admin.perfiladmin'))
 @admin.route("/asignarfechas" , methods=['POST'])
 def asignarfechas():
     if request.method == 'POST':
