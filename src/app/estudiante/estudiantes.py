@@ -23,126 +23,107 @@ def registroproyecto_segunda():
 
 @estudiantes.route('/registrar_proyecto', methods=['POST'])
 def registrar_proyecto():
-    # Instancia de la conexión a IPFS
-    fs = ipfshttpclient.connect('/ip4/192.168.0.17/tcp/5001')
+     # Instancia de la conexión a IPFS
+    fs = ipfshttpclient.connect('/ip4/192.168.0.15/tcp/5001')
     # Instancia de web3 para envio de transacción a blockchain
     w3 = conection_eth()
     
     # Variables para guardar los integrantes del equipo
     if request.method == 'POST':
+
         integrante_dos='1'
         integrante_tres='1'
         entrega=request.form['entrega']
         ciclo = request.form['ciclo']
+        n_integrantes = request.form['numero_miembros']
+        if n_integrantes == '1':
+            integrante_dos = '1'
+            integrante_tres = '1'
+            if verificar_usuario(request.form['integrante_1']):
+                integrante_uno = get_user(request.form['integrante_1'])
+            else:
+                if entrega == '1era Entrega':
+                    flash('El integrante 1 no se encuentra registrado en el sistema')
+                    return redirect(url_for('estudiantes.registroproyecto'))
+                else:
+                    flash('El integrante 1 no se encuentra registrado en el sistema')
+                    return redirect(url_for('estudiantes.registroproyecto_segunda'))
+        elif n_integrantes == '2':
+            if verificar_usuario(request.form['integrante_2']):
+                integrante_uno = get_user(request.form['integrante_1'])
+                integrante_dos = get_user(request.form['integrante_2'])
+                integrante_tres = '1'
+            else:
+                if entrega == '1era Entrega':
+                    flash('El integrante 2 no se encuentra registrado en el sistema')
+                    return redirect(url_for('estudiantes.registroproyecto'))
+                else:
+                    flash('El integrante 2 no se encuentra registrado en el sistema')
+                    return redirect(url_for('estudiantes.registroproyecto_segunda'))
+        elif n_integrantes == '3':
+            integrante_uno = get_user(request.form['integrante_1'])
+            integrante_dos = get_user(request.form['integrante_2'])
+            integrante_tres = get_user(request.form['integrante_3'])
+            if verificar_usuario(request.form['integrante_2']) and verificar_usuario(request.form['integrante_3']):
+                integrante_dos = get_user(request.form['integrante_2'])
+                integrante_tres = get_user(request.form['integrante_3'])
+            else:
+                if entrega == '1era Entrega':
+                    flash('El integrante 2 o 3 no se encuentra registrado en el sistema')
+                    return redirect(url_for('estudiantes.registroproyecto'))
+                else:
+                    flash('El integrante 2 o 3 no se encuentra registrado en el sistema')
+                    return redirect(url_for('estudiantes.registroproyecto_segunda'))
         nombrep = request.form['nombrep']
         doc_proyecto = request.files['docfile']
         # Se capturan los datos del documento
         doc_anexos = request.files['anexos_proyecto']
         doc_proyecto.name = nombrep + ".pdf"
-        n_integrantes = request.form['numero_miembros']
-        if n_integrantes == '1':
-            integrante_uno = request.form['integrante_1']
-            # Se verifica si el usuario existe en la base de datos
-            if verificar_usuario(integrante_uno) == True:
-                if entrega == '1era Entrega':
-                    proyecto_enviar(request.form['nombrep'], ciclo, integrante_uno, integrante_dos, integrante_tres, doc_proyecto, doc_anexos, entrega)
-                    flash('Proyecto registrado correctamente')
-                    return redirect(url_for('estudiantes.perfilestudiante'))
-                elif entrega == '2da Entrega':
-                    proyecto_enviar(request.form['nombrep'], ciclo, integrante_uno, integrante_dos, integrante_tres, doc_proyecto, doc_anexos, entrega)
-                    flash('Proyecto registrado correctamente')
-                    return redirect(url_for('estudiantes.perfilestudiante'))
-            else:
-                flash('Verifique el numero de documento del integrante uno')
-                return redirect(url_for('estudiantes.perfilestudiante'))
-
-        # integrante_uno = get_user(request.form['integrante_1'])
-        # Verificar que el numero del documento del integrante este registrado en la base de datos
-        elif n_integrantes == '2':
-            integrante_uno = request.form['integrante_1']
-            integrante_dos = request.form['integrante_2']
-            if verificar_usuario(integrante_uno) == True and verificar_usuario(integrante_dos) == True:
-                if entrega == '1era Entrega':
-                    proyecto_enviar(request.form['nombrep'], ciclo, integrante_uno, integrante_dos, integrante_tres, doc_proyecto, doc_anexos, entrega)
-                    flash('Proyecto registrado correctamente')
-                    return redirect(url_for('estudiantes.perfilestudiante'))
-                elif entrega == '2da Entrega':
-                    proyecto_enviar(request.form['nombrep'], ciclo, integrante_uno, integrante_dos, integrante_tres, doc_proyecto, doc_anexos, entrega)
-                    flash('Proyecto registrado correctamente')
-                    return redirect(url_for('estudiantes.perfilestudiante'))
-            else:
-                if entrega == '1era Entrega':
-                    flash('Verifique el numero de documento del integrante uno o dos')
-                    return redirect(url_for('estudiantes.registroproyecto'))
-                elif entrega == '2da Entrega':
-                    flash('Verifique el numero de documento del integrante uno o dos')
-                    return redirect(url_for('estudiantes.registroproyecto_segunda'))
-        elif n_integrantes == '3':
-            integrante_uno = request.form['integrante_1']
-            integrante_dos = request.form['integrante_2']
-            integrante_tres = request.form['integrante_3']
-            if verificar_usuario(integrante_uno) == True and verificar_usuario(integrante_dos) == True and verificar_usuario(integrante_tres) == True:
-                if entrega == '1era Entrega':
-                    proyecto_enviar(request.form['nombrep'], ciclo, integrante_uno, integrante_dos, integrante_tres, doc_proyecto, doc_anexos, entrega)
-                    flash('Proyecto registrado correctamente')
-                    return redirect(url_for('estudiantes.perfilestudiante'))
-                elif entrega == '2da Entrega':
-                    proyecto_enviar(request.form['nombrep'], ciclo, integrante_uno, integrante_dos, integrante_tres, doc_proyecto, doc_anexos, entrega)
-                    flash('Proyecto registrado correctamente')
-                    return redirect(url_for('estudiantes.perfilestudiante'))
-            else:
-                if entrega == '1era Entrega':
-                    flash('Verifique el numero de documento del integrante uno, dos o tres')
-                    return redirect(url_for('estudiantes.registroproyecto'))
-                elif entrega == '2da Entrega':
-                    flash('Verifique el numero de documento del integrante uno, dos o tres')
-                    return redirect(url_for('estudiantes.registroproyecto_segunda'))
+        up_projecto_file = fs.add(doc_proyecto)
+        hash_ipfs_projecto=up_projecto_file.get('Hash')
+        data_projecto=w3.toHex(text=hash_ipfs_projecto)
+        tx_projecto={
+            'from': "0xbB98661629e0d9263F527acB44084BFDB0d9b86c",
+            'value': 0,
+            'gas': 2000000,
+            'gasPrice': w3.toWei('1', 'gwei'),
+            'data': data_projecto
+        }
+        tx_send_trans_proyecto = w3.eth.sendTransaction(tx_projecto)
+        hash_trans_proyecto = tx_send_trans_proyecto.hex()
         
-        # up_projecto_file = fs.add(doc_proyecto)
-        # hash_ipfs_projecto=up_projecto_file.get('Hash')
-        # data_projecto=w3.toHex(text=hash_ipfs_projecto)
-        # tx_projecto={
-        #     'from': "0xbB98661629e0d9263F527acB44084BFDB0d9b86c",
-        #     'value': 0,
-        #     'gas': 2000000,
-        #     'gasPrice': w3.toWei('1', 'gwei'),
-        #     'data': data_projecto
-        # }
-        # tx_send_trans_proyecto = w3.eth.sendTransaction(tx_projecto)
-        # hash_trans_proyecto = tx_send_trans_proyecto.hex()
+        if doc_anexos.filename == '':
+            hash_trans_anexos = 'Sin anexos'
+        else:
+        # Se cambia el nombre del documento dependiendo del nombre del proyecto
+            doc_anexos.name = nombrep + "_anexos.pdf"
+            # Se guarda el documento en IPFS
+            up_anexos_file = fs.add(doc_anexos)
+            # Se guarda el hash en variables para parcealas a hexadecimal para subir a la blockchain
+            hash_ipfs_anexos=up_anexos_file.get('Hash')
+            # Se convierte el hash a hexadecimal
+            data_anexos=w3.toHex(text=hash_ipfs_anexos)
+            tx_anexos={
+                'from': "0xbB98661629e0d9263F527acB44084BFDB0d9b86c",
+                'value': 0,
+                'gas': 2000000,
+                'gasPrice': w3.toWei('1', 'gwei'),
+                'data': data_anexos
+            }
+            # se envia la transacciones 
+            tx_send_trans_anexos = w3.eth.sendTransaction(tx_anexos)
+            # Se obtiene el hash de la transacción para cada documento
+            hash_trans_anexos = tx_send_trans_anexos.hex()
         
-        # if doc_anexos.filename == '':
-        #     hash_trans_anexos = 'Sin anexos'
-        # else:
-        # # Se cambia el nombre del documento dependiendo del nombre del proyecto
-        #     doc_anexos.name = nombrep + "_anexos.pdf"
-        #     # Se guarda el documento en IPFS
-        #     up_anexos_file = fs.add(doc_anexos)
-        #     # Se guarda el hash en variables para parcealas a hexadecimal para subir a la blockchain
-        #     hash_ipfs_anexos=up_anexos_file.get('Hash')
-        #     # Se convierte el hash a hexadecimal
-        #     data_anexos=w3.toHex(text=hash_ipfs_anexos)
-        #     tx_anexos={
-        #         'from': "0xbB98661629e0d9263F527acB44084BFDB0d9b86c",
-        #         'value': 0,
-        #         'gas': 2000000,
-        #         'gasPrice': w3.toWei('1', 'gwei'),
-        #         'data': data_anexos
-        #     }
-        #     # se envia la transacciones 
-        #     tx_send_trans_anexos = w3.eth.sendTransaction(tx_anexos)
-        #     # Se obtiene el hash de la transacción para cada documento
-        #     hash_trans_anexos = tx_send_trans_anexos.hex()
+        fecha_hora = datetime.now() 
+        #Generar fecha y hora
         
-        # fecha_hora = datetime.now() 
-        # #Generar fecha y hora
-        
-        # # Se guarda el proyecto en la base de datos
-        # proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, 11, fecha_hora, hash_trans_proyecto, hash_trans_anexos, entrega)
-        # proyecto.set_proyecto()
-        # # obtener el id del proyecto
-        # flash('Proyecto registrado correctamente')
-        # return redirect(url_for('estudiantes.perfilestudiante'))
+        # Se guarda el proyecto en la base de datos
+        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, 11, fecha_hora, hash_trans_proyecto, hash_trans_anexos, entrega)
+        proyecto.set_proyecto()
+        # obtener el id del proyecto
+        flash('Proyecto registrado correctamente')
+        return redirect(url_for('estudiantes.perfilestudiante'))
     else:
         flash('Error al registrar el proyecto')
         return redirect(url_for('estudiantes.registroproyecto'))
@@ -162,52 +143,52 @@ def verificar_usuario(num_doc):
         return True
     else:
         return False
-def proyecto_enviar(nombrep, ciclo, integrante_uno, integrante_dos, integrante_tres, doc_proyecto, doc_anexos, entrega):
-    fs = ipfshttpclient.connect('/ip4/192.168.0.17/tcp/5001')
-    # Instancia de web3 para envio de transacción a blockchain
-    w3 = conection_eth()
-    up_projecto_file = fs.add(doc_proyecto)
-    hash_ipfs_projecto=up_projecto_file.get('Hash')
-    data_projecto=w3.toHex(text=hash_ipfs_projecto)
-    tx_projecto={
-        'from': "0xbB98661629e0d9263F527acB44084BFDB0d9b86c",
-        'value': 0,
-        'gas': 2000000,
-        'gasPrice': w3.toWei('1', 'gwei'),
-        'data': data_projecto
-    }
-    tx_send_trans_proyecto = w3.eth.sendTransaction(tx_projecto)
-    hash_trans_proyecto = tx_send_trans_proyecto.hex()
+# def proyecto_enviar(nombrep, ciclo, integrante_uno, integrante_dos, integrante_tres, doc_proyecto, doc_anexos, entrega):
+#     fs = ipfshttpclient.connect('/ip4/10.73.48.83/tcp/5001')
+#     # Instancia de web3 para envio de transacción a blockchain
+#     w3 = conection_eth()
+#     up_projecto_file = fs.add(doc_proyecto)
+#     hash_ipfs_projecto=up_projecto_file.get('Hash')
+#     data_projecto=w3.toHex(text=hash_ipfs_projecto)
+#     tx_projecto={
+#         'from': "0xbB98661629e0d9263F527acB44084BFDB0d9b86c",
+#         'value': 0,
+#         'gas': 2000000,
+#         'gasPrice': w3.toWei('1', 'gwei'),
+#         'data': data_projecto
+#     }
+#     tx_send_trans_proyecto = w3.eth.sendTransaction(tx_projecto)
+#     hash_trans_proyecto = tx_send_trans_proyecto.hex()
         
-    if doc_anexos.filename == '':
-        hash_trans_anexos = 'Sin anexos'
-    else:
-        # Se cambia el nombre del documento dependiendo del nombre del proyecto
-        doc_anexos.name = nombrep + "_anexos.pdf"
-            # Se guarda el documento en IPFS
-        up_anexos_file = fs.add(doc_anexos)
-            # Se guarda el hash en variables para parcealas a hexadecimal para subir a la blockchain
-        hash_ipfs_anexos=up_anexos_file.get('Hash')
-            # Se convierte el hash a hexadecimal
-        data_anexos=w3.toHex(text=hash_ipfs_anexos)
-        tx_anexos={
-            'from': "0xbB98661629e0d9263F527acB44084BFDB0d9b86c",
-            'value': 0,
-            'gas': 2000000,
-            'gasPrice': w3.toWei('1', 'gwei'),
-            'data': data_anexos
-        }
-            # se envia la transacciones 
-        tx_send_trans_anexos = w3.eth.sendTransaction(tx_anexos)
-            # Se obtiene el hash de la transacción para cada documento
-        hash_trans_anexos = tx_send_trans_anexos.hex()
+#     if doc_anexos.filename == '':
+#         hash_trans_anexos = 'Sin anexos'
+#     else:
+#         # Se cambia el nombre del documento dependiendo del nombre del proyecto
+#         doc_anexos.name = nombrep + "_anexos.pdf"
+#             # Se guarda el documento en IPFS
+#         up_anexos_file = fs.add(doc_anexos)
+#             # Se guarda el hash en variables para parcealas a hexadecimal para subir a la blockchain
+#         hash_ipfs_anexos=up_anexos_file.get('Hash')
+#             # Se convierte el hash a hexadecimal
+#         data_anexos=w3.toHex(text=hash_ipfs_anexos)
+#         tx_anexos={
+#             'from': "0xbB98661629e0d9263F527acB44084BFDB0d9b86c",
+#             'value': 0,
+#             'gas': 2000000,
+#             'gasPrice': w3.toWei('1', 'gwei'),
+#             'data': data_anexos
+#         }
+#             # se envia la transacciones 
+#         tx_send_trans_anexos = w3.eth.sendTransaction(tx_anexos)
+#             # Se obtiene el hash de la transacción para cada documento
+#         hash_trans_anexos = tx_send_trans_anexos.hex()
         
-        fecha_hora = datetime.now() 
-        #Generar fecha y hora
+#         fecha_hora = datetime.now() 
+#         #Generar fecha y hora
         
-        # Se guarda el proyecto en la base de datos
-        proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, 11, fecha_hora, hash_trans_proyecto, hash_trans_anexos, entrega)
-        proyecto.set_proyecto()
+#         # Se guarda el proyecto en la base de datos
+#         proyecto = Proyectos(nombrep, ciclo, integrante_dos, integrante_tres, integrante_uno, 11, fecha_hora, hash_trans_proyecto, hash_trans_anexos, entrega)
+#         proyecto.set_proyecto()
 
 @estudiantes.route('/perfilestudiante')
 @login_required

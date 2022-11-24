@@ -9,7 +9,7 @@ from .usuario import Usuarios, Usuario
 from flask_mail import Mail, Message
 con_bd = EstablecerConexion()
 
-# Establecer la secret key 
+
 @formulario.route('/registro')
 def registro():
     if current_user.is_authenticated:
@@ -118,7 +118,7 @@ def registrar_usuario():
                     flash('El correo ya se encuentra registrado')
                     return redirect(url_for('formulario.registro'))
             else:
-                flash('El numero de identificacion ya se encuentra registrado')
+                flash('El número de identificación ya se encuentra registrado')
                 return redirect(url_for('formulario.registro'))
         else:
             flash('El correo no pertenece a la universidad')
@@ -160,7 +160,7 @@ def registrar_docente():
                         flash('El correo ya se encuentra registrado')
                         return redirect(url_for('formulario.registro'))
                 else:
-                    flash('El numero de identificacion ya se encuentra registrado')
+                    flash('El número de identificación ya se encuentra registrado')
                     return redirect(url_for('formulario.registro'))
             else:
                 flash('Por favor ingrese todos los campos')
@@ -201,7 +201,7 @@ def forgot_password(token):
         cursor.execute(sql)
         user_consult=cursor.fetchone()
         if user_consult is None:
-            flash('Lo sentimos no puedes acceder a esta pagina')
+            flash('Lo sentimos no puedes acceder a esta página')
             return redirect(url_for('formulario.login'))
         else:
             return render_template('forgot.html', token=token)
@@ -244,8 +244,8 @@ def reset_password():
             else:
             #   generar un token para el usuario
                 token = generate_token(email)
-                msg = Message('Reseteo de contraseña', sender='juanlov4321@hotmail.com', recipients=[email])
-                link = 'https://f8d6-186-84-89-9.ngrok.io/forms/new_password/' + token
+                msg = Message('Reseteo de contraseña', sender='fomalhautudecproyectos@gmail.com', recipients=[str(email)])
+                link = 'https://8fdb-190-158-204-7.ngrok.io/forms/new_password/' + token
                 msg.html = render_template('correo.html', link=link)
                 sql_token = "UPDATE projecto_usuario SET token_password='{0}' WHERE correo='{1}'".format(token, email)
                 cursor = con_bd.cursor()

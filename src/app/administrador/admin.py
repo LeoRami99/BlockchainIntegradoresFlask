@@ -13,9 +13,9 @@ def enviar_correo(correo, asunto, ciclo, grupo):
     try:
         with current_app.app_context():
                 # Hacer el envio asincrono
-            msg = Message(asunto, sender = "juanlov4321@hotmail.com", recipients = [correo])
+            msg = Message(asunto, sender = "fomalhautudecproyectos@gmail.com", recipients = [correo])
                 # Correo con estructura HTML
-            msg.html = render_template('correo.html', asunto=asunto, ciclo=ciclo, grupo=grupo)
+            msg.html = render_template('correoJurado.html', asunto=asunto, ciclo=ciclo, grupo=grupo)
                 # Agregar una imagen
             with current_app.open_resource("static/imgs/FomalHauticon.png") as fp:
                 msg.attach("FomalHauticon.png", "image/png", fp.read(), 'inline', headers=[('Content-ID', '<image1>')])
@@ -241,8 +241,8 @@ def reporte_ciclo1():
                     print('No hay calificacion')
                 else:
                     nota_1=w3.eth.getTransaction(calif[3]).input
-                    
-                    calif_obser.append([proyects[11],proyects[0],proyects[1],proyects[2],get_usuario_doc(proyects[8]),get_usuario_doc(proyects[6]),get_usuario_doc(proyects[7]),calif[0],calif[2], nota_1,proyects[3]])
+                    nota_uno=bytes.fromhex(nota_1[2:]).decode('utf-8')
+                    calif_obser.append([proyects[11],proyects[0],proyects[1],proyects[2],get_usuario_doc(proyects[8]),get_usuario_doc(proyects[6]),get_usuario_doc(proyects[7]),calif[0],calif[2], nota_uno,proyects[3]])
             elif proyects[11] == 2:
                 if calif[3] == None or calif[4] == None:
                     print('No hay calificacion')
@@ -332,8 +332,8 @@ def reporte_ciclo1():
     return Response(salida, mimetype="application/ms-excel", headers={"Content-Disposition":"attachment;filename=reporte_ciclo1.xls"})
 def get_usuario_doc(id_user):
     id_usuario=str(id_user)
-    sql_usuari = "SELECT * FROM projecto_usuario WHERE id = %s"
-    cursor.execute(sql_usuari, (id_usuario))
+    sql_usuari = "SELECT * FROM projecto_usuario WHERE id = {0}".format(id_usuario)
+    cursor.execute(sql_usuari)
     usuario = cursor.fetchone()
     return usuario[4]
 @admin.route("/reporte/ciclo2")
