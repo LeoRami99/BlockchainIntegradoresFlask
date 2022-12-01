@@ -120,7 +120,9 @@
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
                                             </select>
-                                            <a class="btn btn-success w-100 m-2" onclick="miembrosGrupo()">Generar Integrantes</a>
+                                            
+                                            <a class="btn btn-success w-100 m-2" onclick="miembrosGrupo()" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">Generar Integrantes</a>
+                                            
                                             <!--<div class="m-2" id="miembros_grupo_1" style="display: none;">
                                                 <input type="text" class="form-control m-2" name="Integrante_1" placeholder="Integrante 1">
                                             </div>
@@ -129,9 +131,9 @@
                                                 <input type="text" class="form-control m-2" name="Integrante_2" placeholder="Integrante 2">
                                             </div> -->
                                             <div class="m-2" id="">
-                                                <input type="number" class="form-control m-2" name="integrante_1" placeholder="#.identificación uno" style="display: none;" id="miembros_grupo_1" required>
-                                                <input type="number" class="form-control m-2" name="integrante_2" placeholder="#.identificación dos" style="display: none;" id="miembros_grupo_2" required>
-                                                <input type="number" class="form-control m-2" name="integrante_3" placeholder="#.identificación tres" style="display: none;" id="miembros_grupo_3" required>
+                                                <input type="number" class="form-control m-2" name="integrante_1" placeholder="#.identificación uno" style="display: none;" id="miembros_grupo_1" required minlength="4">
+                                                <input type="number" class="form-control m-2" name="integrante_2" placeholder="#.identificación dos" style="display: none;" id="miembros_grupo_2" required minlength="4">
+                                                <input type="number" class="form-control m-2" name="integrante_3" placeholder="#.identificación tres" style="display: none;" id="miembros_grupo_3" required minlength="4">
                                             </div>
                                         </div>
                                     </div>
@@ -149,9 +151,9 @@
                                         <div class="accordion-body">
                                             <div class="form-group">
                                                 <h5>Nombre del proyecto integrador tal cual aparece en el
-                                                    document que va a subir</h5>
+                                                    documento que va a subir</h5>
                                                 <input type="text" placeholder="Nombre del Proyecto" name="nombrep"
-                                                    id="nombrep" class="form-control m-2" required>
+                                                    id="nombrep" class="form-control m-2" required minlength="5">
                                             </div>
                                         </div>
                                     </div>
@@ -173,20 +175,20 @@
                                                         <h5>Seleccione su documento en formato PDF</h5>
                                                         <input type="file" class="form-control m-2" id="id_docfile" name="docfile" accept="application/pdf" required>
                                                     </div>
-                                                    <button class="btn btn-danger"
+                                                    <!-- <button class="btn btn-danger"
                                                         onclick="return confirm('¿Esta seguro de eliminar este documento?')">
                                                         <i class="bi bi-trash"></i>
-                                                    </button>
+                                                    </button> -->
                                                 </li>
                                                 <li class="list-group-item">
                                                     <div class="input-group mb-3">
                                                         <h5>Seleccione los anexos de su proyecto en PDF</h5>
                                                         <input type="file" class="form-control m-2" id="id_docfile" name="anexos_proyecto" accept="application/pdf">
                                                     </div>
-                                                    <button class="btn btn-danger"
+                                                    <!-- <button class="btn btn-danger"
                                                         onclick="return confirm('¿Esta seguro de eliminar este documento?')">
                                                         <i class="bi bi-trash"></i>
-                                                    </button>
+                                                    </button> -->
                                                 </li>
                                             </ul>
                                         </div>

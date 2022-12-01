@@ -47,20 +47,20 @@
                         <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-circle"
                                 style="color:#fff;"></i></span>
                         <input class="form-control" type="text" name="nombres" placeholder="Nombres"
-                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" required>
                     </div>
                     <div class="input-group mb-2">
                         <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-lines-fill"
                                 style="color:#fff;"></i></span>
                         <input class="form-control" type="text" name="apellidos" placeholder="Apellidos"
-                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" required>
                     </div>
                     <!-- <input class="form-control" type="text" name="telefono" placeholder="Número de telefono"> -->
                     <div class="input-group mb-2">
                         <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-badge"
                                 style="color:#fff;"></i></span>
                         <select name="tipo_documento" class="form-select"
-                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" required>
                             <option value="1">CC</option>
                             <option value="2">TI</option>
                         </select>
@@ -69,7 +69,7 @@
                         <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-person-badge"
                             style="color:#fff;"></i></span>
                     <select name="tipo_rol" class="form-select"
-                        style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                        style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" required>
                         <option value="1">Estudiante</option>
                     </select>
                     </div>
@@ -78,21 +78,21 @@
                                 style="color:#fff;"></i></span>
                         <input class="form-control" type="text" name="numero_identificacion"
                             placeholder="Número de identificación"
-                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" required minlength="4">
                     </div>
                     <div class="input-group mb-2">
                         <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-envelope"
                                 style="color:#fff;"></i></span>
                         <input class="form-control" type="email" name="correoinstitucional"
                             placeholder="Correo Institucional"
-                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);">
+                            style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" required>
                     </div>
                     <div class="input-group mb-2">
                         <span class="input-group-text fondo" id="basic-addon1"><i class="bi bi-key"
                                 style="color:#fff;"></i></span>
                         <input class="form-control fondo" type="password" name="contraseña"
                             style="color:#fff; background-color: rgba(34, 32, 32, 0.5);" id="password"
-                            placeholder="Contraseña">
+                            placeholder="Contraseña" required minlength="8">
                     </div>
                     <div class="text-center">
                         <button type="submit" id="boton" class="w-50 p-1">Enviar</button>

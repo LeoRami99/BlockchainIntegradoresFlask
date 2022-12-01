@@ -138,8 +138,8 @@ def perfiljurado():
     return render_template('perfilJurado.html', proyectos=proyecto2, usuario=usuarios, calificaciones=calificaciones, juradosxciclo=juradosciclo)
 def get_usuario_nombre(id_user):
     id_usuario=str(id_user)
-    sql_usuari = "SELECT * FROM projecto_usuario WHERE id = %s"
-    cursor.execute(sql_usuari, (id_usuario))
+    sql_usuari = "SELECT * FROM projecto_usuario WHERE id ={0}".format(id_usuario)
+    cursor.execute(sql_usuari)
     usuario = cursor.fetchone()
     return usuario[1]
 

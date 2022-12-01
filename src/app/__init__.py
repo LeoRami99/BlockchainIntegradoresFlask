@@ -20,12 +20,12 @@ def createApp():
     login_manager.login_view = 'formulario.login'
     login_manager.init_app(app)
     app.secret_key = 'mysecretkey'
-    app.config['MAIL_SERVER']='smtp.outlook.com'
-    app.config['MAIL_PORT'] = 587
-    app.config['MAIL_USERNAME'] = 'juanlov4321@hotmail.com'
-    app.config['MAIL_PASSWORD'] = config('PASSWORD')
-    app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USE_SSL'] = False
+    app.config['MAIL_SERVER']='smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = 'fomalhautudecproyectos@gmail.com'
+    app.config['MAIL_PASSWORD'] = 'tcet ejwe udhe elzd'
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
     mail = Mail()
     mail.init_app(app)
     

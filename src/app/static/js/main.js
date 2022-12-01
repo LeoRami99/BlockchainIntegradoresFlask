@@ -102,7 +102,7 @@ function decryptInput(hash_doc) {
 
 function establcerSrc(hash_decrypt) {
     // establecer src con el hash_doc
-    const ulr_ipfs = "http://8990-186-84-89-9.ngrok.io/ipfs/" + hash_decrypt;
+    const ulr_ipfs = "http://192.168.0.19:8080/ipfs/" + hash_decrypt;
     window.open(ulr_ipfs, '_blank','location=0,height=570,width=520,scrollbars=yes,status=yes');
 }
 // Esta función imp
@@ -474,4 +474,5 @@ function imprimir_observaciones(id, obser) {
     // Una vez que se imprime la observación se deshabilita el botón de observación
     document.getElementById("boton-" + id).disabled = true;
 }
+
 
