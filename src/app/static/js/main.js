@@ -475,3 +475,4 @@ function imprimir_observaciones(id, obser) {
     document.getElementById("boton-" + id).disabled = true;
 }
 
+
