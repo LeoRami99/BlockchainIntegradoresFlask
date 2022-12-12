@@ -23,8 +23,8 @@ def enviar_correo(correo, asunto, ciclo, grupo):
             mail.send(msg)
     except Exception as e:
         flash("Error al enviar el correo, codigo de error: {}".format(e))
-@login_required
 @admin.route('/perfiladmin')
+@login_required
 def perfiladmin():
     sql_rol_admin = """SELECT id, nombre, apellidos, correo, tipo_documento_id, doc_identidad, rol_id_id FROM projecto_usuario"""
     cursor.execute(sql_rol_admin)
@@ -475,6 +475,7 @@ def reporte_ciclo3():
                     nota_uno = bytes.fromhex(nota_1[2:]).decode('utf-8')
                     nota_dos = bytes.fromhex(nota_2[2:]).decode('utf-8')
                     nota_final= (float(nota_uno) + float(nota_dos)) / 2
+                    nota_final = "{:.2f}".format(nota_final)
                     calif_obser.append([proyects[11],proyects[0],proyects[1],proyects[2],get_usuario_doc(proyects[8]),get_usuario_doc(proyects[6]),get_usuario_doc(proyects[7]),calif[0],calif[2], nota_final,proyects[3]])
             elif proyects[11] == 3:
                 if calif[3] == None or calif[4] == None or calif[5] == None:
@@ -488,6 +489,7 @@ def reporte_ciclo3():
                     nota_dos = bytes.fromhex(nota_2[2:]).decode('utf-8')
                     nota_tres = bytes.fromhex(nota_3[2:]).decode('utf-8')
                     nota_final= (float(nota_uno) + float(nota_dos) + float(nota_tres)) / 3
+                    nota_final = "{:.2f}".format(nota_final)
                     calif_obser.append([proyects[11],proyects[0],proyects[1],proyects[2],get_usuario_doc(proyects[8]),get_usuario_doc(proyects[6]),get_usuario_doc(proyects[7]),calif[0],calif[2], nota_final,proyects[3]])
                     
             elif proyects[11] == 4:
@@ -504,6 +506,8 @@ def reporte_ciclo3():
                     nota_tres = bytes.fromhex(nota_3[2:]).decode('utf-8')
                     nota_cuatro = bytes.fromhex(nota_4[2:]).decode('utf-8')
                     nota_final= (float(nota_uno) + float(nota_dos) + float(nota_tres) + float(nota_cuatro)) / 4
+                    # aplicar formato decimal a la nota
+                    nota_final = "{:.2f}".format(nota_final)
                     calif_obser.append([proyects[11],proyects[0],proyects[1],proyects[2],get_usuario_doc(proyects[8]),get_usuario_doc(proyects[6]),get_usuario_doc(proyects[7]),calif[0],calif[2], nota_final,proyects[3]])
             elif proyects[11] == 5:
                 if calif[3] == None or calif[4] == None or calif[5] == None or calif[6] == None or calif[7] == None:
@@ -521,6 +525,7 @@ def reporte_ciclo3():
                     nota_cuatro = bytes.fromhex(nota_4[2:]).decode('utf-8')
                     nota_cinco = bytes.fromhex(nota_5[2:]).decode('utf-8')
                     nota_final= (float(nota_uno) + float(nota_dos) + float(nota_tres) + float(nota_cuatro) + float(nota_cinco)) / 5
+                    nota_final = "{:.2f}".format(nota_final)
                     calif_obser.append([proyects[11],proyects[0],proyects[1],proyects[2],get_usuario_doc(proyects[8]),get_usuario_doc(proyects[6]),get_usuario_doc(proyects[7]),calif[0],calif[2], nota_final,proyects[3]])
     # Generar el reporte en excel
     # Creamos el libro de trabajo

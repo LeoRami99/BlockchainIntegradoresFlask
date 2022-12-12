@@ -9,14 +9,14 @@
         {% block title %}
         {% endblock %}
     </title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
     <!-- hacer el favicon -->
     <link rel="icon" href="{{url_for('static', filename='imgs/FomalHauticon.svg')}}">
     
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="{{url_for('static', filename='js/jquery-3.6.1.min.js')}}" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.dataTables.min.css')}}">
+    <link rel="stylesheet" rel="stylesheet" href="{{url_for('static', filename='css/jquery.dataTables.min.css')}}">
     <script src="{{url_for('static', filename='js/jquery.dataTables.min.js')}}"></script>
 
 </head>
@@ -110,6 +110,12 @@
     AOS.init();
 </script>
 <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+<script type="module">
+    import * as boostrap from "{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 <!-- <script src="{{url_for('static', filename='js/web3.min.js')}}"> </script>
 <script src="{{url_for('static', filename='js/web3.min.js.map')}}"> </script> -->
 <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>

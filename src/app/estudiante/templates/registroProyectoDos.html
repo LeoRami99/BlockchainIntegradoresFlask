@@ -1,4 +1,7 @@
 {%extends 'base.html' %}
+{% block title %}
+    Fomalhaut | Registro Proyecto - Segunda Entrega
+{%endblock%}
 {% block navbar %}
 <nav class="nav navbar sticky-top">
     <div class="container-fluid float-end">
@@ -121,7 +124,7 @@
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
                                             </select>
-                                            <a class="btn btn-success w-100 m-2" onclick="miembrosGrupo()">Generar Integrantes</a>
+                                            <a class="btn btn-success w-100 m-2" onclick="miembrosGrupo()"" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Recuerda que todos los números de documentos de los integrantes deben estar registrados en el sistema">Generar Integrantes</a>
                                             <div class="m-2" id="">
                                                 <input type="number" class="form-control m-2" name="integrante_1" placeholder="#.identificación uno" style="display: none;" id="miembros_grupo_1" required>
                                                 <input type="number" class="form-control m-2" name="integrante_2" placeholder="#.identificación dos" style="display: none;" id="miembros_grupo_2" required>
