@@ -381,6 +381,8 @@ function nota_2(nota1, nota2){
     var notas1=parseFloat(web3.utils.hexToUtf8(nota1))
     var notas2=parseFloat(web3.utils.hexToUtf8(nota2))
     var promedio=(notas1+notas2)/2
+    // aplicar un decimal format para que solo muestre 2 decimales
+    promedio=promedio.toFixed(2)
     return promedio
 }
 function nota_3(nota1, nota2, nota3){
@@ -388,6 +390,7 @@ function nota_3(nota1, nota2, nota3){
     var notas2=parseFloat(web3.utils.hexToUtf8(nota2))
     var notas3=parseFloat(web3.utils.hexToUtf8(nota3))
     var promedio=(notas1+notas2+notas3)/3
+    promedio=promedio.toFixed(2)
     return promedio
 }
 function nota_4(nota1, nota2, nota3, nota4){
@@ -395,8 +398,9 @@ function nota_4(nota1, nota2, nota3, nota4){
     var notas2=parseFloat(web3.utils.hexToUtf8(nota2))
     var notas3=parseFloat(web3.utils.hexToUtf8(nota3))
     var notas4=parseFloat(web3.utils.hexToUtf8(nota4))
-    var promedio=notas1+notas2+notas3+notas4
-    return promedio/4
+    var promedio=(notas1+notas2+notas3+notas4)/4
+    promedio=promedio.toFixed(2)
+    return promedio
     
 
 }
@@ -407,6 +411,7 @@ function nota_5(nota1, nota2, nota3, nota4, nota5){
     var notas4=parseFloat(web3.utils.hexToUtf8(nota4))
     var notas5=parseFloat(web3.utils.hexToUtf8(nota5))
     var promedio=(notas1+notas2+notas3+notas4+notas5)/5
+    promedio=promedio.toFixed(2)
     return promedio
 }
 
